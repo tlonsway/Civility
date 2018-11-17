@@ -13,7 +13,8 @@ public class Display extends JComponent {
     int height; 
     boolean w,a,s,d=false;
     Inventory in;
-    public Display(int w, int h, Inventory inventory) {
+    Player player;
+    public Display(int w, int h, Inventory inventory,Player p) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
         center_x=0;
@@ -21,6 +22,7 @@ public class Display extends JComponent {
         width=w;
         height=h;
         in=inventory;
+        player = p;
     }
     public void update() {
         for(Building b : buildings) {
@@ -121,6 +123,12 @@ public class Display extends JComponent {
         g.drawString("Gold: "+(int)(in.getGold()),40,40);
         g.setColor(Color.RED);
         g.fillOval(900,500,40,40);
+        g.setColor(Color.BLACK);
+        g.drawRect(879,529,42,12);
+        g.setColor(Color.RED);
+        g.fillRect(880,530,920,540);
+        g.setColor(Color.GREEN);
+        g.fillRect(880,530,800+(int)(player.getHealth()/4),10);
     }
     public void addBuilding(Building b) {
         buildings.add(b);
