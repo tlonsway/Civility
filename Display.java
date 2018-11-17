@@ -106,6 +106,7 @@ public class Display extends JComponent {
             for(Item i: player.getInventory()){
                 g.setColor(Color.BLACK);
                 g.drawRect(x,y,50,50);
+                //g.drawString()
                 x+=100;
                 if(x>=1650){
                     x = 150;
