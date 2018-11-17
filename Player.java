@@ -5,7 +5,7 @@ public class Player{
     private double health;
     private Color color;
     //private Player_Inventory;
-    private Player(String N, double H, Color C){
+    public Player(String N, double H, Color C){
         name = N;
         health = H;
         color = C;

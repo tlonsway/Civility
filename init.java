@@ -10,7 +10,8 @@ public class init {
         frame.getContentPane().setBackground(new Color(0,140,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Inventory i = new Inventory();
-        Display d = new Display(1800,1000,i);
+        Player p = new Player("Bob",100,Color.RED);
+        Display d = new Display(1800,1000,i,p);
         frame.add(d);
         d.setVisible(true);
         (new Thread(new FrameThread(d,60))).start();
