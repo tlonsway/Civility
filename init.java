@@ -25,5 +25,13 @@ public class init {
         d.addBuilding(new GoldMine(500,500));
         d.addResource(new Tree(150,150));
         d.addResource(new Rock(-300,-300));
+        for(int i2=0;i2<100;i2++) {
+            try {
+                Thread.sleep(100);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            p.doDamage(1);
+        }
     }
 }

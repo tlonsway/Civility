@@ -20,7 +20,7 @@ public class Player{
     public Color getColor(){
         return color;
     }
-    public boolean recieveDamage(double damage){
+    public boolean doDamage(double damage){
         //deals the damage to the player and returns true if player is dead
         health -= damage;
         if(health <= 0){

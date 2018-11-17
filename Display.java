@@ -124,11 +124,11 @@ public class Display extends JComponent {
         g.setColor(Color.RED);
         g.fillOval(900,500,40,40);
         g.setColor(Color.BLACK);
-        g.drawRect(899,549,41,11);
+        g.drawRect(899,479,41,11);
         g.setColor(Color.RED);
-        g.fillRect(900,550,40,10);
+        g.fillRect(900,480,40,10);
         g.setColor(Color.GREEN);
-        g.fillRect(900,550,(int)(player.getHealth()/100)*40,10);
+        g.fillRect(900,480,(int)(player.getHealth()/100*40),10);
     }
     public void addBuilding(Building b) {
         buildings.add(b);
