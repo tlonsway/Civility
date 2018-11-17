@@ -9,4 +9,5 @@ public interface AI {
     public BoundingBox getBoundingBox();
     public Color getColor();
     public String getType();
+    public String getName();
 }

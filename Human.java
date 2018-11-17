@@ -8,10 +8,14 @@ public class Human implements AI {
     int height=30;
     Display d;
     Color color = Color.GREEN;
+    String name;
     public Human(int x_loc, int y_loc, Display dis) {
         x=x_loc;
         y=y_loc;
         d=dis;
+        String[] names = new String[]{"bob","brian","tristan","ethan","steve","bill","charles","oliver","harry","jack","george","noah","charlie","jacob","alfie","freddie","oscar","leo","logan","wes"};
+        int namenum = (int)(Math.random()*names.length);
+        name=names[namenum];
     }
     public void update() {
         ArrayList<Building> buildings = d.getBuildings();
@@ -113,5 +117,8 @@ public class Human implements AI {
     }
     public String getType() {
         return "human";
+    }
+    public String getName() {
+        return name;
     }
 }

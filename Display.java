@@ -144,6 +144,10 @@ public class Display extends JComponent {
                 if (a.getBoundingBox().intersects(screen)) {
                     g.setColor(a.getColor());
                     g.fillRect((int)(a.getX()-center_x),(int)(a.getY()-center_y),(int)(a.getWidth()),(int)(a.getHeight()));
+                    g.setColor(Color.BLACK);
+                    Font f = new Font("Courier New",Font.PLAIN,18);
+                    g.setFont(f);
+                    g.drawString(a.getName(),(int)(a.getX()-center_x),(int)(a.getY()-center_y+a.getHeight()+20));
                 }                
             }
             g.setColor(Color.BLACK);
