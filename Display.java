@@ -35,6 +35,11 @@ public class Display extends JComponent {
                     check = true;
                 }
             }
+            for (Resource r : resources) {
+                if (r.getBoundingBox().intersects(new BoundingBox(890+center_x,500+center_y,40,40))) {
+                    check = true;
+                }
+            }
             if (!check)
                 center_x-=10;
         }
@@ -42,6 +47,11 @@ public class Display extends JComponent {
             boolean check = false;
             for (Building b : buildings) {
                 if (b.getBoundingBox().intersects(new BoundingBox(910+center_x,500+center_y,40,40))) {
+                    check = true;
+                }
+            }
+            for (Resource r : resources) {
+                if (r.getBoundingBox().intersects(new BoundingBox(910+center_x,500+center_y,40,40))) {
                     check = true;
                 }
             }
@@ -55,6 +65,11 @@ public class Display extends JComponent {
                     check = true;
                 }
             }
+            for (Resource r : resources) {
+                if (r.getBoundingBox().intersects(new BoundingBox(900+center_x,490+center_y,40,40))) {
+                    check = true;
+                }
+            }
             if (!check)
                 center_y-=10;
         }
@@ -62,6 +77,11 @@ public class Display extends JComponent {
             boolean check = false;
             for (Building b : buildings) {
                 if (b.getBoundingBox().intersects(new BoundingBox(900+center_x,510+center_y,40,40))) {
+                    check = true;
+                }
+            }
+            for (Resource r : resources) {
+                if (r.getBoundingBox().intersects(new BoundingBox(900+center_x,510+center_y,40,40))) {
                     check = true;
                 }
             }
