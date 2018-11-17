@@ -6,6 +6,7 @@ import java.awt.geom.*;
 import javafx.geometry.*;
 public class Display extends JComponent {
     ArrayList<Building> buildings;
+    ArrayList<Resource> resources;
     double center_x;
     double center_y;
     int width;
@@ -14,6 +15,7 @@ public class Display extends JComponent {
     Inventory in;
     public Display(int w, int h, Inventory inventory) {
         buildings = new ArrayList<Building>();
+        resources = new ArrayList<Resource>();
         center_x=0;
         center_y=0;
         width=w;
@@ -52,10 +54,18 @@ public class Display extends JComponent {
                 g.fillRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
             }
         }
+        for (Resource r : resources) {
+            if (r.getBoundingBox().intersects(screen)) {
+                g.setColor(r.getColor());
+                g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
+            }
+        }
     }
     public void addBuilding(Building b) {
         buildings.add(b);
-        this.draw();
+    }
+    public void addResource(Resource r) {
+        resources.add(r);
     }
     public void setCenterX(double x) {
         center_x=x;
