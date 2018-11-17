@@ -2,8 +2,8 @@ import java.util.*;
 import javafx.geometry.*;
 import java.awt.*;
 public class Human implements AI {
-    int x;
-    int y;
+    double x;
+    double y;
     int width=30;
     int height=30;
     Display d;
@@ -21,81 +21,82 @@ public class Human implements AI {
         double center_y=d.getCenterY();
         int movx=0;
         int movy=0;
+        int magnitude = 150;
         if (dir==0) {
             boolean check = false;
             for (Building b : buildings) {
-                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x-10,y+center_y,width,height))) {
+                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x-magnitude,y+center_y,width,height))) {
                     check = true;
                 }
             }
             for (Resource r : resources) {
-                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x-10,y+center_y,width,height))) {
+                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x-magnitude,y+center_y,width,height))) {
                     check = true;
                 }
             }
             if (!check) {
-                movx=-10;
+                movx=-magnitude;
             }
         } else if (dir==1) {
             boolean check = false;
             for (Building b : buildings) {
-                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x+10,y+center_y,width,height))) {
+                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x+magnitude,y+center_y,width,height))) {
                     check = true;
                 }
             }
             for (Resource r : resources) {
-                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x+10,y+center_y,width,height))) {
+                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x+magnitude,y+center_y,width,height))) {
                     check = true;
                 }
             }
             if (!check) {
-                movx=10;
+                movx=magnitude;
             }
         } else if (dir==2) {
             boolean check = false;
             for (Building b : buildings) {
-                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y-10,width,height))) {
+                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y-magnitude,width,height))) {
                     check = true;
                 }
             }
             for (Resource r : resources) {
-                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y-10,width,height))) {
+                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y-magnitude,width,height))) {
                     check = true;
                 }
             }
             if (!check) {
-                movy=-10;
+                movy=-magnitude;
             }
         } else if (dir==3) {
             boolean check = false;
             for (Building b : buildings) {
-                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y+10,width,height))) {
+                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y+magnitude,width,height))) {
                     check = true;
                 }
             }
             for (Resource r : resources) {
-                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y+10,width,height))) {
+                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y+magnitude,width,height))) {
                     check = true;
                 }
             }
             if (!check) {
-                movy=10;
+                movy=magnitude;
             }
         }
-        for(int i=0;i<10;i++) {
+        for(int i=0;i<100;i++) {
             try {
-                Thread.sleep(15);
+                Thread.sleep(6);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            x+=movx/2;
-            y+=movy/2;
+            x+=(double)(movx)/100;
+            y+=(double)(movy)/100;
         }
     }
-    public int getX() {
+    public double getX() {
         return x;
     }
-    public int getY() {
+    public double getY() {
         return y;
     }
     public int getWidth() {
@@ -109,5 +110,8 @@ public class Human implements AI {
     }
     public Color getColor() {
         return color;
+    }
+    public String getType() {
+        return "human";
     }
 }

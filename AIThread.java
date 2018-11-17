@@ -7,12 +7,14 @@ public class AIThread implements Runnable {
     public void run() {
         while(true) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(750);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             for (AI a : bots) {
-                a.update();
+                if (a.getType().equals("human")) {
+                    a.update();
+                }
             }
         }
     }
