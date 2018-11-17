@@ -46,12 +46,15 @@ public class Display extends JComponent {
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawString(""+(int)(in.getGold()),40,40);
         BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
         for (Building b : buildings) {
             if (b.getBoundingBox().intersects(screen)) {
                 g.setColor(b.getColor());
                 g.fillRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
+                g.setColor(Color.BLACK);
+                Font f = new Font("Courier New",Font.PLAIN,18);
+                g.setFont(f);
+                g.drawString(b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
             }
         }
         for (Resource r : resources) {
@@ -60,6 +63,9 @@ public class Display extends JComponent {
                 g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
             }
         }
+        Font f = new Font("Courier New", Font.BOLD, 30);
+        g.setFont(f);
+        g.drawString(""+(int)(in.getGold()),40,40);
     }
     public void addBuilding(Building b) {
         buildings.add(b);
