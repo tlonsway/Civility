@@ -61,11 +61,16 @@ public class Display extends JComponent {
             if (r.getBoundingBox().intersects(screen)) {
                 g.setColor(r.getColor());
                 g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
+                g.setColor(Color.BLACK);
+                Font f = new Font("Courier New",Font.PLAIN,18);
+                g.setFont(f);
+                g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
             }
         }
+        g.setColor(Color.BLACK);
         Font f = new Font("Courier New", Font.BOLD, 30);
         g.setFont(f);
-        g.drawString(""+(int)(in.getGold()),40,40);
+        g.drawString("Gold: "+(int)(in.getGold()),40,40);
     }
     public void addBuilding(Building b) {
         buildings.add(b);
