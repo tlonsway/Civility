@@ -20,6 +20,9 @@ public class KeyboardThread extends KeyAdapter {
         if (key == KeyEvent.VK_S) {
             dis.sPress();
         } 
+        if(key == KeyEvent.VK_I){
+            dis.iPress();
+        }
     }
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();

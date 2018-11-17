@@ -106,9 +106,11 @@ public class Display extends JComponent {
             int x = 150;
             int y = 150;
             for(Item i: player.getInventory()){
+                g.setColor(Color.WHITE);
+                g.fillRect(x,y,50,50);
                 g.setColor(Color.BLACK);
                 g.drawRect(x,y,50,50);
-                //g.drawString()
+                g.drawString(i.getType(),x+5,y+20);
                 x+=100;
                 if(x>=1650){
                     x = 150;
@@ -201,10 +203,12 @@ public class Display extends JComponent {
         s=false;
     }
     public void iPress(){
-        i=true;
-    }
-    public void iRelease(){
-        i=false;
+        if(i){
+            i = false;
+        }
+        else{
+            i = true;
+        }
     }
     public ArrayList<Building> getBuildings() {
         return buildings;

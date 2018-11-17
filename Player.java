@@ -33,4 +33,7 @@ public class Player{
     public ArrayList<Item> getInventory(){
         return inventory.getItems();
     }
+    public void addItem(Item i){
+        inventory.addItem(i);
+    }
 }
