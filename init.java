@@ -29,7 +29,9 @@ public class init {
         d.addResource(new Tree(150,150));
         d.addResource(new Rock(-300,-300));
         at.addBot(new Human(100,-100,d));
-        p.addItem(new Item("CUBE"));
+        for(int x = 0; x < (int)(Math.random()*100);x++){
+            d.addResource(new Tree((int)(Math.random()*1000),(int)(Math.random()*1000)));
+        }
         for(int i2=0;i2<100;i2++) {
             try {
                 Thread.sleep(100);
