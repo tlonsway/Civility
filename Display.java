@@ -172,4 +172,11 @@ public class Display extends JComponent {
     public void sRelease() {
         s=false;
     }
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+    public ArrayList<Resource> getResources() {
+        return resources;
+    }
+    
 }
