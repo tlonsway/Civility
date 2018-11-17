@@ -1,15 +1,17 @@
 import javafx.geometry.*;
 import java.awt.*;
+import java.util.*;
 public class Player{
     private String name;
     private double health;
     private Color color;
     private final double maxHealth = 100;
-    //private Player_Inventory;
-    public Player(String N, double H, Color C){
+    private Player_Inventory inventory;
+    public Player(String N, double H, Color C,Player_Inventory I){
         name = N;
         health = H;
         color = C;
+        inventory = I;
     }
     public String getName(){
         return name;
@@ -27,5 +29,8 @@ public class Player{
             return true;
         }
         return false;
+    }
+    public ArrayList<Item> getInventory(){
+        return inventory.getItems();
     }
 }

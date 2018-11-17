@@ -11,7 +11,7 @@ public class Display extends JComponent {
     double center_y;
     int width;
     int height; 
-    boolean w,a,s,d=false;
+    boolean w,a,s,d,i=false;
     Inventory in;
     Player player;
     public Display(int w, int h, Inventory inventory,Player p) {
@@ -96,39 +96,58 @@ public class Display extends JComponent {
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
-        for (Building b : buildings) {
-            if (b.getBoundingBox().intersects(screen)) {
-                g.setColor(b.getColor());
-                g.fillRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
+        if(i){
+            g.setColor(Color.GREEN);
+            g.fillRect(0,0,1800,1000);
+            g.setColor(Color.GRAY);
+            g.fillRect(100,100,1600,800);
+            int x = 150;
+            int y = 150;
+            for(Item i: player.getInventory()){
                 g.setColor(Color.BLACK);
-                Font f = new Font("Courier New",Font.PLAIN,18);
-                g.setFont(f);
-                g.drawString(b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
+                g.drawRect(x,y,50,50);
+                x+=100;
+                if(x>=1650){
+                    x = 150;
+                    y += 50;
+                }
             }
         }
-        for (Resource r : resources) {
-            if (r.getBoundingBox().intersects(screen)) {
-                g.setColor(r.getColor());
-                g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
-                g.setColor(Color.BLACK);
-                Font f = new Font("Courier New",Font.PLAIN,18);
-                g.setFont(f);
-                g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
+        else{
+            BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
+            for (Building b : buildings) {
+                if (b.getBoundingBox().intersects(screen)) {
+                    g.setColor(b.getColor());
+                    g.fillRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
+                    g.setColor(Color.BLACK);
+                    Font f = new Font("Courier New",Font.PLAIN,18);
+                    g.setFont(f);
+                    g.drawString(b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
+                }
             }
+            for (Resource r : resources) {
+                if (r.getBoundingBox().intersects(screen)) {
+                    g.setColor(r.getColor());
+                    g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
+                    g.setColor(Color.BLACK);
+                    Font f = new Font("Courier New",Font.PLAIN,18);
+                    g.setFont(f);
+                    g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
+                }
+            }
+            g.setColor(Color.BLACK);
+            Font f = new Font("Courier New", Font.BOLD, 30);
+            g.setFont(f);
+            g.drawString("Gold: "+(int)(in.getGold()),40,40);
+            g.setColor(Color.RED);
+            g.fillOval(900,500,40,40);
+            g.setColor(Color.BLACK);
+            g.drawRect(899,479,41,11);
+            g.setColor(Color.RED);
+            g.fillRect(900,480,40,10);
+            g.setColor(Color.GREEN);
+            g.fillRect(900,480,(int)(player.getHealth()/100*40),10);
         }
-        g.setColor(Color.BLACK);
-        Font f = new Font("Courier New", Font.BOLD, 30);
-        g.setFont(f);
-        g.drawString("Gold: "+(int)(in.getGold()),40,40);
-        g.setColor(Color.RED);
-        g.fillOval(900,500,40,40);
-        g.setColor(Color.BLACK);
-        g.drawRect(899,479,41,11);
-        g.setColor(Color.RED);
-        g.fillRect(900,480,40,10);
-        g.setColor(Color.GREEN);
-        g.fillRect(900,480,(int)(player.getHealth()/100*40),10);
     }
     public void addBuilding(Building b) {
         buildings.add(b);
@@ -171,6 +190,12 @@ public class Display extends JComponent {
     }
     public void sRelease() {
         s=false;
+    }
+    public void iPress(){
+        i=true;
+    }
+    public void iRelease(){
+        i=false;
     }
     public ArrayList<Building> getBuildings() {
         return buildings;
