@@ -9,16 +9,23 @@ public class Display extends JComponent {
     double center_x;
     double center_y;
     int width;
-    int height;
+    int height; 
     boolean w,a,s,d=false;
-    public Display(int w, int h) {
+    Inventory in;
+    public Display(int w, int h, Inventory inventory) {
         buildings = new ArrayList<Building>();
         center_x=0;
         center_y=0;
         width=w;
         height=h;
+        in=inventory;
     }
     public void update() {
+        for(Building b : buildings) {
+            if (b.getType().equals("goldmine")) {
+                in.addGold(.005);
+            }
+        }
         if (a) {
             center_x-=10;
         }
@@ -37,7 +44,7 @@ public class Display extends JComponent {
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        
+        g.drawString(""+(int)(in.getGold()),40,40);
         BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
         for (Building b : buildings) {
             if (b.getBoundingBox().intersects(screen)) {

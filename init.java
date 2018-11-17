@@ -9,7 +9,8 @@ public class init {
         frame.setResizable(false);
         frame.getContentPane().setBackground(new Color(0,140,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Display d = new Display(1800,1000);
+        Inventory i = new Inventory();
+        Display d = new Display(1800,1000,i);
         frame.add(d);
         d.setVisible(true);
         (new Thread(new FrameThread(d,60))).start();
@@ -20,5 +21,6 @@ public class init {
         d.addBuilding(new House(0,0));
         d.addBuilding(new House(-400,400));
         d.addBuilding(new Factory(-600,-600));
+        d.addBuilding(new GoldMine(500,500));
     }
 }
