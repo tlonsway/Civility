@@ -4,6 +4,7 @@ public class Player{
     private String name;
     private double health;
     private Color color;
+    private final double maxHealth = 100;
     //private Player_Inventory;
     public Player(String N, double H, Color C){
         name = N;
@@ -27,5 +28,4 @@ public class Player{
         }
         return false;
     }
-    
 }
