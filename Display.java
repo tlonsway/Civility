@@ -71,6 +71,8 @@ public class Display extends JComponent {
         Font f = new Font("Courier New", Font.BOLD, 30);
         g.setFont(f);
         g.drawString("Gold: "+(int)(in.getGold()),40,40);
+        g.setColor(Color.RED);
+        g.fillOval(900,500,40,40);
     }
     public void addBuilding(Building b) {
         buildings.add(b);
