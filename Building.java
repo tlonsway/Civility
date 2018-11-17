@@ -1,12 +1,12 @@
 import javafx.geometry.*;
 import java.awt.*;
 public abstract class Building {
-    double x;
-    double y;
-    double width;
-    double height;
-    String type;
-    Color color;
+    private double x;
+    private double y;
+    private double width;
+    private double height;
+    private String type;
+    private Color color;
     Building(String t, double x_loc, double y_loc, double w, double h, Color c) {
         type=t;
         x=x_loc;
