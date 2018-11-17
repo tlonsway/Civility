@@ -14,7 +14,8 @@ public class Display extends JComponent {
     boolean w,a,s,d,i=false;
     Inventory in;
     Player player;
-    public Display(int w, int h, Inventory inventory,Player p) {
+    AIThread aithread;
+    public Display(int w, int h, Inventory inventory,Player p, AIThread at) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
         center_x=0;
@@ -23,6 +24,7 @@ public class Display extends JComponent {
         height=h;
         in=inventory;
         player = p;
+        aithread=at;
     }
     public void update() {
         for(Building b : buildings) {
@@ -135,6 +137,12 @@ public class Display extends JComponent {
                     g.setFont(f);
                     g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
                 }
+            }
+            for(AI a : aithread.getBots()) {
+                if (a.getBoundingBox().intersects(screen)) {
+                    g.setColor(a.getColor());
+                    g.fillRect((int)(a.getX()-center_x),(int)(a.getY()-center_y),(int)(a.getWidth()),(int)(a.getHeight()));
+                }                
             }
             g.setColor(Color.BLACK);
             Font f = new Font("Courier New", Font.BOLD, 30);
