@@ -32,13 +32,13 @@ public class init {
         for(int x = 0; x < (int)(Math.random()*100);x++){
             d.addResource(new Tree((int)(Math.random()*1000),(int)(Math.random()*1000)));
         }
-        for(int i2=0;i2<100;i2++) {
+        for(int i2=0;i2<20;i2++) {
             try {
-                Thread.sleep(100);
+                Thread.sleep(0);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            p.doDamage(1);
+            at.addBot(new Human((int)(((Math.random()*2)-1)*1000),(int)(((Math.random()*2)-1)*1000),d));
         }
     }
 }
