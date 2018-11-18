@@ -5,7 +5,9 @@ public class Fists{
     public Fists(Color C){
         color = C;
     }
-    public int[] getFistCords(int X, int Y){
-        return new int[10];
+    public int[] getFistsCords(int X, int Y){
+        int[] ret = new int[4];
+        
+        return ret;
     }
 }
