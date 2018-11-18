@@ -46,7 +46,7 @@ public class Display extends JComponent {
                 }
             }
             if (!check)
-                center_x-=10;
+                center_x-=moveamt;
         }
         if (d) {
             boolean check = false;
@@ -61,7 +61,7 @@ public class Display extends JComponent {
                 }
             }
             if (!check)
-                center_x+=10;
+                center_x+=moveamt;
         }
         if (w) {
             boolean check = false;
@@ -76,7 +76,7 @@ public class Display extends JComponent {
                 }
             }
             if (!check)
-                center_y-=10;
+                center_y-=moveamt;
         }
         if (s) {
             boolean check = false;
@@ -91,7 +91,7 @@ public class Display extends JComponent {
                 }
             }
             if (!check)
-                center_y+=10;
+                center_y+=moveamt;
         }
     }
     public void draw() {
@@ -159,7 +159,7 @@ public class Display extends JComponent {
             Font f = new Font("Courier New", Font.BOLD, 30);
             g.setFont(f);
             g.drawString("Gold: "+(int)(in.getGold()),40,40);
-            g.setColor(Color.RED);
+            g.setColor(player.getColor());
             g.fillOval(900,500,40,40);
             g.setColor(Color.BLACK);
             g.drawRect(899,479,41,11);
