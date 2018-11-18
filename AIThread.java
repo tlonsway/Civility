@@ -1,20 +1,19 @@
 import java.util.*;
 public class AIThread implements Runnable {
     ArrayList<AI> bots;
+    Display dis;
     public AIThread() {
         bots = new ArrayList<AI>();
     }
     public void run() {
         while(true) {
             try {
-                Thread.sleep(750);
+                Thread.sleep(200);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             for (AI a : bots) {
-                if (a.getType().equals("human")) {
-                    a.update();
-                }
+                (new Thread(new AIMoveThread(a))).start();
             }
         }
     }
@@ -23,5 +22,8 @@ public class AIThread implements Runnable {
     }
     public void addBot(AI a) {
         bots.add(a);
+    }
+    public void setDisplay(Display d) {
+        dis=d;
     }
 }

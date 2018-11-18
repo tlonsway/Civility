@@ -18,8 +18,9 @@ public class Human implements AI {
         name=names[namenum];
     }
     public void update() {
-        ArrayList<Building> buildings = d.getBuildings();
-        ArrayList<Resource> resources = d.getResources();
+        ArrayList<Building> builds = d.getBuildings();
+        ArrayList<Resource> resource = d.getResources();
+        System.out.println("update start");
         int dir = (int)(Math.random()*4);
         double center_x=d.getCenterX();
         double center_y=d.getCenterY();
@@ -28,12 +29,12 @@ public class Human implements AI {
         int magnitude = 150;
         if (dir==0) {
             boolean check = false;
-            for (Building b : buildings) {
+            for (Building b : builds) {
                 if (b.getBoundingBox().intersects(new BoundingBox(x+center_x-magnitude,y+center_y,width,height))) {
                     check = true;
                 }
             }
-            for (Resource r : resources) {
+            for (Resource r : resource) {
                 if (r.getBoundingBox().intersects(new BoundingBox(x+center_x-magnitude,y+center_y,width,height))) {
                     check = true;
                 }
@@ -43,12 +44,12 @@ public class Human implements AI {
             }
         } else if (dir==1) {
             boolean check = false;
-            for (Building b : buildings) {
+            for (Building b : builds) {
                 if (b.getBoundingBox().intersects(new BoundingBox(x+center_x+magnitude,y+center_y,width,height))) {
                     check = true;
                 }
             }
-            for (Resource r : resources) {
+            for (Resource r : resource) {
                 if (r.getBoundingBox().intersects(new BoundingBox(x+center_x+magnitude,y+center_y,width,height))) {
                     check = true;
                 }
@@ -58,12 +59,12 @@ public class Human implements AI {
             }
         } else if (dir==2) {
             boolean check = false;
-            for (Building b : buildings) {
+            for (Building b : builds) {
                 if (b.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y-magnitude,width,height))) {
                     check = true;
                 }
             }
-            for (Resource r : resources) {
+            for (Resource r : resource) {
                 if (r.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y-magnitude,width,height))) {
                     check = true;
                 }
@@ -73,12 +74,12 @@ public class Human implements AI {
             }
         } else if (dir==3) {
             boolean check = false;
-            for (Building b : buildings) {
+            for (Building b : builds) {
                 if (b.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y+magnitude,width,height))) {
                     check = true;
                 }
             }
-            for (Resource r : resources) {
+            for (Resource r : resource) {
                 if (r.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y+magnitude,width,height))) {
                     check = true;
                 }
@@ -87,6 +88,7 @@ public class Human implements AI {
                 movy=magnitude;
             }
         }
+        System.out.println("collision check complete");
         for(int i=0;i<100;i++) {
             try {
                 Thread.sleep(6);
@@ -96,6 +98,7 @@ public class Human implements AI {
             x+=(double)(movx)/100;
             y+=(double)(movy)/100;
         }
+        System.out.println("completed update");
     }
     public double getX() {
         return x;

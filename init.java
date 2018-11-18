@@ -15,6 +15,7 @@ public class init {
         (new Thread(at)).start();
         Player p = new Player("Bob",100,Color.RED,pi);
         Display d = new Display(1800,1000,i,p,at);
+        at.setDisplay(d);
         frame.add(d);
         d.setVisible(true);
         (new Thread(new FrameThread(d,60))).start();
