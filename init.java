@@ -32,8 +32,6 @@ public class init {
         for(int a = 0; a < 10; a++){
             p.addItem(new Item("Test"));
         }
-        System.out.println(p.getInventory());
-        System.out.println(pi.getItems());
         for(int x = 0; x < (int)(Math.random()*100);x++){
             //d.addResource(new Tree((int)(Math.random()*1000),(int)(Math.random()*1000)));
         }

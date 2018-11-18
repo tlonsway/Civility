@@ -9,7 +9,7 @@ public class Player_Inventory{
         for(Item a: items){
             if(a.getType().equals(i.getType())){
                 found = true;
-                a.changeQuantity(1);
+                a.changeQuantity(i.getQuantity());
             }
         }
         if(!found){
@@ -21,7 +21,7 @@ public class Player_Inventory{
         for(Item a: items){
             if(a.getType().equals(i.getType())){
                 found = true;
-                a.changeQuantity(-1);
+                a.changeQuantity(i.getQuantity()*-1);
                 if(a.getQuantity() <= 0){
                     items.remove(a);
                 }

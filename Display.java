@@ -100,20 +100,22 @@ public class Display extends JComponent {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if(i){
-            g.setColor(Color.GREEN);
-            g.fillRect(0,0,1800,1000);
+            //g.setColor(Color.GREEN);
+            //g.fillRect(0,0,1800,1000);
             g.setColor(Color.GRAY);
             g.fillRect(100,100,1600,800);
+            g.setColor(Color.BLACK);
+            g.drawRect(100,100,1600,800);
             int x = 150;
             int y = 150;
             ArrayList<Item> Items = player.getInventory();
-            System.out.println(Items);
             for(Item i: player.getInventory()){
                 g.setColor(Color.WHITE);
                 g.fillRect(x,y,50,50);
                 g.setColor(Color.BLACK);
                 g.drawRect(x,y,50,50);
                 g.drawString(i.getType(),x+5,y+20);
+                g.drawString("x"+i.getQuantity(),x+15, y+40);
                 x+=100;
                 if(x>=1650){
                     x = 150;

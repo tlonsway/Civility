@@ -9,9 +9,9 @@ public abstract class Resource implements Clickable {
     private Color color;
     private double Max_Health;
     private double health;
-    private int yeild;
+    private Item yeild;
     //private String Item_type
-    public Resource(double X, double Y, double H, double W, String T, Color C, double MH){
+    public Resource(double X, double Y, double H, double W, String T, Color C, double MH,String YN){
         x = X;
         y = Y;
         height = H;
@@ -20,7 +20,8 @@ public abstract class Resource implements Clickable {
         color = C;
         health = MH;
         Max_Health = MH;
-        yeild = (int)(Math.random()*100)+1;
+        yeild = new Item(YN);
+        yeild.changeQuantity((int)(Math.random()*100));
     }
     public double getX(){
         return x;
@@ -40,7 +41,7 @@ public abstract class Resource implements Clickable {
     public String getType(){
         return type;
     }
-    public int getYeild(){
+    public Item getYeild(){
         return yeild;
     }
     public Color getColor(){
