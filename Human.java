@@ -1,7 +1,7 @@
 import java.util.*;
 import javafx.geometry.*;
 import java.awt.*;
-public class Human implements AI {
+public class Human implements AI,Runnable {
     double x;
     double y;
     int width=30;
@@ -18,87 +18,94 @@ public class Human implements AI {
         name=names[namenum];
     }
     public void update() {
-        ArrayList<Building> builds = d.getBuildings();
-        ArrayList<Resource> resource = d.getResources();
-        System.out.println("update start");
-        int dir = (int)(Math.random()*4);
-        double center_x=d.getCenterX();
-        double center_y=d.getCenterY();
-        int movx=0;
-        int movy=0;
-        int magnitude = 150;
-        if (dir==0) {
-            boolean check = false;
-            for (Building b : builds) {
-                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x-magnitude,y+center_y,width,height))) {
-                    check = true;
-                }
-            }
-            for (Resource r : resource) {
-                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x-magnitude,y+center_y,width,height))) {
-                    check = true;
-                }
-            }
-            if (!check) {
-                movx=-magnitude;
-            }
-        } else if (dir==1) {
-            boolean check = false;
-            for (Building b : builds) {
-                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x+magnitude,y+center_y,width,height))) {
-                    check = true;
-                }
-            }
-            for (Resource r : resource) {
-                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x+magnitude,y+center_y,width,height))) {
-                    check = true;
-                }
-            }
-            if (!check) {
-                movx=magnitude;
-            }
-        } else if (dir==2) {
-            boolean check = false;
-            for (Building b : builds) {
-                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y-magnitude,width,height))) {
-                    check = true;
-                }
-            }
-            for (Resource r : resource) {
-                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y-magnitude,width,height))) {
-                    check = true;
-                }
-            }
-            if (!check) {
-                movy=-magnitude;
-            }
-        } else if (dir==3) {
-            boolean check = false;
-            for (Building b : builds) {
-                if (b.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y+magnitude,width,height))) {
-                    check = true;
-                }
-            }
-            for (Resource r : resource) {
-                if (r.getBoundingBox().intersects(new BoundingBox(x+center_x,y+center_y+magnitude,width,height))) {
-                    check = true;
-                }
-            }
-            if (!check) {
-                movy=magnitude;
-            }
-        }
-        System.out.println("collision check complete");
-        for(int i=0;i<100;i++) {
+    }
+    public void run() {
+        while(true) {
             try {
-                Thread.sleep(6);
+                Thread.sleep((int)((Math.random()*2000)+500));
+                //Thread.sleep(10);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            x+=(double)(movx)/100;
-            y+=(double)(movy)/100;
+            ArrayList<Building> builds = d.getBuildings();
+            ArrayList<Resource> resource = d.getResources();
+            int dir = (int)(Math.random()*4);
+            double center_x=d.getCenterX();
+            double center_y=d.getCenterY();
+            int movx=0;
+            int movy=0;
+            int magnitude = 150;
+            if (dir==0) {
+                boolean check = false;
+                for (Building b : builds) {
+                    if (b.getBoundingBox().intersects(new BoundingBox(x-center_x-magnitude,y-center_y,width+magnitude,height))) {
+                        check = true;
+                    }
+                }
+                for (Resource r : resource) {
+                    if (r.getBoundingBox().intersects(new BoundingBox(x-center_x-magnitude,y-center_y,width+magnitude,height))) {
+                        check = true;
+                    }
+                }
+                if (!check) {
+                    movx=magnitude;
+                }
+            } else if (dir==1) {
+                boolean check = false;
+                for (Building b : builds) {
+                    if (b.getBoundingBox().intersects(new BoundingBox(x-center_x+magnitude,y-center_y,width-magnitude,height))) {
+                        check = true;
+                    }
+                }
+                for (Resource r : resource) {
+                    if (r.getBoundingBox().intersects(new BoundingBox(x-center_x+magnitude,y-center_y,width-magnitude,height))) {
+                        check = true;
+                    }
+                }
+                if (!check) {
+                    movx=-magnitude;
+                }
+            } else if (dir==2) {
+                boolean check = false;
+                for (Building b : builds) {
+                    if (b.getBoundingBox().intersects(new BoundingBox(x-center_x,y-center_y-magnitude,width,height+magnitude))) {
+                        check = true;
+                    }
+                }
+                for (Resource r : resource) {
+                    if (r.getBoundingBox().intersects(new BoundingBox(x-center_x,y-center_y-magnitude,width,height+magnitude))) {
+                        check = true;
+                    }
+                }
+                if (!check) {
+                    movy=magnitude;
+                }
+            } else if (dir==3) {
+                boolean check = false;
+                for (Building b : builds) {
+                    if (b.getBoundingBox().intersects(new BoundingBox(x-center_x,y-center_y+magnitude,width,height-magnitude))) {
+                        check = true;
+                    }
+                }
+                for (Resource r : resource) {
+                    if (r.getBoundingBox().intersects(new BoundingBox(x-center_x,y-center_y+magnitude,width,height-magnitude))) {
+                        check = true;
+                    }
+                }
+                if (!check) {
+                    movy=-magnitude;
+                }
+            }
+            for(int i=0;i<100;i++) {
+                try {
+                    Thread.sleep(6);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                x+=(double)(movx)/100;
+                y+=(double)(movy)/100;
+            }
         }
-        System.out.println("completed update");
     }
     public double getX() {
         return x;

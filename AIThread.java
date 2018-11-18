@@ -6,15 +6,10 @@ public class AIThread implements Runnable {
         bots = new ArrayList<AI>();
     }
     public void run() {
-        while(true) {
-            try {
-                Thread.sleep(200);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            for (AI a : bots) {
-                (new Thread(new AIMoveThread(a))).start();
-            }
+        try {
+            Thread.sleep(10);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     public ArrayList<AI> getBots() {

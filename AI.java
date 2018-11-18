@@ -11,4 +11,5 @@ public interface AI {
     public Color getColor();
     public String getType();
     public String getName();
+    public void run();
 }
