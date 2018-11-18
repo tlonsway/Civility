@@ -1,6 +1,6 @@
 import javafx.geometry.*;
 import java.awt.*;
-public abstract class Building {
+public abstract class Building implements Clickable {
     private double x;
     private double y;
     private double width;

@@ -1,6 +1,6 @@
 import javafx.geometry.*;
 import java.awt.*;
-public abstract class Resource{
+public abstract class Resource implements Clickable {
     private double x;
     private double y;
     private double height;
