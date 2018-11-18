@@ -11,9 +11,9 @@ public class Player_Inventory{
                 found = true;
                 a.changeQuantity(1);
             }
-            if(!found){
-                items.add(i);
-            }
+        }
+        if(!found){
+            items.add(i);
         }
     }
     public void removeItem(Item i){
