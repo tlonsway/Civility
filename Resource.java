@@ -7,6 +7,9 @@ public abstract class Resource{
     private double width;
     private String type;
     private Color color;
+    private double Max_Health;
+    private double health;
+    //private String Item_type
     public Resource(double X, double Y, double H, double W, String T, Color C){
         x = X;
         y = Y;
@@ -35,5 +38,14 @@ public abstract class Resource{
     }
     public Color getColor(){
         return color;
+    }
+    public double getHealth(){
+        return health;
+    }
+    public void dealDamage(double damage){
+        health -= damage;
+    }
+    public double getMax_Health(){
+        return Max_Health;
     }
 }
