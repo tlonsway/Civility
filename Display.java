@@ -106,6 +106,8 @@ public class Display extends JComponent {
             g.fillRect(100,100,1600,800);
             int x = 150;
             int y = 150;
+            ArrayList<Item> Items = player.getInventory();
+            System.out.println(Items);
             for(Item i: player.getInventory()){
                 g.setColor(Color.WHITE);
                 g.fillRect(x,y,50,50);
