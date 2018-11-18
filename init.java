@@ -22,15 +22,15 @@ public class init {
         (new Thread(new UpdateThread(d))).start();
         KeyboardThread kt = new KeyboardThread(d);
         frame.addKeyListener(kt);
-        d.addBuilding(new Center(200,300));
+        /*d.addBuilding(new Center(200,300));
         d.addBuilding(new House(0,0));
         d.addBuilding(new House(-400,400));
         d.addBuilding(new Factory(-600,-600));
         d.addBuilding(new GoldMine(500,500));
         d.addResource(new Tree(150,150));
-        d.addResource(new Rock(-300,-300));
+        d.addResource(new Rock(-300,-300));*/
         for(int x = 0; x < (int)(Math.random()*100);x++){
-            d.addResource(new Tree((int)(Math.random()*1000),(int)(Math.random()*1000)));
+            //d.addResource(new Tree((int)(Math.random()*1000),(int)(Math.random()*1000)));
         }
         for(int i2=0;i2<20;i2++) {
             try {

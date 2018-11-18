@@ -159,6 +159,7 @@ public class Display extends JComponent {
             Font f = new Font("Courier New", Font.BOLD, 30);
             g.setFont(f);
             g.drawString("Gold: "+(int)(in.getGold()),40,40);
+            g.drawString("center_x: " + center_x + "   center_y: " + center_y,300,40);
             g.setColor(player.getColor());
             g.fillOval(900,500,40,40);
             g.setColor(Color.BLACK);
