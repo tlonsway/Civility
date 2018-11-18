@@ -38,9 +38,6 @@ public class init {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            Human bot = (new Human((int)(((Math.random()*2)-1)*1000),(int)(((Math.random()*2)-1)*1000),d));
-            at.addBot(bot);
-            (new Thread(bot)).start();
         }
     }
 }

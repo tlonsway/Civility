@@ -125,9 +125,13 @@ public class Display extends JComponent {
                     g.setColor(b.getColor());
                     g.fillRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
                     g.setColor(Color.BLACK);
-                    Font f = new Font("Courier New",Font.PLAIN,18);
+                    Font f = new Font("Courier New",Font.PLAIN,15);
                     g.setFont(f);
-                    g.drawString(b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
+                    String btitle="";
+                    if (b.getType().equals("house")) {
+                        btitle+=((House)(b)).getOwner()+"'s ";
+                    }
+                    g.drawString(btitle+b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
                 }
             }
             for (Resource r : resources) {
@@ -144,11 +148,6 @@ public class Display extends JComponent {
                 if (a.getBoundingBox().intersects(screen)) {
                     g.setColor(a.getColor());
                     g.fillRect((int)(a.getX()-center_x),(int)(a.getY()-center_y),(int)(a.getWidth()),(int)(a.getHeight()));
-                    g.setColor(Color.RED);
-                    g.drawRect((int)(a.getX()-center_x-150), (int)(a.getY()-center_y), a.getWidth()+150, a.getHeight());
-                    g.drawRect((int)(a.getX()-center_x+150), (int)(a.getY()-center_y), a.getWidth()-150, a.getHeight());
-                    g.drawRect((int)(a.getX()-center_x), (int)(a.getY()-center_y-150), a.getWidth(), a.getHeight()+150);
-                    g.drawRect((int)(a.getX()-center_x), (int)(a.getY()-center_y+150), a.getWidth(), a.getHeight()-150);
                     g.setColor(Color.BLACK);
                     Font f = new Font("Courier New",Font.PLAIN,18);
                     g.setFont(f);
@@ -171,6 +170,13 @@ public class Display extends JComponent {
     }
     public void addBuilding(Building b) {
         buildings.add(b);
+        if (b.getType().equals("house")) {
+            House h = (House)(b);
+            Human bot = new Human((int)(b.getX()),(int)(b.getY())+150,this,h);
+            aithread.addBot(bot);
+            h.setOwner(bot.getName());
+            (new Thread(bot)).start();
+        }
     }
     public void addResource(Resource r) {
         resources.add(r);
