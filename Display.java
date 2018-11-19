@@ -122,6 +122,9 @@ public class Display extends JComponent {
                     y += 50;
                 }
             }
+            Point mp = MouseInfo.getPointerInfo().getLocation();
+            g.setColor(Color.WHITE);
+            g.fillOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);            
         }
         else{
             BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
@@ -168,8 +171,6 @@ public class Display extends JComponent {
             g.fillOval(900,500,40,40);
             Point mp = MouseInfo.getPointerInfo().getLocation();
             int[] fistCords = player.getFistCords((int)mp.getX(),(int)mp.getY());
-            System.out.println("mouse x: " + mp.getX());
-            System.out.println("mouse y: " + mp.getY());
             g.setColor(Color.WHITE);
             g.fillOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);
             g.setColor(player.getFistColor());

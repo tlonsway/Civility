@@ -27,7 +27,6 @@ public class Fists{
         double fy2=inv*dist*-Math.sin(theta+offset-horzdist)+515;
         //fx2=1;
         //fy2=1;
-        System.out.println("angle: " + theta);
         ret[0]=(int)fx1;
         ret[1]=(int)fy1;
         ret[2]=(int)fx2;
