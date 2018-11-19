@@ -6,6 +6,7 @@ public class Hotbar{
         for(int i = 0; i < 10; i++){
             items[i] = new Item("test");
         }
+        items[1] = new Item("Tristan");
     }
     public Item[] getHotbar(){
         return items;

@@ -193,7 +193,7 @@ public class Display extends JComponent {
                 g.setColor(Color.BLACK);
                 g.drawRect(605+i*60,830,50,50);
                 g.drawString(hotbar[i].getType(),610+i*60,850);
-                g.drawString(" " + hotbar[i].getQuantity(),610+i*60,865);
+                g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
             }
         }
     }
