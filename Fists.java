@@ -13,10 +13,20 @@ public class Fists{
         if (X<=920) {
             inv=-1;
         }
-        double fx1=inv*30*Math.cos(theta)+915;
+        /*double fx1=inv*30*Math.cos(theta)+915;
         double fy1=inv*30*Math.sin(theta)+515;
         double fx2=inv*30*Math.cos(theta)+915;
-        double fy2=inv*30*Math.sin(theta)+515;
+        double fy2=inv*30*Math.sin(theta)+515;*/
+        int dist=25;
+        theta=-theta;
+        double offset=.8;
+        double horzdist=.2;
+        double fx1=inv*dist*Math.sin(theta+offset+horzdist)+915;
+        double fy1=inv*dist*Math.cos(theta+offset+horzdist)+515;    
+        double fx2=inv*dist*Math.cos(theta+offset-horzdist)+915;
+        double fy2=inv*dist*-Math.sin(theta+offset-horzdist)+515;
+        //fx2=1;
+        //fy2=1;
         System.out.println("angle: " + theta);
         ret[0]=(int)fx1;
         ret[1]=(int)fy1;

@@ -1,6 +1,7 @@
 import java.awt.*;
 import javax.swing.*;
 import java.util.*;
+import java.awt.image.*;
 public class init {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Game Window");
@@ -9,6 +10,9 @@ public class init {
         frame.setResizable(false);
         frame.getContentPane().setBackground(new Color(0,140,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+        Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank");
+        frame.getContentPane().setCursor(blankCursor);
         Inventory i = new Inventory();
         Player_Inventory pi = new Player_Inventory();
         AIThread at = new AIThread();
