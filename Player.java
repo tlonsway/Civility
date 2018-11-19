@@ -7,11 +7,13 @@ public class Player{
     private Color color;
     private final double maxHealth = 100;
     private Player_Inventory inventory;
-    public Player(String N, double H, Color C,Player_Inventory I){
+    private Fists fists;
+    public Player(String N, double H, Color C,Player_Inventory I,Fists F){
         name = N;
         health = H;
         color = C;
         inventory = I;
+        fists = F;
     }
     public String getName(){
         return name;
@@ -35,5 +37,11 @@ public class Player{
     }
     public void addItem(Item i){
         inventory.addItem(i);
+    }
+    public int[] getFistCords(int x,int y){
+        return fists.getFistsCords(x,y);
+    }   
+    public Color getFistColor(){
+        return fists.getColor();
     }
 }

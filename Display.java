@@ -166,6 +166,11 @@ public class Display extends JComponent {
             g.drawString("center_x: " + center_x + "   center_y: " + center_y,300,40);
             g.setColor(player.getColor());
             g.fillOval(900,500,40,40);
+            g.setColor(player.getFistColor());
+            Point mp = MouseInfo.getPointerInfo().getLocation();
+            int[] fistCords = player.getFistCords((int)mp.getX(),(int)mp.getY());
+            g.fillOval(fistCords[0],fistCords[1],10,10);
+            g.fillOval(fistCords[2],fistCords[3],10,10);
             g.setColor(Color.BLACK);
             g.drawRect(899,479,41,11);
             g.setColor(Color.RED);

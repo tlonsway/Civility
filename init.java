@@ -13,7 +13,8 @@ public class init {
         Player_Inventory pi = new Player_Inventory();
         AIThread at = new AIThread();
         (new Thread(at)).start();
-        Player p = new Player("Bob",100,Color.BLUE,pi);
+        Fists fists = new Fists(new Color(252, 210, 126));
+        Player p = new Player("Bob",100,Color.BLUE,pi,fists);
         Display d = new Display(1800,1000,i,p,at);
         at.setDisplay(d);
         frame.add(d);
