@@ -8,12 +8,17 @@ public class Player{
     private final double maxHealth = 100;
     private Player_Inventory inventory;
     private Fists fists;
-    public Player(String N, double H, Color C,Player_Inventory I,Fists F){
+    private Hotbar hotbar;
+    public Player(String N, double H, Color C,Player_Inventory I,Fists F,Hotbar Hot){
         name = N;
         health = H;
         color = C;
         inventory = I;
         fists = F;
+        hotbar = Hot;
+    }
+    public Item[] getHotbar(){
+        return hotbar.getHotbar();
     }
     public String getName(){
         return name;

@@ -14,7 +14,8 @@ public class init {
         AIThread at = new AIThread();
         (new Thread(at)).start();
         Fists fists = new Fists(new Color(252, 210, 126));
-        Player p = new Player("Bob",100,Color.BLUE,pi,fists);
+        Hotbar hotbar = new Hotbar();
+        Player p = new Player("Bob",100,Color.BLUE,pi,fists,hotbar);
         Display d = new Display(1800,1000,i,p,at);
         at.setDisplay(d);
         frame.add(d);

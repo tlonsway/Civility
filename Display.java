@@ -181,7 +181,20 @@ public class Display extends JComponent {
             g.setColor(Color.GREEN);
             g.fillRect(900,480,(int)(player.getHealth()/100*40),10);
             g.setColor(Color.GRAY);
-            g.fillRect(150,829,700,51);
+            g.fillRect(595,820,610,70);
+            g.setColor(Color.BLACK);
+            g.drawRect(595,820,610,70);
+            Item[] hotbar = player.getHotbar();
+            f = new Font("Courier New",Font.PLAIN,15);
+            g.setFont(f);
+            for(int i = 0; i < 10; i++){
+                g.setColor(Color.WHITE);
+                g.fillRect(605+i*60,830,50,50);
+                g.setColor(Color.BLACK);
+                g.drawRect(605+i*60,830,50,50);
+                g.drawString(hotbar[i].getType(),610+i*60,850);
+                g.drawString(" " + hotbar[i].getQuantity(),610+i*60,865);
+            }
         }
     }
     public void addBuilding(Building b) {
