@@ -14,7 +14,7 @@ public class Human implements AI,Runnable {
         x=x_loc;
         y=y_loc;
         d=dis;
-        String[] names = new String[]{"bob","brian","tristan","ethan","steve","bill","charles","oliver","harry","jack","george","noah","charlie","jacob","alfie","freddie","oscar","leo","logan","wes", "Roger","Nicholas","Rich","Korey","Renaldo","Donte","Rodolfo","Gerald","Rigoberto","Jamar","Doyle","Thad","Edgardo","Trey","Sylvester","Abel","Markus","Bryan","Odell","Oswaldo","Albert","Hai","Robby","Parker","Kermit","Darin","Willy","Juan","Jamie","Junior","Faustino","Harvey","Gayle","Eric","Otha","Sam","Roscoe","Stacey","Gerardo","Karl","Titus","Jerrod","Minh","Young","Danial","Emery","Felipe","Gustavo","Elisha","Malcolm"};
+        String[] names = new String[]{"Bob","Brian","Tristan","Ethan","Steve","Bill","Charles","Oliver","Harry","Jack","George","Noah","Charlie","Jacob","Alfie","Freddie","Oscar","Leo","Logan","Wes", "Roger","Nicholas","Rich","Korey","Renaldo","Donte","Rodolfo","Gerald","Rigoberto","Jamar","Doyle","Thad","Edgardo","Trey","Sylvester","Abel","Markus","Bryan","Odell","Oswaldo","Albert","Hai","Robby","Parker","Kermit","Darin","Willy","Juan","Jamie","Junior","Faustino","Harvey","Gayle","Eric","Otha","Sam","Roscoe","Stacey","Gerardo","Karl","Titus","Jerrod","Minh","Young","Danial","Emery","Felipe","Gustavo","Elisha","Malcolm"};
         int namenum = (int)(Math.random()*names.length);
         name=names[namenum];
         home=h;
