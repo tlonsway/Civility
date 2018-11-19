@@ -177,6 +177,8 @@ public class Display extends JComponent {
             g.fillRect(900,480,40,10);
             g.setColor(Color.GREEN);
             g.fillRect(900,480,(int)(player.getHealth()/100*40),10);
+            g.setColor(Color.GRAY);
+            g.fillRect(150,829,700,51);
         }
     }
     public void addBuilding(Building b) {
