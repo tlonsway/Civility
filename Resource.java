@@ -10,7 +10,6 @@ public abstract class Resource implements Clickable {
     private double Max_Health;
     private double health;
     private Item yeild;
-    //private String Item_type
     public Resource(double X, double Y, double H, double W, String T, Color C, double MH,String YN){
         x = X;
         y = Y;
