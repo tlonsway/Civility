@@ -264,6 +264,7 @@ public class Display extends JComponent {
     }
     public void mouseClick(double x, double y) {
         System.out.println("Mouse clicked at x:" + x + " and y:" + y);
+        player.punch(null,(int)x,(int)y);
     }
     
 }

@@ -54,7 +54,8 @@ public class Player{
     public Color getFistColor(){
         return fists.getColor();
     }
-    public void punch(Resource resource){
+    public void punch(Resource resource,int x,int y){
+        fists.animate(x,y);
         if(resource != null){
             resource.dealDamage(5+playerWeaponDamage);
         }
