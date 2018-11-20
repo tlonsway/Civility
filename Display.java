@@ -262,5 +262,8 @@ public class Display extends JComponent {
     public ArrayList<Resource> getResources() {
         return resources;
     }
+    public void mouseClick(double x, double y) {
+        System.out.println("Mouse clicked at x:" + x + " and y:" + y);
+    }
     
 }

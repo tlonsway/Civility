@@ -9,7 +9,7 @@ public class MouseThread extends  MouseAdapter{
     public void mousePressed(MouseEvent e){
         if(e.getButton() == 1){
             //should grab the resource that the player punched
-            dis.player.punch(null);
+            dis.mouseClick(e.getX(),e.getY());
         }
         else if(e.getButton() == 2){
             //display the information about the object clicked on
