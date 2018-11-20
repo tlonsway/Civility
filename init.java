@@ -27,6 +27,8 @@ public class init {
         (new Thread(new FrameThread(d,60))).start();
         (new Thread(new UpdateThread(d))).start();
         KeyboardThread kt = new KeyboardThread(d);
+        MouseThread mt = new MouseThread(d);
+        frame.addMouseListener(mt);
         frame.addKeyListener(kt);
         d.addBuilding(new Center(200,300));
         d.addBuilding(new House(0,0));
