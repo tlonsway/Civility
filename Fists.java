@@ -3,11 +3,14 @@ public class Fists{
     private Color color;
     private int x1,x2,y1,y2 = 0;
     private AnimateFist animate;
+    private boolean isRightArm;
     public Fists(Color C){
         color = C;
-        animate = new AnimateFist();
+        isRightArm = true;
+        animate = new AnimateFist(isRightArm);
     }
     public int[] getFistsCords(int X, int Y){
+        animate.setMouseCords(X,Y);
         if(!animate.isAnimating()){
             int[] ret = new int[4];
             //player middle at (920,520) always
@@ -39,7 +42,15 @@ public class Fists{
         return animate.getFistCords();
     }
     public void animate(int X,int Y){
-        animate.animate(X,Y);
+        System.out.println("Fist.animate()");
+        animate = new AnimateFist(isRightArm);
+        (new Thread(animate)).start();
+        if(isRightArm){
+            isRightArm = false;
+        }
+        else{
+            isRightArm = true;
+        }
     }
     public Color getColor() {
         return color;
