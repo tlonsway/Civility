@@ -150,6 +150,12 @@ public class Display extends JComponent {
                     Font f = new Font("Courier New",Font.PLAIN,18);
                     g.setFont(f);
                     g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
+                    g.setColor(Color.BLACK);
+                    g.drawRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)+21,11,41);
+                    g.setColor(Color.RED);
+                    g.fillRect((int)(r.getX()-center_x)+1,(int)(r.getY()-center_y)+20,10,40);
+                    g.setColor(Color.GREEN);
+                    g.fillRect((int)(r.getX()-center_x)+1,(int)(r.getY()-center_y)+20,10,40);
                 }
             }
             for(AI a : aithread.getBots()) {
@@ -264,7 +270,13 @@ public class Display extends JComponent {
     }
     public void mouseClick(double x, double y) {
         System.out.println("Mouse clicked at x:" + x + " and y:" + y);
-        player.punch(null,(int)x,(int)y);
+        Resource objectHit = null;
+        for (Resource r : resources) {
+            if (r.getBoundingBox().intersects(new BoundingBox(900+center_x,500+center_y,50,50))) {
+                objectHit = r;
+            }
+        }
+        player.punch(objectHit,(int)x,(int)y);
     }
     
 }
