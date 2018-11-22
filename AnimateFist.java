@@ -1,3 +1,9 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+import java.util.*;
+import java.awt.geom.*;
+import javafx.geometry.*;
 public class AnimateFist implements Runnable{
     private int[] fistCords;
     private int mouseCords[];
@@ -33,6 +39,9 @@ public class AnimateFist implements Runnable{
     }
     public void animate(){
         animating = true;
+        Point mp = MouseInfo.getPointerInfo().getLocation();
+        mouseCords[0]=(int)mp.getX();
+        mouseCords[1]=(int)mp.getY();
         double theta = (Math.atan((520-(double)mouseCords[1])/(920-(double)mouseCords[0])));
         int inv=1;
         double offset=.8;
