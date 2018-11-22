@@ -37,6 +37,9 @@ public class AnimateFist implements Runnable{
     public int[] getFistCords(){
         return fistCords;
     }
+    public boolean isRightArm() {
+        return isRightArm;
+    }
     public void animate(){
         animating = true;
         Point mp = MouseInfo.getPointerInfo().getLocation();

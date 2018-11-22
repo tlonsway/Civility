@@ -271,12 +271,27 @@ public class Display extends JComponent {
     public void mouseClick(double x, double y) {
         System.out.println("Mouse clicked at x:" + x + " and y:" + y);
         Resource objectHit = null;
+        Building buildinghit = null;
+        Point mp = MouseInfo.getPointerInfo().getLocation();
+        int[] fistcords = player.getFistCords((int)mp.getX(),(int)mp.getY());
+        int fistx=fistcords[2];
+        int fisty=fistcords[3];
+        if (player.getFists().getAnimate().isRightArm()) {
+            fistx=fistcords[0];
+            fisty=fistcords[1];
+        }
         for (Resource r : resources) {
-            if (r.getBoundingBox().intersects(new BoundingBox(900+center_x,500+center_y,50,50))) {
+            if (r.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,50,50))) {
                 objectHit = r;
+                System.out.println("Punched object: " + r.getType());
+            }
+        }
+        for (Building b : buildings) {
+            if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,50,50))) {
+                buildinghit = b;
+                System.out.println("Punched building: " + b.getType());
             }
         }
         player.punch(objectHit,(int)x,(int)y);
     }
-    
 }

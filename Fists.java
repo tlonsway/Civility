@@ -55,4 +55,7 @@ public class Fists{
     public Color getColor() {
         return color;
     }
+    public AnimateFist getAnimate() {
+        return animate;
+    }
 }

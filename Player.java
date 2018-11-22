@@ -60,4 +60,7 @@ public class Player{
             resource.dealDamage(5+playerWeaponDamage);
         }
     }
+    public Fists getFists() {
+        return fists;
+    }
 }
