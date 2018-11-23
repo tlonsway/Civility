@@ -11,15 +11,18 @@ public class KeyboardThread extends KeyAdapter {
         if (key == KeyEvent.VK_A) {
             dis.aPress();
         }
+        if(key == KeyEvent.VK_C){
+            dis.cPress();
+        }
         if (key == KeyEvent.VK_D) {
             dis.dPress();
+        }
+        if (key == KeyEvent.VK_S) {
+            dis.sPress();
         }
         if (key == KeyEvent.VK_W) {
             dis.wPress();
         }
-        if (key == KeyEvent.VK_S) {
-            dis.sPress();
-        } 
         if(key == KeyEvent.VK_I){
             dis.iPress();
         }

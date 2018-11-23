@@ -13,6 +13,17 @@ public class Player_Inventory{
             }
         }
         if(!found){
+            int x = 150;
+            int y = 150;
+            if(items.size()>0){
+                x = items.get(items.size()-1).getBX()+100;
+                y = items.get(items.size()-1).getBY();
+                if(x > 1650){
+                    x = 150;
+                    y += 100;
+                }
+            }
+            i.setButtonInfo(x,y,50,50);
             items.add(i);
         }
     }

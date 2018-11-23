@@ -15,7 +15,7 @@ public class Display extends JComponent {
     Inventory in;
     Player player;
     AIThread aithread;
-    private String view;
+    String view;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
@@ -121,20 +121,42 @@ public class Display extends JComponent {
             ArrayList<Item> Items = player.getInventory();
             for(Item i: player.getInventory()){
                 g.setColor(Color.WHITE);
-                g.fillRect(x,y,50,50);
+                g.fillRect(i.getBX(),i.getBY(),i.getBWidth(),i.getBHeight());
                 g.setColor(Color.BLACK);
-                g.drawRect(x,y,50,50);
-                g.drawString(i.getType(),x+5,y+20);
-                g.drawString("x"+i.getQuantity(),x+15, y+40);
-                x+=100;
-                if(x>=1650){
-                    x = 150;
-                    y += 50;
-                }
+                g.drawRect(i.getBX(),i.getBY(),i.getBWidth(),i.getBHeight());
+                g.drawString(i.getType(),i.getBX()+5,i.getBY()+20);
+                g.drawString("x"+i.getQuantity(),i.getBX()+15,i.getBY()+40);
             }
             Point mp = MouseInfo.getPointerInfo().getLocation();
             g.setColor(Color.WHITE);
-            g.fillOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);            
+            g.fillOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);        
+            g.setColor(Color.GRAY);
+            g.fillRect(595,820,610,70);
+            g.setColor(Color.BLACK);
+            g.drawRect(595,820,610,70);
+            Item[] hotbar = player.getHotbar();
+            Font f = new Font("Courier New",Font.PLAIN,15);
+            g.setFont(f);
+            for(int i = 0; i < 10; i++){
+                if(player.getHotBarItemSelected() == i){
+                    g.setColor(Color.BLACK);
+                }
+                else{
+                    g.setColor(Color.WHITE);
+                }
+                g.fillRect(605+i*60,830,50,50);
+                if(player.getHotBarItemSelected() == i){
+                    g.setColor(Color.WHITE);
+                }
+                else{
+                    g.setColor(Color.BLACK);
+                }
+                if(hotbar[i] != null){
+                    g.drawRect(605+i*60,830,50,50);
+                    g.drawString(hotbar[i].getType(),610+i*60,850);
+                    g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
+                }
+            }
         }
         else if(view == "world"){
             BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
@@ -279,6 +301,14 @@ public class Display extends JComponent {
     public void sRelease() {
         s=false;
     }
+    public void cPress(){
+        if(view != "crafting"){
+            view = "crafting";
+        }
+        else{
+            view = "world";
+        }
+    }
     public void onePress(){
         player.setHotBarItemSelected(0);
     }
@@ -315,6 +345,13 @@ public class Display extends JComponent {
         }
         else{
             view = "world";
+        }
+    }
+    public void inventoryClick(int x,int y){
+        for(Item e: player.getInventory()){
+            if(new BoundingBox(e.getBX(),e.getBY(),e.getBWidth(),e.getBHeight()).intersects(new BoundingBox(x,y,1,1))){
+                
+            }
         }
     }
     public ArrayList<Building> getBuildings() {
