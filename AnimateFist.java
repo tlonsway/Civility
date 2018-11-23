@@ -50,7 +50,7 @@ public class AnimateFist implements Runnable{
         double offset=.8;
         double horzdist=.2;
         //double slope = (fistCords[2]-fistCords[0])/(fistCords[3]-fistCords[1])*-1;
-        for(int i = 0; i < 10; i++){
+        for(int i = 0; i < 15; i+=1){
             if (mouseCords[0]<=920) {
                 inv=-1;
             }
@@ -82,7 +82,7 @@ public class AnimateFist implements Runnable{
                 System.out.println(e);
             }
         }
-        for(int i = 10; i > 0; i--){
+        for(int i = 15; i > 0; i-=1){
             if (mouseCords[0]<=920) {
                 inv=-1;
             }

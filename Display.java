@@ -142,7 +142,13 @@ public class Display extends JComponent {
                     g.drawString(btitle+b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
                 }
             }
-            for (Resource r : resources) {
+            for (int ri=0;ri<resources.size();ri++) {
+                Resource r = resources.get(ri);
+                if (r.getHealth()<=0) {
+                    resources.remove(ri);
+                    ri++;
+                    continue;
+                }
                 if (r.getBoundingBox().intersects(screen)) {
                     g.setColor(r.getColor());
                     g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
@@ -155,7 +161,7 @@ public class Display extends JComponent {
                     g.setColor(Color.RED);
                     g.fillRect((int)(r.getX()-center_x)+1,(int)(r.getY()-center_y)+20,10,40);
                     g.setColor(Color.GREEN);
-                    g.fillRect((int)(r.getX()-center_x)+1,(int)(r.getY()-center_y)+20,10,40);
+                    g.fillRect((int)(r.getX()-center_x)+1,(int)(r.getY()-center_y)+20,10,(int)(r.getHealth()/r.getMax_Health()*40));
                 }
             }
             for(AI a : aithread.getBots()) {
