@@ -159,12 +159,14 @@ public class Display extends JComponent {
                     Font f = new Font("Courier New",Font.PLAIN,18);
                     g.setFont(f);
                     g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
-                    g.setColor(Color.BLACK);
-                    g.drawRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)+19,11,41);
-                    g.setColor(Color.RED);
-                    g.fillRect((int)(r.getX()-center_x)+1,(int)(r.getY()-center_y)+20,10,40);
-                    g.setColor(Color.GREEN);
-                    g.fillRect((int)(r.getX()-center_x)+1,(int)(r.getY()-center_y)+20,10,(int)(r.getHealth()/r.getMax_Health()*40));
+                    if (r.getHealth()<r.getMax_Health()) {
+                        g.setColor(Color.BLACK);
+                        g.drawRect((int)(r.getX()-center_x)-13,(int)(r.getY()-center_y)-1,11,(int)r.getHeight()+1);
+                        g.setColor(Color.RED);
+                        g.fillRect((int)(r.getX()-center_x)+1-13,(int)(r.getY()-center_y),10,(int)r.getHeight());
+                        g.setColor(Color.GREEN);
+                        g.fillRect((int)(r.getX()-center_x)+1-13,(int)(r.getY()-center_y),10,(int)(r.getHealth()/r.getMax_Health()*r.getHeight()));
+                    }
                 }
             }
             for(AI a : aithread.getBots()) {
