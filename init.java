@@ -38,7 +38,8 @@ public class init {
         d.addResource(new Tree(150,150));
         d.addResource(new Rock(-300,-300));
         for(int x = 0; x < (int)(Math.random()*100);x++){
-            //d.addResource(new Tree((int)(Math.random()*1000),(int)(Math.random()*1000)));
+            d.addResource(new Tree((int)(2000*((Math.random()*2)-1)),(int)(2000*((Math.random()*2)-1))));
+            d.addResource(new Rock((int)(2000*((Math.random()*2)-1)),(int)(2000*((Math.random()*2)-1))));
         }
         for(int i2=0;i2<20;i2++) {
             try {

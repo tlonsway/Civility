@@ -373,7 +373,7 @@ public class Display extends JComponent {
             fisty=fistcords[1];
         }
         for (Resource r : resources) {
-            if (r.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,50,50))) {
+            if (r.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
                 objectHit = r;
                 System.out.println("Punched object: " + r.getType());
                 System.out.println("Display: " + r.getYield().getQuantity());
@@ -382,7 +382,7 @@ public class Display extends JComponent {
             }
         }
         for (Building b : buildings) {
-            if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,50,50))) {
+            if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
                 buildinghit = b;
                 System.out.println("Punched building: " + b.getType());
             }
