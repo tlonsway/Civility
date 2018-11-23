@@ -35,11 +35,29 @@ public class init {
         d.addBuilding(new House(-400,400));
         d.addBuilding(new Factory(-600,-600));
         d.addBuilding(new GoldMine(500,500));
-        d.addResource(new Tree(150,150));
-        d.addResource(new Rock(-300,-300));
+        //d.addResource(new Tree(150,150));
+        //d.addResource(new Rock(-300,-300));
         for(int x = 0; x < (int)(Math.random()*100);x++){
-            d.addResource(new Tree((int)(2000*((Math.random()*2)-1)),(int)(2000*((Math.random()*2)-1))));
-            d.addResource(new Rock((int)(2000*((Math.random()*2)-1)),(int)(2000*((Math.random()*2)-1))));
+            //d.addResource(new Tree((int)(2000*((Math.random()*2)-1)),(int)(2000*((Math.random()*2)-1))));
+            //d.addResource(new Rock((int)(2000*((Math.random()*2)-1)),(int)(2000*((Math.random()*2)-1))));
+        }
+        //Biome b = new Biome("rocky",-1000,-1000);
+        //d.addBiome(b);
+        for(int x=-20000;x<=20000;x+=2000) {
+            for(int y=-20000;y<=20000;y+=2000) {
+                int choice=(int)(Math.random()*4);
+                String type="";
+                if (choice==0) {
+                    type="winter";
+                } else if (choice==1) {
+                    type="forest";
+                } else if (choice==2) {
+                    type="desert";
+                } else {
+                    type="rocky";
+                }
+                d.addBiome(new Biome(type,x,y));
+            }
         }
         for(int i2=0;i2<20;i2++) {
             try {

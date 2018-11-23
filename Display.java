@@ -7,6 +7,7 @@ import javafx.geometry.*;
 public class Display extends JComponent {
     ArrayList<Building> buildings;
     ArrayList<Resource> resources;
+    ArrayList<Biome> biomes;
     double center_x;
     double center_y;
     int width;
@@ -19,6 +20,7 @@ public class Display extends JComponent {
     public Display(int w, int h, Inventory inventory,Player p, AIThread at) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
+        biomes = new ArrayList<Biome>();
         center_x=0;
         center_y=0;
         width=w;
@@ -29,17 +31,20 @@ public class Display extends JComponent {
         view = "world";
     }
     public void update() {
+        BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
         for(Building b : buildings) {
             if (b.getType().equals("goldmine")) {
                 in.addGold(.005);
             }
         }
-        for (int ri=0;ri<resources.size();ri++) {
-            Resource r = resources.get(ri);
-            if (r.getHealth()<=0) {
-                resources.remove(ri);
-                ri++;
-                continue;
+        for(Biome b : biomes) {
+            for (int ri=0;ri<b.getResources().size();ri++) {
+                Resource r = b.getResource(ri);
+                if (r.getHealth()<=0) {
+                    b.removeResource(ri);
+                    ri++;
+                    continue;
+                }
             }
         }
         int moveamt = 5;
@@ -50,9 +55,14 @@ public class Display extends JComponent {
                     check = true;
                 }
             }
-            for (Resource r : resources) {
-                if (r.getBoundingBox().intersects(new BoundingBox(900-moveamt+center_x,500+center_y,40,40))) {
-                    check = true;
+            for(Biome b : biomes) {
+                if (b.getBoundingBox().intersects(screen)) {
+                    resources=b.getResources();
+                    for (Resource r : resources) {
+                        if (r.getBoundingBox().intersects(new BoundingBox(900-moveamt+center_x,500+center_y,40,40))) {
+                            check = true;
+                        }
+                    }
                 }
             }
             if (!check)
@@ -65,9 +75,14 @@ public class Display extends JComponent {
                     check = true;
                 }
             }
-            for (Resource r : resources) {
-                if (r.getBoundingBox().intersects(new BoundingBox(900+moveamt+center_x,500+center_y,40,40))) {
-                    check = true;
+            for(Biome b : biomes) {
+                if (b.getBoundingBox().intersects(screen)) {
+                    resources=b.getResources();
+                    for (Resource r : resources) {
+                        if (r.getBoundingBox().intersects(new BoundingBox(900+moveamt+center_x,500+center_y,40,40))) {
+                            check = true;
+                        }
+                    }
                 }
             }
             if (!check)
@@ -80,9 +95,14 @@ public class Display extends JComponent {
                     check = true;
                 }
             }
-            for (Resource r : resources) {
-                if (r.getBoundingBox().intersects(new BoundingBox(900+center_x,500-moveamt+center_y,40,40))) {
-                    check = true;
+            for(Biome b : biomes) {
+                if (b.getBoundingBox().intersects(screen)) {
+                    resources=b.getResources();
+                    for (Resource r : resources) {
+                        if (r.getBoundingBox().intersects(new BoundingBox(900+center_x,500-moveamt+center_y,40,40))) {
+                            check = true;
+                        }
+                    }
                 }
             }
             if (!check)
@@ -95,9 +115,14 @@ public class Display extends JComponent {
                     check = true;
                 }
             }
-            for (Resource r : resources) {
-                if (r.getBoundingBox().intersects(new BoundingBox(900+center_x,500+moveamt+center_y,40,40))) {
-                    check = true;
+            for(Biome b : biomes) {
+                if (b.getBoundingBox().intersects(screen)) {
+                    resources=b.getResources();
+                    for (Resource r : resources) {
+                        if (r.getBoundingBox().intersects(new BoundingBox(900+center_x,500+moveamt+center_y,40,40))) {
+                            check = true;
+                        }
+                    }
                 }
             }
             if (!check)
@@ -164,6 +189,36 @@ public class Display extends JComponent {
         }
         else if(view == "world"){
             BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
+            for(Biome b : biomes) {
+                if (b.getBoundingBox().intersects(screen)) {
+                    g.setColor(b.getColor());
+                    g.fillRect(-(int)center_x+b.getX(),-(int)center_y+b.getY(),b.getWidth(),b.getHeight());
+                }
+            }
+            for(Biome b : biomes) {
+                if (b.getBoundingBox().intersects(screen)) {
+                    resources=b.getResources();
+                    for (int ri=0;ri<resources.size();ri++) {
+                        Resource r = resources.get(ri);
+                        if (r.getBoundingBox().intersects(screen)) {
+                            g.setColor(r.getColor());
+                            g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
+                            g.setColor(Color.BLACK);
+                            Font f = new Font("Courier New",Font.PLAIN,18);
+                            g.setFont(f);
+                            g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
+                            if (r.getHealth()<r.getMax_Health()) {
+                                g.setColor(Color.BLACK);
+                                g.drawRect((int)(r.getX()-center_x)-1,(int)(r.getY()-center_y)-16,(int)r.getWidth()+1,11);
+                                g.setColor(Color.RED);
+                                g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)-15,(int)r.getWidth(),10);
+                                g.setColor(Color.GREEN);
+                                g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)-15,(int)(r.getHealth()/r.getMax_Health()*r.getWidth()),10);
+                            }
+                        }
+                    }
+                }
+            }
             for (Building b : buildings) {
                 if (b.getBoundingBox().intersects(screen)) {
                     g.setColor(b.getColor());
@@ -178,25 +233,7 @@ public class Display extends JComponent {
                     g.drawString(btitle+b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
                 }
             }
-            for (int ri=0;ri<resources.size();ri++) {
-                Resource r = resources.get(ri);
-                if (r.getBoundingBox().intersects(screen)) {
-                    g.setColor(r.getColor());
-                    g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
-                    g.setColor(Color.BLACK);
-                    Font f = new Font("Courier New",Font.PLAIN,18);
-                    g.setFont(f);
-                    g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
-                    if (r.getHealth()<r.getMax_Health()) {
-                        g.setColor(Color.BLACK);
-                        g.drawRect((int)(r.getX()-center_x)-1,(int)(r.getY()-center_y)-16,(int)r.getWidth()+1,11);
-                        g.setColor(Color.RED);
-                        g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)-15,(int)r.getWidth(),10);
-                        g.setColor(Color.GREEN);
-                        g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)-15,(int)(r.getHealth()/r.getMax_Health()*r.getWidth()),10);
-                    }
-                }
-            }
+            
             for(AI a : aithread.getBots()) {
                 if (a.getBoundingBox().intersects(screen)) {
                     g.setColor(a.getColor());
@@ -378,6 +415,7 @@ public class Display extends JComponent {
         return resources;
     }
     public void mouseClick(double x, double y) {
+        BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
         System.out.println("Mouse clicked at x:" + x + " and y:" + y);
         Resource objectHit = null;
         Building buildinghit = null;
@@ -389,13 +427,18 @@ public class Display extends JComponent {
             fistx=fistcords[0];
             fisty=fistcords[1];
         }
-        for (Resource r : resources) {
-            if (r.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
-                objectHit = r;
-                System.out.println("Punched object: " + r.getType());
-                System.out.println("Display: " + r.getYield().getQuantity());
-                player.addItem(r.getYield());
-                System.out.println("adding quantity of type " + r.getType() + " amount: " + r.getYield().getQuantity());
+        for(Biome b : biomes) {
+            if (b.getBoundingBox().intersects(screen)) {
+                resources=b.getResources();
+                for (Resource r : resources) {
+                    if (r.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
+                        objectHit = r;
+                        System.out.println("Punched object: " + r.getType());
+                        System.out.println("Display: " + r.getYield().getQuantity());
+                        player.addItem(r.getYield());
+                        System.out.println("adding quantity of type " + r.getType() + " amount: " + r.getYield().getQuantity());
+                    }
+                }
             }
         }
         for (Building b : buildings) {
@@ -405,5 +448,12 @@ public class Display extends JComponent {
             }
         }
         player.punch(objectHit,(int)x,(int)y);
+    }
+    public void addBiome(Biome b) {
+        biomes.add(b);
+        ArrayList<Resource> biomeResources = b.getResources();
+        for(Resource r : biomeResources) {
+            resources.add(r);
+        }
     }
 }
