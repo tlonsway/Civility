@@ -23,6 +23,36 @@ public class KeyboardThread extends KeyAdapter {
         if(key == KeyEvent.VK_I){
             dis.iPress();
         }
+        if(key == KeyEvent.VK_1){
+            dis.onePress();
+        }
+        if(key == KeyEvent.VK_2){
+            dis.twoPress();
+        }
+        if(key == KeyEvent.VK_3){
+            dis.threePress();
+        }
+        if(key == KeyEvent.VK_4){
+            dis.fourPress();
+        }
+        if(key == KeyEvent.VK_5){
+            dis.fivePress();
+        }
+        if(key == KeyEvent.VK_6){
+            dis.sixPress();
+        }
+        if(key == KeyEvent.VK_7){
+            dis.sevenPress();
+        }
+        if(key == KeyEvent.VK_8){
+            dis.eightPress();
+        }
+        if(key == KeyEvent.VK_9){
+            dis.ninePress();
+        }
+        if(key == KeyEvent.VK_0){
+            dis.zeroPress();
+        }
     }
     public void keyReleased(KeyEvent e) {
         int key = e.getKeyCode();

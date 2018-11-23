@@ -20,7 +20,7 @@ public abstract class Resource implements Clickable {
         health = MH;
         Max_Health = MH;
         yield = new Item(YN);
-        yield.changeQuantity((int)(Math.random()*40));
+        yield.changeQuantity((int)(Math.random()*10));
     }
     public double getX(){
         return x;

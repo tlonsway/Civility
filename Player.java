@@ -25,6 +25,12 @@ public class Player{
     public Item[] getHotbar(){
         return hotbar.getHotbar();
     }
+    public int getHotBarItemSelected(){
+        return hotbar.getItemSelected();
+    }
+    public void setHotBarItemSelected(int i){
+        hotbar.selectItem(i);
+    }
     public String getName(){
         return name;
     }

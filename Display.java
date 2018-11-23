@@ -15,6 +15,7 @@ public class Display extends JComponent {
     Inventory in;
     Player player;
     AIThread aithread;
+    private String view;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
@@ -25,6 +26,7 @@ public class Display extends JComponent {
         in=inventory;
         player = p;
         aithread=at;
+        view = "world";
     }
     public void update() {
         for(Building b : buildings) {
@@ -107,7 +109,7 @@ public class Display extends JComponent {
     }
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        if(i){
+        if(view == "inventory"){
             //g.setColor(Color.GREEN);
             //g.fillRect(0,0,1800,1000);
             g.setColor(Color.GRAY);
@@ -134,7 +136,7 @@ public class Display extends JComponent {
             g.setColor(Color.WHITE);
             g.fillOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);            
         }
-        else{
+        else if(view == "world"){
             BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
             for (Building b : buildings) {
                 if (b.getBoundingBox().intersects(screen)) {
@@ -161,11 +163,11 @@ public class Display extends JComponent {
                     g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
                     if (r.getHealth()<r.getMax_Health()) {
                         g.setColor(Color.BLACK);
-                        g.drawRect((int)(r.getX()-center_x)-13,(int)(r.getY()-center_y)-1,11,(int)r.getHeight()+1);
+                        g.drawRect((int)(r.getX()-center_x)-1,(int)(r.getY()-center_y)-16,(int)r.getWidth()+1,11);
                         g.setColor(Color.RED);
-                        g.fillRect((int)(r.getX()-center_x)+1-13,(int)(r.getY()-center_y),10,(int)r.getHeight());
+                        g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)-15,(int)r.getWidth(),10);
                         g.setColor(Color.GREEN);
-                        g.fillRect((int)(r.getX()-center_x)+1-13,(int)(r.getY()-center_y),10,(int)(r.getHealth()/r.getMax_Health()*r.getHeight()));
+                        g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)-15,(int)(r.getHealth()/r.getMax_Health()*r.getWidth()),10);
                     }
                 }
             }
@@ -207,12 +209,24 @@ public class Display extends JComponent {
             f = new Font("Courier New",Font.PLAIN,15);
             g.setFont(f);
             for(int i = 0; i < 10; i++){
-                g.setColor(Color.WHITE);
+                if(player.getHotBarItemSelected() == i){
+                    g.setColor(Color.BLACK);
+                }
+                else{
+                    g.setColor(Color.WHITE);
+                }
                 g.fillRect(605+i*60,830,50,50);
-                g.setColor(Color.BLACK);
-                g.drawRect(605+i*60,830,50,50);
-                g.drawString(hotbar[i].getType(),610+i*60,850);
-                g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
+                if(player.getHotBarItemSelected() == i){
+                    g.setColor(Color.WHITE);
+                }
+                else{
+                    g.setColor(Color.BLACK);
+                }
+                if(hotbar[i] != null){
+                    g.drawRect(605+i*60,830,50,50);
+                    g.drawString(hotbar[i].getType(),610+i*60,850);
+                    g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
+                }
             }
         }
     }
@@ -265,12 +279,42 @@ public class Display extends JComponent {
     public void sRelease() {
         s=false;
     }
+    public void onePress(){
+        player.setHotBarItemSelected(0);
+    }
+    public void twoPress(){
+        player.setHotBarItemSelected(1);
+    }
+    public void threePress(){
+        player.setHotBarItemSelected(2);
+    }
+    public void fourPress(){
+        player.setHotBarItemSelected(3);
+    }
+    public void fivePress(){
+        player.setHotBarItemSelected(4);
+    }
+    public void sixPress(){
+        player.setHotBarItemSelected(5);
+    }
+    public void sevenPress(){
+        player.setHotBarItemSelected(6);
+    }
+    public void eightPress(){
+        player.setHotBarItemSelected(7);
+    }
+    public void ninePress(){
+        player.setHotBarItemSelected(8);
+    }
+    public void zeroPress(){
+        player.setHotBarItemSelected(9);
+    }
     public void iPress(){
-        if(i){
-            i = false;
+        if(view != "inventory"){
+            view = "inventory";
         }
         else{
-            i = true;
+            view = "world";
         }
     }
     public ArrayList<Building> getBuildings() {
@@ -295,7 +339,7 @@ public class Display extends JComponent {
             if (r.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,50,50))) {
                 objectHit = r;
                 System.out.println("Punched object: " + r.getType());
-                player.addItem(new Item(r.getYield().getType(),r.getYield().getQuantity()));
+                player.addItem(r.getYield());
                 System.out.println("adding quantity of type " + r.getType() + " amount: " + r.getYield().getQuantity());
             }
         }

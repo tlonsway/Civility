@@ -37,9 +37,6 @@ public class init {
         d.addBuilding(new GoldMine(500,500));
         d.addResource(new Tree(150,150));
         d.addResource(new Rock(-300,-300));
-        for(int a = 0; a < 10; a++){
-            p.addItem(new Item("Test"));
-        }
         for(int x = 0; x < (int)(Math.random()*100);x++){
             //d.addResource(new Tree((int)(Math.random()*1000),(int)(Math.random()*1000)));
         }
