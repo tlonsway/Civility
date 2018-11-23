@@ -48,8 +48,11 @@ public class AnimateFist implements Runnable{
         double theta = (Math.atan((520-(double)mouseCords[1])/(920-(double)mouseCords[0])));
         int inv=1;
         double offset=.8;
-        double horzdist=.2;
         //double slope = (fistCords[2]-fistCords[0])/(fistCords[3]-fistCords[1])*-1;
+        double horzdist1=.2;
+        double horzdist2=.2;
+        double dist1=25;
+        double dist2=25;
         for(int i = 0; i < 15; i+=1){
             if (mouseCords[0]<=920) {
                 inv=-1;
@@ -59,18 +62,21 @@ public class AnimateFist implements Runnable{
             }
             theta = (Math.atan((520-(double)mouseCords[1])/(920-(double)mouseCords[0])));
             theta=-theta;
-            int dist1=25;
-            int dist2=25;
             if(isRightArm){
-                dist2+=i;
+                dist2+=1;
             }
-            else{
-                dist1+=i;
+            else {
+                dist1+=1;
             }
-            double fx1=inv*dist1*Math.sin(theta+offset+horzdist)+915;
-            double fy1=inv*dist1*Math.cos(theta+offset+horzdist)+515;    
-            double fx2=inv*dist2*Math.cos(theta+offset-horzdist)+915;
-            double fy2=inv*dist2*-Math.sin(theta+offset-horzdist)+515;
+            if (isRightArm) {
+                horzdist2+=.015;
+            } else {
+                horzdist1+=.015;
+            }
+            double fx1=inv*dist1*Math.sin(theta+offset+horzdist1)+915;
+            double fy1=inv*dist1*Math.cos(theta+offset+horzdist1)+515;    
+            double fx2=inv*dist2*Math.cos(theta+offset-horzdist2)+915;
+            double fy2=inv*dist2*-Math.sin(theta+offset-horzdist2)+515;
             fistCords[0] = (int)fx1;
             fistCords[1] = (int)fy1;
             fistCords[2] = (int)fx2;
@@ -82,7 +88,7 @@ public class AnimateFist implements Runnable{
                 System.out.println(e);
             }
         }
-        for(int i = 15; i > 0; i-=1){
+        for(int i = 14; i >= 0; i-=1){
             if (mouseCords[0]<=920) {
                 inv=-1;
             }
@@ -91,18 +97,21 @@ public class AnimateFist implements Runnable{
             }
             theta = (Math.atan((520-(double)mouseCords[1])/(920-(double)mouseCords[0])));
             theta=-theta;
-            int dist1=25;
-            int dist2=25;
             if(isRightArm){
-                dist2+=i;
+                dist2-=1;
             }
             else{
-                dist1+=i;
+                dist1-=1;
             }
-            double fx1=inv*dist1*Math.sin(theta+offset+horzdist)+915;
-            double fy1=inv*dist1*Math.cos(theta+offset+horzdist)+515;    
-            double fx2=inv*dist2*Math.cos(theta+offset-horzdist)+915;
-            double fy2=inv*dist2*-Math.sin(theta+offset-horzdist)+515;
+            if (isRightArm) {
+                horzdist2-=.015;
+            } else {
+                horzdist1-=.015;
+            }
+            double fx1=inv*dist1*Math.sin(theta+offset+horzdist1)+915;
+            double fy1=inv*dist1*Math.cos(theta+offset+horzdist1)+515;    
+            double fx2=inv*dist2*Math.cos(theta+offset-horzdist2)+915;
+            double fy2=inv*dist2*-Math.sin(theta+offset-horzdist2)+515;
             fistCords[0] = (int)fx1;
             fistCords[1] = (int)fy1;
             fistCords[2] = (int)fx2;

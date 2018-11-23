@@ -295,6 +295,8 @@ public class Display extends JComponent {
             if (r.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,50,50))) {
                 objectHit = r;
                 System.out.println("Punched object: " + r.getType());
+                player.addItem(new Item(r.getYield().getType(),r.getYield().getQuantity()));
+                System.out.println("adding quantity of type " + r.getType() + " amount: " + r.getYield().getQuantity());
             }
         }
         for (Building b : buildings) {
