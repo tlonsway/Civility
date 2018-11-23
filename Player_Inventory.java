@@ -5,14 +5,17 @@ public class Player_Inventory{
         items = new ArrayList<Item>();
     }
     public void addItem(Item i){
+        System.out.println("Player_Inventory: " + i.getQuantity());
         boolean found = false;
         for(Item a: items){
             if(a.getType().equals(i.getType())){
                 found = true;
+                System.out.println("Adding " + i.getQuantity() + " " + i.getType());
                 a.changeQuantity(i.getQuantity());
             }
         }
         if(!found){
+            Item temp = new Item(i.getType());
             int x = 150;
             int y = 150;
             if(items.size()>0){
@@ -23,8 +26,9 @@ public class Player_Inventory{
                     y += 100;
                 }
             }
-            i.setButtonInfo(x,y,50,50);
-            items.add(i);
+            temp.setButtonInfo(x,y,50,50);
+            temp.changeQuantity(i.getQuantity());
+            items.add(temp);
         }
     }
     public void removeItem(Item i){

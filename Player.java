@@ -19,6 +19,9 @@ public class Player{
         hotbar = Hot;
         playerWeaponDamage = 0;
     }
+    public void setHotBarItem(Item i){
+        hotbar.setHotbarItem(i);
+    }   
     public void setPlayerWeaponDammage(int PWD){
         playerWeaponDamage = PWD;
     }
@@ -52,6 +55,7 @@ public class Player{
         return inventory.getItems();
     }
     public void addItem(Item i){
+        System.out.println("Player: " + i.getQuantity());
         inventory.addItem(i);
     }
     public int[] getFistCords(int x,int y){

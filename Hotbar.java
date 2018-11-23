@@ -14,6 +14,9 @@ public class Hotbar{
     public int getItemSelected(){
         return itemSelected;
     }
+    public void setHotbarItem(Item i){
+        items[itemSelected] = i;
+    }
     public void addItemToHotBar(Item i){
         items[itemSelected] = i;
     }

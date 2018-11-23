@@ -350,7 +350,7 @@ public class Display extends JComponent {
     public void inventoryClick(int x,int y){
         for(Item e: player.getInventory()){
             if(new BoundingBox(e.getBX(),e.getBY(),e.getBWidth(),e.getBHeight()).intersects(new BoundingBox(x,y,1,1))){
-                
+                player.setHotBarItem(e);
             }
         }
     }
@@ -376,6 +376,7 @@ public class Display extends JComponent {
             if (r.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,50,50))) {
                 objectHit = r;
                 System.out.println("Punched object: " + r.getType());
+                System.out.println("Display: " + r.getYield().getQuantity());
                 player.addItem(r.getYield());
                 System.out.println("adding quantity of type " + r.getType() + " amount: " + r.getYield().getQuantity());
             }
