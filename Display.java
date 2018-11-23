@@ -110,8 +110,12 @@ public class Display extends JComponent {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
         if(view == "inventory"){
-            //g.setColor(Color.GREEN);
-            //g.fillRect(0,0,1800,1000);
+            Font f = new Font("Courier New",Font.PLAIN,60);
+            g.setFont(f);
+            g.setColor(Color.BLACK);
+            g.drawString("Inventory",52,52);
+            g.setColor(Color.WHITE);
+            g.drawString("Inventory",50,50);
             g.setColor(Color.GRAY);
             g.fillRect(100,100,1600,800);
             g.setColor(Color.BLACK);
@@ -135,7 +139,7 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             g.drawRect(595,820,610,70);
             Item[] hotbar = player.getHotbar();
-            Font f = new Font("Courier New",Font.PLAIN,15);
+            f = new Font("Courier New",Font.PLAIN,15);
             g.setFont(f);
             for(int i = 0; i < 10; i++){
                 if(player.getHotBarItemSelected() == i){
@@ -250,6 +254,19 @@ public class Display extends JComponent {
                     g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
                 }
             }
+        }
+        else if(view == "crafting"){
+            Font f = new Font("Courier New",Font.PLAIN,60);
+            g.setFont(f);
+            g.setColor(Color.BLACK);
+            g.drawString("Crafting",52,52);
+            g.setColor(Color.WHITE);
+            g.drawString("Crafting",50,50);
+            g.setColor(Color.GRAY);
+            g.fillRect(100,100,1600,800);
+            g.setColor(Color.BLACK);
+            g.drawRect(100,100,1600,800);
+            
         }
     }
     public void addBuilding(Building b) {
