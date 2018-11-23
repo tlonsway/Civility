@@ -32,6 +32,14 @@ public class Display extends JComponent {
                 in.addGold(.005);
             }
         }
+        for (int ri=0;ri<resources.size();ri++) {
+            Resource r = resources.get(ri);
+            if (r.getHealth()<=0) {
+                resources.remove(ri);
+                ri++;
+                continue;
+            }
+        }
         int moveamt = 5;
         if (a) {
             boolean check = false;
@@ -144,11 +152,6 @@ public class Display extends JComponent {
             }
             for (int ri=0;ri<resources.size();ri++) {
                 Resource r = resources.get(ri);
-                if (r.getHealth()<=0) {
-                    resources.remove(ri);
-                    ri++;
-                    continue;
-                }
                 if (r.getBoundingBox().intersects(screen)) {
                     g.setColor(r.getColor());
                     g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
@@ -157,7 +160,7 @@ public class Display extends JComponent {
                     g.setFont(f);
                     g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
                     g.setColor(Color.BLACK);
-                    g.drawRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)+21,11,41);
+                    g.drawRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)+19,11,41);
                     g.setColor(Color.RED);
                     g.fillRect((int)(r.getX()-center_x)+1,(int)(r.getY()-center_y)+20,10,40);
                     g.setColor(Color.GREEN);
