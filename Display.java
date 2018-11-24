@@ -480,7 +480,7 @@ public class Display extends JComponent {
         if(temp != null && temp.getIsPlacable()){
             if(temp.getType().equals("HouseBlueprint")){
                 System.out.println("test");
-                buildings.add(new HouseFrame((int)x,(int)y));
+                buildings.add(new HouseFrame((int)x+(int)center_x,(int)y+(int)center_y));
                 temp = new Item(temp.getType(),temp.getIsCraftable(),temp.getIsPlacable());
                 player.removeItemFromInven(temp);
                 boolean check = false;
