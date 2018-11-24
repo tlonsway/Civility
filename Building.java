@@ -20,6 +20,9 @@ public abstract class Building implements Clickable {
         buildItemsRequired = TI;
         buildItemsHas = new ArrayList<TempItem>();
     }
+    public void setRequired(ArrayList<TempItem> TI) {
+        buildItemsRequired=TI;
+    }
     public int addResource(Item i){
         if(contains(i,buildItemsHas)){
             if(i.getQuantity() <= getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType())){
