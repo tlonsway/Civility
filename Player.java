@@ -55,7 +55,7 @@ public class Player{
         return inventory.getItems();
     }
     public void addItem(Item i){
-        System.out.println("Player: " + i.getQuantity());
+        //System.out.println("Player: " + i.getQuantity());
         inventory.addItem(i);
     }
     public int[] getFistCords(int x,int y){

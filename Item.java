@@ -57,7 +57,7 @@ public class Item{
         return type;
     }
     public void changeQuantity(int num){
-        System.out.println("quantity changed by: " + num);
+        //System.out.println("quantity changed by: " + num);
         quantity += num;
     }
     public int getQuantity(){

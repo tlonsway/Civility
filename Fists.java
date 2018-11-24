@@ -70,7 +70,7 @@ public class Fists{
         return cords;
     }
     public void animate(int X,int Y){
-        System.out.println("Fist.animate()");
+        //System.out.println("Fist.animate()");
         animate = new AnimateFist(isRightArm);
         (new Thread(animate)).start();
         if(isRightArm){

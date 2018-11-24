@@ -5,12 +5,12 @@ public class Player_Inventory{
         items = new ArrayList<Item>();
     }
     public void addItem(Item i){
-        System.out.println("Player_Inventory: " + i.getQuantity());
+        //System.out.println("Player_Inventory: " + i.getQuantity());
         boolean found = false;
         for(Item a: items){
             if(a.getType().equals(i.getType())){
                 found = true;
-                System.out.println("Adding " + i.getQuantity() + " " + i.getType());
+                //System.out.println("Adding " + i.getQuantity() + " " + i.getType());
                 a.changeQuantity(i.getQuantity());
             }
         }

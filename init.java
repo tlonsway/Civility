@@ -19,7 +19,7 @@ public class init {
         (new Thread(at)).start();
         Fists fists = new Fists(new Color(252, 210, 126));
         Hotbar hotbar = new Hotbar();
-        Player p = new Player("Bob",100,Color.BLUE,pi,fists,hotbar);
+        Player p = new Player("Bob",100,new Color(252, 210, 126),pi,fists,hotbar);
         Display d = new Display(1800,1000,i,p,at);
         at.setDisplay(d);
         frame.add(d);
@@ -55,6 +55,11 @@ public class init {
                     type="rocky";
                 }
                 d.addBiome(new Biome(type,x,y));
+                try {
+                    Thread.sleep(1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
         for(int i2=0;i2<20;i2++) {

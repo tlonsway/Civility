@@ -158,7 +158,9 @@ public class Display extends JComponent {
             }
             Point mp = MouseInfo.getPointerInfo().getLocation();
             g.setColor(Color.WHITE);
-            g.fillOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);        
+            g.fillOval((int)mp.getX()-5,(int)mp.getY()-5,10,10); 
+            g.setColor(Color.BLACK);
+            g.drawOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);
             g.setColor(Color.GRAY);
             g.fillRect(595,820,610,70);
             g.setColor(Color.BLACK);
@@ -204,6 +206,7 @@ public class Display extends JComponent {
                             g.setColor(r.getColor());
                             g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
                             g.setColor(Color.BLACK);
+                            g.drawRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
                             Font f = new Font("Courier New",Font.PLAIN,18);
                             g.setFont(f);
                             g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
@@ -224,6 +227,7 @@ public class Display extends JComponent {
                     g.setColor(b.getColor());
                     g.fillRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
                     g.setColor(Color.BLACK);
+                    g.drawRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
                     Font f = new Font("Courier New",Font.PLAIN,15);
                     g.setFont(f);
                     String btitle="";
@@ -233,12 +237,12 @@ public class Display extends JComponent {
                     g.drawString(btitle+b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
                 }
             }
-            
             for(AI a : aithread.getBots()) {
                 if (a.getBoundingBox().intersects(screen)) {
                     g.setColor(a.getColor());
                     g.fillRect((int)(a.getX()-center_x),(int)(a.getY()-center_y),(int)(a.getWidth()),(int)(a.getHeight()));
                     g.setColor(Color.BLACK);
+                    g.drawRect((int)(a.getX()-center_x),(int)(a.getY()-center_y),(int)(a.getWidth()),(int)(a.getHeight()));
                     Font f = new Font("Courier New",Font.PLAIN,18);
                     g.setFont(f);
                     g.drawString(a.getName(),(int)(a.getX()-center_x),(int)(a.getY()-center_y+a.getHeight()+20));
@@ -251,14 +255,20 @@ public class Display extends JComponent {
             g.drawString("center_x: " + center_x + "   center_y: " + center_y,300,40);
             g.setColor(player.getColor());
             g.fillOval(900,500,40,40);
+            g.setColor(Color.BLACK);
+            g.drawOval(900,500,40,40);
             Point mp = MouseInfo.getPointerInfo().getLocation();
             int[] fistCords = player.getFistCords((int)mp.getX(),(int)mp.getY());
             g.setColor(Color.WHITE);
             g.fillOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);
+            g.setColor(Color.BLACK);
+            g.drawOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);
             g.setColor(player.getFistColor());
             g.fillOval(fistCords[0],fistCords[1],10,10);
             g.fillOval(fistCords[2],fistCords[3],10,10);
             g.setColor(Color.BLACK);
+            g.drawOval(fistCords[0],fistCords[1],10,10);
+            g.drawOval(fistCords[2],fistCords[3],10,10);
             g.drawRect(899,479,41,11);
             g.setColor(Color.RED);
             g.fillRect(900,480,40,10);
@@ -302,8 +312,7 @@ public class Display extends JComponent {
             g.setColor(Color.GRAY);
             g.fillRect(100,100,1600,800);
             g.setColor(Color.BLACK);
-            g.drawRect(100,100,1600,800);
-            
+            g.drawRect(100,100,1600,800);            
         }
     }
     public void addBuilding(Building b) {
@@ -416,7 +425,7 @@ public class Display extends JComponent {
     }
     public void mouseClick(double x, double y) {
         BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
-        System.out.println("Mouse clicked at x:" + x + " and y:" + y);
+        //System.out.println("Mouse clicked at x:" + x + " and y:" + y);
         Resource objectHit = null;
         Building buildinghit = null;
         Point mp = MouseInfo.getPointerInfo().getLocation();
@@ -433,10 +442,10 @@ public class Display extends JComponent {
                 for (Resource r : resources) {
                     if (r.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
                         objectHit = r;
-                        System.out.println("Punched object: " + r.getType());
-                        System.out.println("Display: " + r.getYield().getQuantity());
+                        //System.out.println("Punched object: " + r.getType());
+                        //System.out.println("Display: " + r.getYield().getQuantity());
                         player.addItem(r.getYield());
-                        System.out.println("adding quantity of type " + r.getType() + " amount: " + r.getYield().getQuantity());
+                        //System.out.println("adding quantity of type " + r.getType() + " amount: " + r.getYield().getQuantity());
                     }
                 }
             }
@@ -444,7 +453,7 @@ public class Display extends JComponent {
         for (Building b : buildings) {
             if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
                 buildinghit = b;
-                System.out.println("Punched building: " + b.getType());
+                //System.out.println("Punched building: " + b.getType());
             }
         }
         player.punch(objectHit,(int)x,(int)y);
