@@ -6,9 +6,9 @@ public class Biome{
     private int x,y,width,height;
     private String type;
     private Color color;
-    int randseed;
+    long randseed;
     //possible types are: winter, desert, forest, rocky
-    public Biome(String t, int x_loc, int y_loc, int rs) {
+    public Biome(String t, int x_loc, int y_loc, long rs) {
         resources = new ArrayList<Resource>();
         x=x_loc;
         y=y_loc;
