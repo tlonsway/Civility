@@ -11,38 +11,38 @@ public class Biome{
         resources = new ArrayList<Resource>();
         x=x_loc;
         y=y_loc;
-        width=2000;
-        height=2000;
+        width=3000;
+        height=3000;
         if (t.equals("winter")) {
             int amt = 255-(int)(Math.random()*40)-20;
             color = new Color(amt,amt,amt);
             for(int i=0;i<(int)(Math.random()*40);i++) {
-                resources.add(new Tree(x+(int)(2000*((Math.random()*1))),y+(int)(2000*((Math.random()*1)))));
+                resources.add(new Tree(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
             }
             for(int i=0;i<(int)(Math.random()*10);i++) {
-                resources.add(new Rock(x+(int)(2000*((Math.random()*1))),y+(int)(2000*((Math.random()*1)))));
+                resources.add(new Rock(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
             }
         } else if (t.equals("desert")) {
             color = new Color(255,250,100+(int)(Math.random()*121));
             for(int i=0;i<(int)(Math.random()*10);i++) {
-                resources.add(new Rock(x+(int)(2000*((Math.random()*1))),y+(int)(2000*((Math.random()*1)))));
+                resources.add(new Rock(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
             }
         } else if (t.equals("forest")) {
             color = new Color(0,100+(int)(Math.random()*101),5);
             for(int i=0;i<(int)(Math.random()*40);i++) {
-                resources.add(new Tree(x+(int)(2000*((Math.random()*1))),y+(int)(2000*((Math.random()*1)))));
+                resources.add(new Tree(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
             }
             for(int i=0;i<(int)(Math.random()*10);i++) {
-                resources.add(new Rock(x+(int)(2000*((Math.random()*1))),y+(int)(2000*((Math.random()*1)))));
+                resources.add(new Rock(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
             }
         } else if (t.equals("rocky")) {
             int amt = 50+(int)(Math.random()*100);
             color = new Color(amt,amt,amt);
             for(int i=0;i<2+(int)(Math.random()*8);i++) {
-                resources.add(new Tree(x+(int)(2000*((Math.random()*1))),y+(int)(2000*((Math.random()*1)))));
+                resources.add(new Tree(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
             }
             for(int i=0;i<20+(int)(Math.random()*80);i++) {
-                resources.add(new Rock(x+(int)(2000*((Math.random()*1))),y+(int)(2000*((Math.random()*1)))));
+                resources.add(new Rock(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
             }
         }
     }

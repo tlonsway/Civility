@@ -41,8 +41,8 @@ public class init {
         }
         //Biome b = new Biome("rocky",-1000,-1000);
         //d.addBiome(b);
-        for(int x=-20000;x<=20000;x+=2000) {
-            for(int y=-20000;y<=20000;y+=2000) {
+        for(int x=-20000;x<=20000;x+=3000) {
+            for(int y=-20000;y<=20000;y+=3000) {
                 int choice=(int)(Math.random()*4);
                 String type="";
                 if (choice==0) {
