@@ -509,9 +509,14 @@ public class Display extends JComponent {
             }
         }
         for (Building b : buildings) {
-            if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10)) && b.getType().equals("House Frame")) {
+            if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
                 buildinghit = b;
                 //System.out.println("Punched building: " + b.getType());
+                if(b.getType().equals("House Frame") && b.requires(player.getHotbar()[player.getHotBarItemSelected()])){
+                    Item item = new Item(player.getHotbar()[player.getHotBarItemSelected()].getType(),player.getHotbar()[player.getHotBarItemSelected()].getIsCraftable(),player.getHotbar()[player.getHotBarItemSelected()].getIsPlacable());
+                    item.changeQuantity(b.addResource(player.getHotbar()[player.getHotBarItemSelected()])*-1-1);
+                    player.removeItemFromInven(item);
+                } 
             }
         }
         player.punch(objectHit,(int)x,(int)y);
