@@ -24,8 +24,6 @@ public class init {
         at.setDisplay(d);
         frame.add(d);
         d.setVisible(true);
-        (new Thread(new FrameThread(d,60))).start();
-        (new Thread(new UpdateThread(d))).start();
         KeyboardThread kt = new KeyboardThread(d);
         MouseThread mt = new MouseThread(d);
         frame.addMouseListener(mt);
@@ -66,5 +64,7 @@ public class init {
                 e.printStackTrace();
             }
         }
+        (new Thread(new FrameThread(d,60))).start();
+        (new Thread(new UpdateThread(d))).start();
     }
 }
