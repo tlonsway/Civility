@@ -27,6 +27,9 @@ public class Biome{
             for(int i=0;i<(int)(Math.random()*10);i++) {
                 resources.add(new Rock(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
             }
+            for(int i=0;i<30+(int)(Math.random()*120);i++) {
+                resources.add(new Cactus(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            }
         } else if (t.equals("forest")) {
             color = new Color(0,100+(int)(Math.random()*101),5);
             for(int i=0;i<(int)(Math.random()*40);i++) {
