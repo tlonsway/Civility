@@ -509,7 +509,7 @@ public class Display extends JComponent {
             }
         }
         for (Building b : buildings) {
-            if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
+            if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10)) && b.getType().equals("House Frame")) {
                 buildinghit = b;
                 //System.out.println("Punched building: " + b.getType());
             }
