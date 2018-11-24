@@ -10,7 +10,6 @@ public class Item{
     private ArrayList<String> itemsRequired;
     private ArrayList<Integer> numOfItem;
     private boolean isPlacable;
-    private int[] dementions;
     private int cx;
     private int cy;
     public Item(String T,boolean IC,boolean IP){
@@ -20,25 +19,11 @@ public class Item{
             itemsRequired = new ArrayList<String>();
             numOfItem = new ArrayList<Integer>();
         }
-        if(IP){
-            dementions = new int[4];
-        }
         isCraftable = IC;
         isPlacable = IP;
     }
     public boolean getIsPlacable(){
         return isPlacable;
-    }
-    public void setDementionSize(int W,int H){
-        dementions[2] = W;
-        dementions[3] = H;
-    }
-    public void getDementionCords(int x,int y){
-        dementions[0] = x;
-        dementions[1] = y;
-    }
-    public int[] getDemention(){
-        return dementions;
     }
     public void setCX(int x){
         cx = x;

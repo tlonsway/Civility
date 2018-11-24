@@ -1,7 +1,9 @@
-public class HouseFrame extends Item{
-    public HouseFrame(){
-        super("house_frame",true,true);
-        super.addStringToItemsRequired("wood");
-        super.addIntegerToNumOfItem(100);
+import java.awt.*;
+public class HouseFrame extends Building{
+    public HouseFrame(int x,int y){
+        super("House Frame",x,y,75,75,Color.BLACK);
+    }
+    public void click(){
+        
     }
 }

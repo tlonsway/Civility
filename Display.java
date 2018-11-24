@@ -476,6 +476,24 @@ public class Display extends JComponent {
             fistx=fistcords[0];
             fisty=fistcords[1];
         }
+        Item temp = player.getHotbar()[player.getHotBarItemSelected()];
+        if(temp != null && temp.getIsPlacable()){
+            if(temp.getType().equals("HouseBlueprint")){
+                System.out.println("test");
+                buildings.add(new HouseFrame((int)x,(int)y));
+                temp = new Item(temp.getType(),temp.getIsCraftable(),temp.getIsPlacable());
+                player.removeItemFromInven(temp);
+                boolean check = false;
+                for(Item a: player.getInventory()){
+                    if(a.getType().equals(temp.getType())){
+                        check = true;
+                    }
+                }
+                if(!check){
+                    player.getHotbar()[player.getHotBarItemSelected()] = null;
+                }
+            }
+        }
         for(Biome b : biomes) {
             if (b.getBoundingBox().intersects(screen)) {
                 resources=b.getResources();

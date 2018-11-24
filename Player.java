@@ -45,6 +45,9 @@ public class Player{
     public String getName(){
         return name;
     }
+    public void removeItemFromInven(Item I){
+        inventory.removeItem(I);
+    }
     public double getHealth(){
         return health;
     }
