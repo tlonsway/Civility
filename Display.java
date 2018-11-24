@@ -147,6 +147,8 @@ public class Display extends JComponent {
             g.drawRect(100,100,1600,800);
             int x = 150;
             int y = 150;
+            f = new Font("Courier New",Font.PLAIN,15);
+            g.setFont(f);
             ArrayList<Item> Items = player.getInventory();
             for(Item i: player.getInventory()){
                 g.setColor(Color.WHITE);
