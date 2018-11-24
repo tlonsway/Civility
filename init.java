@@ -20,7 +20,7 @@ public class init {
         Fists fists = new Fists(new Color(252, 210, 126));
         Hotbar hotbar = new Hotbar();
         Player p = new Player("Bob",100,new Color(252, 210, 126),pi,fists,hotbar);
-        Display d = new Display(1800,1000,i,p,at);
+        Display d = new Display(1800,1000,i,p,at,frame);
         at.setDisplay(d);
         frame.add(d);
         d.setVisible(true);

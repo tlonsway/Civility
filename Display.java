@@ -17,7 +17,8 @@ public class Display extends JComponent {
     Player player;
     AIThread aithread;
     String view;
-    public Display(int w, int h, Inventory inventory,Player p, AIThread at) {
+    JFrame frame;
+    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
         biomes = new ArrayList<Biome>();
@@ -29,6 +30,7 @@ public class Display extends JComponent {
         player = p;
         aithread=at;
         view = "world";
+        frame=f;
     }
     public void update() {
         BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
@@ -159,10 +161,11 @@ public class Display extends JComponent {
                 g.drawString("x"+i.getQuantity(),i.getBX()+15,i.getBY()+40);
             }
             Point mp = MouseInfo.getPointerInfo().getLocation();
+            Point loc = frame.getLocationOnScreen();
             g.setColor(Color.WHITE);
-            g.fillOval((int)mp.getX()-5,(int)mp.getY()-5,10,10); 
+            g.fillOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10); 
             g.setColor(Color.BLACK);
-            g.drawOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);
+            g.drawOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
             g.setColor(Color.GRAY);
             g.fillRect(595,820,610,70);
             g.setColor(Color.BLACK);
@@ -260,11 +263,12 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             g.drawOval(900,500,40,40);
             Point mp = MouseInfo.getPointerInfo().getLocation();
-            int[] fistCords = player.getFistCords((int)mp.getX(),(int)mp.getY());
+            Point loc = frame.getLocationOnScreen();
+            int[] fistCords = player.getFistCords((int)mp.getX()-(int)loc.getX(),(int)mp.getY()-(int)loc.getY());
             g.setColor(Color.WHITE);
-            g.fillOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);
+            g.fillOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
             g.setColor(Color.BLACK);
-            g.drawOval((int)mp.getX()-5,(int)mp.getY()-5,10,10);
+            g.drawOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
             g.setColor(player.getFistColor());
             g.fillOval(fistCords[0],fistCords[1],10,10);
             g.fillOval(fistCords[2],fistCords[3],10,10);
@@ -431,7 +435,8 @@ public class Display extends JComponent {
         Resource objectHit = null;
         Building buildinghit = null;
         Point mp = MouseInfo.getPointerInfo().getLocation();
-        int[] fistcords = player.getFistCords((int)mp.getX(),(int)mp.getY());
+        Point loc = frame.getLocationOnScreen();
+        int[] fistcords = player.getFistCords((int)mp.getX()-(int)loc.getX(),(int)mp.getY()-(int)loc.getY());
         int fistx=fistcords[2];
         int fisty=fistcords[3];
         if (player.getFists().getAnimate().isRightArm()) {
