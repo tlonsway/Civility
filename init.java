@@ -22,6 +22,7 @@ public class init {
         Player p = new Player("Bob",100,new Color(252, 210, 126),pi,fists,hotbar);
         ArrayList<Item> craftableItems = new ArrayList<Item>();
         craftableItems.add(new WoodenAxe());
+        craftableItems.add(new HouseFrame());
         int X = 150;
         int Y = 150;
         for(Item e: craftableItems){

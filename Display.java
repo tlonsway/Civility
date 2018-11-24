@@ -36,6 +36,9 @@ public class Display extends JComponent {
     }
     public void update() {
         BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
+        if (player.getHealth()<=0) {
+            view="dead";
+        }
         for(Building b : buildings) {
             if (b.getType().equals("goldmine")) {
                 in.addGold(.005);
@@ -48,6 +51,9 @@ public class Display extends JComponent {
                     b.removeResource(ri);
                     ri++;
                     continue;
+                }
+                if (r.getBoundingBox().intersects(new BoundingBox(890+center_x,490+center_y,60,60))) {
+                    player.doDamage(.05);
                 }
             }
         }
@@ -328,9 +334,9 @@ public class Display extends JComponent {
                 g.fillRect(e.getCX(),e.getCY(),100,50);
                 g.setColor(Color.BLACK);
                 g.drawRect(e.getCX(),e.getCY(),100,50);
-                g.drawString(e.getType(),e.getCX()+5,e.getCY()+10);
+                g.drawString(e.getType(),e.getCX()+5,e.getCY()+15);
                 for(int a = 0; a < e.getItemsRequired().size();a++){
-                    g.drawString(e.getItemsRequired().get(a)+": x"+e.getNumOfItem().get(a),e.getCX()+5,e.getCY()+a*5+10);
+                    g.drawString(e.getItemsRequired().get(a)+": x"+e.getNumOfItem().get(a),e.getCX()+5,e.getCY()+a*5+10+25);
                 }
             }
             Point mp = MouseInfo.getPointerInfo().getLocation();
@@ -339,7 +345,14 @@ public class Display extends JComponent {
             g.fillOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10); 
             g.setColor(Color.BLACK);
             g.drawOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
-        }
+        } else if (view.equals("dead")) {
+            g.setColor(Color.RED);
+            g.fillRect(0,0,1900,1000);
+            Font f = new Font("Courier New",Font.BOLD,100);
+            g.setFont(f);
+            g.setColor(Color.BLACK);
+            g.drawString("YOU DIED",650,400);
+        }   
     }
     public void addBuilding(Building b) {
         buildings.add(b);

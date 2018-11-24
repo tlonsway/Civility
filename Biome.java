@@ -22,6 +22,9 @@ public class Biome{
             for(int i=0;i<(int)(Math.random()*10);i++) {
                 resources.add(new Rock(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
             }
+            for(int i=0;i<20+(int)(Math.random()*80);i++) {
+                resources.add(new Glacier(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            }
         } else if (t.equals("desert")) {
             color = new Color(255,250,100+(int)(Math.random()*121));
             for(int i=0;i<(int)(Math.random()*10);i++) {
