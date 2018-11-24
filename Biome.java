@@ -16,7 +16,7 @@ public class Biome{
         if (t.equals("winter")) {
             int amt = 255-(int)(Math.random()*40)-20;
             color = new Color(amt,amt,amt);
-            for(int i=0;i<(int)(Math.random()*40);i++) {
+            for(int i=0;i<20+(int)(Math.random()*80);i++) {
                 resources.add(new PineTree(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
             }
             for(int i=0;i<(int)(Math.random()*10);i++) {
