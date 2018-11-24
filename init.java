@@ -55,9 +55,11 @@ public class init {
         }
         //Biome b = new Biome("rocky",-1000,-1000);
         //d.addBiome(b);
+        int randseed = 0;
+        Random generator = new Random(randseed);
         for(int x=-20000;x<=20000;x+=3000) {
             for(int y=-20000;y<=20000;y+=3000) {
-                int choice=(int)(Math.random()*5);
+                int choice=(int)(generator.nextDouble()*6);
                 String type="";
                 if (choice==0) {
                     type="winter";
@@ -67,11 +69,13 @@ public class init {
                     type="desert";
                 } else if (choice==3) {
                     type="rocky";
-                } else {
+                } else if (choice==4) {
                     type="jungle";
+                } else if (choice==5) {
+                    type="plains";
                 }
                    
-                d.addBiome(new Biome(type,x,y));
+                d.addBiome(new Biome(type,x,y,randseed));
                 try {
                     Thread.sleep(1);
                 } catch (Exception e) {
