@@ -52,7 +52,7 @@ public class Display extends JComponent {
                     ri++;
                     continue;
                 }
-                if (r.getBoundingBox().intersects(new BoundingBox(890+center_x,490+center_y,60,60))) {
+                if (r.getType().equals("cactus")&&r.getBoundingBox().intersects(new BoundingBox(890+center_x,490+center_y,60,60))) {
                     player.doDamage(.05);
                 }
             }
