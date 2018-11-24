@@ -37,7 +37,7 @@ public class Player{
     public void craft(Item i){
         inventory.addItem(i);
         for(int a = 0; a < i.getItemsRequired().size();a++){
-            Item temp = new Item(i.getItemsRequired().get(a),true);
+            Item temp = new Item(i.getItemsRequired().get(a),true,i.getIsPlacable());
             temp.changeQuantity(i.getNumOfItem().get(a)-1);
             inventory.removeItem(temp);
         }

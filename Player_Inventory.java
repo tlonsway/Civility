@@ -15,7 +15,7 @@ public class Player_Inventory{
             }
         }
         if(!found){
-            Item temp = new Item(i.getType(),i.getIsCraftable());
+            Item temp = new Item(i.getType(),i.getIsCraftable(),i.getIsPlacable());
             int x = 150;
             int y = 150;
             if(items.size()>0){
