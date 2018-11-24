@@ -30,7 +30,8 @@ public class Human implements AI,Runnable {
                 e.printStackTrace();
             }
             ArrayList<Building> builds = d.getBuildings();
-            ArrayList<Resource> resource = d.getResources();
+            //ArrayList<Resource> resource = d.getResources();
+            ArrayList<Resource> resource = new ArrayList<Resource>();
             int dir = (int)(Math.random()*4);
             double center_x=d.getCenterX();
             double center_y=d.getCenterY();

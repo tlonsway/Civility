@@ -6,59 +6,76 @@ public class Biome{
     private int x,y,width,height;
     private String type;
     private Color color;
+    int randseed;
     //possible types are: winter, desert, forest, rocky
-    public Biome(String t, int x_loc, int y_loc) {
+    public Biome(String t, int x_loc, int y_loc, int rs) {
         resources = new ArrayList<Resource>();
         x=x_loc;
         y=y_loc;
         width=3000;
         height=3000;
+        //randseed=123456789;
+        randseed=rs;
+        Random generator = new Random(randseed);
         if (t.equals("winter")) {
-            int amt = 255-(int)(Math.random()*40)-20;
+            int amt = 255-(int)(generator.nextDouble()*40)-20;
             color = new Color(amt,amt,amt);
-            for(int i=0;i<20+(int)(Math.random()*80);i++) {
-                resources.add(new PineTree(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            for(int i=0;i<20+(int)(generator.nextDouble()*80);i++) {
+                resources.add(new PineTree(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
             }
-            for(int i=0;i<(int)(Math.random()*10);i++) {
-                resources.add(new Rock(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            for(int i=0;i<(int)(generator.nextDouble()*10);i++) {
+                resources.add(new Rock(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
             }
-            for(int i=0;i<20+(int)(Math.random()*80);i++) {
-                resources.add(new Glacier(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            for(int i=0;i<20+(int)(generator.nextDouble()*80);i++) {
+                resources.add(new Glacier(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
             }
         } else if (t.equals("desert")) {
-            color = new Color(255,250,100+(int)(Math.random()*121));
-            for(int i=0;i<(int)(Math.random()*10);i++) {
-                resources.add(new Rock(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            color = new Color(255,250,100+(int)(generator.nextDouble()*121));
+            for(int i=0;i<(int)(generator.nextDouble()*10);i++) {
+                resources.add(new Rock(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
             }
-            for(int i=0;i<30+(int)(Math.random()*120);i++) {
-                resources.add(new Cactus(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            for(int i=0;i<30+(int)(generator.nextDouble()*120);i++) {
+                resources.add(new Cactus(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
             }
         } else if (t.equals("forest")) {
-            color = new Color(0,100+(int)(Math.random()*101),5);
-            for(int i=0;i<50+(int)(Math.random()*150);i++) {
-                resources.add(new Tree(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            color = new Color(0,100+(int)(generator.nextDouble()*101),5);
+            for(int i=0;i<50+(int)(generator.nextDouble()*150);i++) {
+                resources.add(new Tree(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
             }
-            for(int i=0;i<(int)(Math.random()*10);i++) {
-                resources.add(new Rock(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            for(int i=0;i<(int)(generator.nextDouble()*10);i++) {
+                resources.add(new Rock(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
+            }
+            for(int i=0;i<5+(int)(generator.nextDouble()*20);i++) {
+                resources.add(new Bush(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
             }
         } else if (t.equals("rocky")) {
-            int amt = 50+(int)(Math.random()*100);
+            int amt = 50+(int)(generator.nextDouble()*100);
             color = new Color(amt,amt,amt);
-            for(int i=0;i<2+(int)(Math.random()*8);i++) {
-                resources.add(new Tree(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            for(int i=0;i<2+(int)(generator.nextDouble()*8);i++) {
+                resources.add(new Tree(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
             }
-            for(int i=0;i<20+(int)(Math.random()*80);i++) {
-                resources.add(new Rock(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            for(int i=0;i<20+(int)(generator.nextDouble()*80);i++) {
+                resources.add(new Rock(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
             }
-            for(int i=0;i<(int)(Math.random()*10);i++) {
-                resources.add(new Crystal(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            for(int i=0;i<(int)(generator.nextDouble()*10);i++) {
+                resources.add(new Crystal(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
             }
         } else if (t.equals("jungle")) {
-            color = new Color(0,80+(int)(Math.random()*80),0);
-            for(int i=0;i<20+(int)(Math.random()*100);i++) {
-                resources.add(new RubberTree(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            color = new Color(0,80+(int)(generator.nextDouble()*80),0);
+            for(int i=0;i<20+(int)(generator.nextDouble()*100);i++) {
+                resources.add(new RubberTree(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
             }
+        } else if (t.equals("plains")) {
+            color = new Color(134,206,0);
+            for(int i=0;i<30+(int)(generator.nextDouble()*120);i++) {
+                resources.add(new Bush(x+(int)(width*((generator.nextDouble()*1))),y+(int)(height*((generator.nextDouble()*1)))));
+            }
+        } else if (t.equals("swamp")) {
+            color = new Color(0,96,28);
+            
+            
         }
+        
     }
     public Color getColor() {
         return color;
