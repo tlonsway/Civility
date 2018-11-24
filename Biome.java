@@ -53,6 +53,11 @@ public class Biome{
             for(int i=0;i<(int)(Math.random()*10);i++) {
                 resources.add(new Crystal(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
             }
+        } else if (t.equals("jungle")) {
+            color = new Color(0,80+(int)(Math.random()*80),0);
+            for(int i=0;i<20+(int)(Math.random()*100);i++) {
+                resources.add(new RubberTree(x+(int)(width*((Math.random()*1))),y+(int)(height*((Math.random()*1)))));
+            }
         }
     }
     public Color getColor() {

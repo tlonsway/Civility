@@ -57,7 +57,7 @@ public class init {
         //d.addBiome(b);
         for(int x=-20000;x<=20000;x+=3000) {
             for(int y=-20000;y<=20000;y+=3000) {
-                int choice=(int)(Math.random()*4);
+                int choice=(int)(Math.random()*5);
                 String type="";
                 if (choice==0) {
                     type="winter";
@@ -65,9 +65,12 @@ public class init {
                     type="forest";
                 } else if (choice==2) {
                     type="desert";
-                } else {
+                } else if (choice==3) {
                     type="rocky";
+                } else {
+                    type="jungle";
                 }
+                   
                 d.addBiome(new Biome(type,x,y));
                 try {
                     Thread.sleep(1);
