@@ -9,12 +9,27 @@ public class Item{
     private boolean isCraftable;
     private ArrayList<String> itemsRequired;
     private ArrayList<Integer> numOfItem;
+    private boolean isPlaceable;
+    private int cx;
+    private int cy;
     public Item(String T,boolean IC){
         type = T;
         quantity = 1;
         itemsRequired = new ArrayList<String>();
         numOfItem = new ArrayList<Integer>();
         isCraftable = IC;
+    }
+    public void setCX(int x){
+        cx = x;
+    }
+    public int getCX(){
+        return cx;
+    }
+    public int getCY(){
+        return cy;
+    }
+    public void setCY(int y){
+        cy = y;
     }
     public ArrayList<String> getItemsRequired(){
         return itemsRequired;

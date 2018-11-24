@@ -16,9 +16,10 @@ public class Display extends JComponent {
     Inventory in;
     Player player;
     AIThread aithread;
+    ArrayList<Item> craftableItems;
     String view;
     JFrame frame;
-    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f) {
+    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
         biomes = new ArrayList<Biome>();
@@ -31,6 +32,7 @@ public class Display extends JComponent {
         aithread=at;
         view = "world";
         frame=f;
+        craftableItems = CI;
     }
     public void update() {
         BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
@@ -308,7 +310,7 @@ public class Display extends JComponent {
                 }
             }
         }
-        else if(view == "crafting"){
+        else if(view.equals("crafting")){
             Font f = new Font("Courier New",Font.PLAIN,60);
             g.setFont(f);
             g.setColor(Color.BLACK);
@@ -318,7 +320,25 @@ public class Display extends JComponent {
             g.setColor(Color.GRAY);
             g.fillRect(100,100,1600,800);
             g.setColor(Color.BLACK);
-            g.drawRect(100,100,1600,800);            
+            g.drawRect(100,100,1600,800);
+            f = new Font("Courier New",Font.PLAIN,15);
+            g.setFont(f);
+            for(Item e: craftableItems){
+                g.setColor(Color.WHITE);
+                g.fillRect(e.getCX(),e.getCY(),100,50);
+                g.setColor(Color.BLACK);
+                g.drawRect(e.getCX(),e.getCY(),100,50);
+                g.drawString(e.getType(),e.getCX()+5,e.getCY()+10);
+                for(int a = 0; a < e.getItemsRequired().size();a++){
+                    g.drawString(e.getItemsRequired().get(a)+": x"+e.getNumOfItem().get(a),e.getCX()+5,e.getCY()+a*5+10);
+                }
+            }
+            Point mp = MouseInfo.getPointerInfo().getLocation();
+            Point loc = frame.getLocationOnScreen();
+            g.setColor(Color.WHITE);
+            g.fillOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10); 
+            g.setColor(Color.BLACK);
+            g.drawOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
         }
     }
     public void addBuilding(Building b) {
@@ -464,6 +484,28 @@ public class Display extends JComponent {
             }
         }
         player.punch(objectHit,(int)x,(int)y);
+    }
+    public void craftingClick(int x,int y){
+        System.out.print("craftingMouseClick()");
+        for(Item i: craftableItems){
+            if(hasResources(i) && new BoundingBox(i.getCX(),i.getCY(),100,50).intersects(new BoundingBox(x,y,1,1))){
+                player.craft(i);
+            }
+        }
+    }
+    public boolean hasResources(Item i){
+        for(int a = 0; a < i.getItemsRequired().size();a++){
+            boolean contin = false;
+            for(Item e: player.getInventory()){
+                if(e.getType() == i.getItemsRequired().get(a) && e.getQuantity() >= i.getNumOfItem().get(a)){
+                    contin = true;
+                }
+            }
+            if(!contin){
+                return false;
+            }
+        }
+        return true;
     }
     public void addBiome(Biome b) {
         biomes.add(b);

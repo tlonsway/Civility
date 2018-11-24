@@ -15,6 +15,9 @@ public class MouseThread extends  MouseAdapter{
             else if(dis.view == "inventory"){
                 dis.inventoryClick(e.getX(),e.getY());
             }
+            else if(dis.view == "crafting"){
+                dis.craftingClick(e.getX(),e.getY());
+            }
         }
         else if(e.getButton() == 2){
             //display the information about the object clicked on

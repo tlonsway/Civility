@@ -34,6 +34,14 @@ public class Player{
     public void setHotBarItemSelected(int i){
         hotbar.selectItem(i);
     }
+    public void craft(Item i){
+        inventory.addItem(i);
+        for(int a = 0; a < i.getItemsRequired().size();a++){
+            Item temp = new Item(i.getItemsRequired().get(a),true);
+            temp.changeQuantity(i.getNumOfItem().get(a)-1);
+            inventory.removeItem(temp);
+        }
+    }
     public String getName(){
         return name;
     }

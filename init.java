@@ -20,7 +20,20 @@ public class init {
         Fists fists = new Fists(new Color(252, 210, 126),frame);
         Hotbar hotbar = new Hotbar();
         Player p = new Player("Bob",100,new Color(252, 210, 126),pi,fists,hotbar);
-        Display d = new Display(1800,1000,i,p,at,frame);
+        ArrayList<Item> craftableItems = new ArrayList<Item>();
+        craftableItems.add(new WoodenAxe());
+        int X = 150;
+        int Y = 150;
+        for(Item e: craftableItems){
+            e.setCX(X);
+            e.setCY(Y);
+            X+=150;
+            if(X >= 1650){
+                X = 150;
+                Y += 100;
+            }
+        }
+        Display d = new Display(1800,1000,i,p,at,frame,craftableItems);
         at.setDisplay(d);
         frame.add(d);
         d.setVisible(true);
