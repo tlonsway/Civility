@@ -516,6 +516,10 @@ public class Display extends JComponent {
                     Item item = new Item(player.getHotbar()[player.getHotBarItemSelected()].getType(),player.getHotbar()[player.getHotBarItemSelected()].getIsCraftable(),player.getHotbar()[player.getHotBarItemSelected()].getIsPlacable());
                     item.changeQuantity(b.addResource(player.getHotbar()[player.getHotBarItemSelected()])*-1-1);
                     player.removeItemFromInven(item);
+                    if(b.isBuildable()){
+                        this.addBuilding(new House(b.getX(),b.getY()));
+                        buildings.remove(b);
+                    }
                 } 
             }
         }
