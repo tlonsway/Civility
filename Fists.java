@@ -1,13 +1,16 @@
 import java.awt.*;
+import javax.swing.*;
 public class Fists{
     private Color color;
     private int x1,x2,y1,y2 = 0;
     private AnimateFist animate;
     private boolean isRightArm;
-    public Fists(Color C){
+    JFrame frame;
+    public Fists(Color C, JFrame f){
         color = C;
         isRightArm = true;
-        animate = new AnimateFist(isRightArm);
+        animate = new AnimateFist(isRightArm,frame);
+        frame=f;
     }
     public int[] getFistsCords(int X, int Y){
         animate.setMouseCords(X,Y);
@@ -71,7 +74,7 @@ public class Fists{
     }
     public void animate(int X,int Y){
         //System.out.println("Fist.animate()");
-        animate = new AnimateFist(isRightArm);
+        animate = new AnimateFist(isRightArm,frame);
         (new Thread(animate)).start();
         if(isRightArm){
             isRightArm = false;

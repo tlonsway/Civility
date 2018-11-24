@@ -9,11 +9,13 @@ public class AnimateFist implements Runnable{
     private int mouseCords[];
     private boolean animating;
     private boolean isRightArm;
-    public AnimateFist(boolean R){
+    private JFrame frame;
+    public AnimateFist(boolean R,JFrame f){
         fistCords = new int[4];
         mouseCords = new int[2];
         animating = false;
         isRightArm = R;
+        frame=f;
     }
     public void setMouseCords(int[] cords){
         mouseCords = cords;
@@ -43,8 +45,9 @@ public class AnimateFist implements Runnable{
     public void animate(){
         animating = true;
         Point mp = MouseInfo.getPointerInfo().getLocation();
-        mouseCords[0]=(int)mp.getX();
-        mouseCords[1]=(int)mp.getY();
+        Point loc = frame.getLocationOnScreen();
+        mouseCords[0]=(int)mp.getX()-(int)loc.getX();
+        mouseCords[1]=(int)mp.getY()-(int)loc.getY();
         double theta = (Math.atan((520-(double)mouseCords[1])/(920-(double)mouseCords[0])));
         int inv=1;
         double offset=.8;
