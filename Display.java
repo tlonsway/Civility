@@ -515,6 +515,7 @@ public class Display extends JComponent {
                 if(b.getType().equals("House Frame") && b.requires(player.getHotbar()[player.getHotBarItemSelected()])){
                     Item item = new Item(player.getHotbar()[player.getHotBarItemSelected()].getType(),player.getHotbar()[player.getHotBarItemSelected()].getIsCraftable(),player.getHotbar()[player.getHotBarItemSelected()].getIsPlacable());
                     item.changeQuantity(b.addResource(player.getHotbar()[player.getHotBarItemSelected()])*-1-1);
+                    System.out.println(item.getQuantity());
                     player.removeItemFromInven(item);
                     if(b.isBuildable()){
                         this.addBuilding(new House(b.getX(),b.getY()));
