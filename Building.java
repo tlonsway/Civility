@@ -23,6 +23,12 @@ public abstract class Building implements Clickable {
     public void setRequired(ArrayList<TempItem> TI) {
         buildItemsRequired=TI;
     }
+    public ArrayList<TempItem> getBuildItemsRequired(){
+        return buildItemsRequired;
+    }
+    public ArrayList<TempItem> getBuildItemsHas(){
+        return buildItemsHas;
+    }
     public int addResource(Item i){
         if(contains(i,buildItemsHas)){
             if(i.getQuantity() <= getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType())){
@@ -76,8 +82,14 @@ public abstract class Building implements Clickable {
         return false;
     }
     public boolean requires(Item i){
-        for(TempItem e: buildItemsRequired){
-            if(e.getType().equals(i.getType())){
+        for(int a = 0;a < buildItemsRequired.size();a++){
+            if(buildItemsRequired.get(a).getType().equals(i.getType())){
+                int Q = buildItemsRequired.get(a).getQuantity();
+                for(int s = 0; s <  buildItemsHas.size(); s++){
+                    if(buildItemsHas.get(s).getType().equals(i.getType()) && buildItemsHas.get(s).getQuantity() >= Q){
+                        return false;
+                    }
+                }
                 return true;
             }
         }

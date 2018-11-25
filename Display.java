@@ -248,6 +248,14 @@ public class Display extends JComponent {
                         btitle+=((House)(b)).getOwner()+"'s ";
                     }
                     g.drawString(btitle+b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
+                    if(b.getType().contains("Frame")){
+                        g.setColor(Color.WHITE);
+                        for(int i = 0; i < b.getBuildItemsRequired().size();i++){
+                            /*if(b.contains(b.getBuildItemsRequired().get(i),b.getBuildItemsHas())){
+                                
+                            }*/
+                        }
+                    }
                 }
             }
             for(AI a : aithread.getBots()) {
@@ -523,6 +531,9 @@ public class Display extends JComponent {
                     }
                 } 
             }
+        }
+        if(player.getHotbar()[player.getHotBarItemSelected()] != null && player.getHotbar()[player.getHotBarItemSelected()].getQuantity() <= 0){
+            player.getHotbar()[player.getHotBarItemSelected()] = null;
         }
         player.punch(objectHit,(int)x,(int)y);
     }

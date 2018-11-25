@@ -27,7 +27,7 @@ public class Player_Inventory{
                 }
             }
             temp.setButtonInfo(x,y,50,50);
-            temp.changeQuantity(i.getQuantity());
+            temp.changeQuantity(i.getQuantity()-1);
             items.add(temp);
         }
     }
