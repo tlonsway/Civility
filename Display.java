@@ -77,7 +77,7 @@ public class Display extends JComponent {
             }
             if (!check)
                 center_x-=moveamt;
-        }
+        } else 
         if (d) {
             boolean check = false;
             for (Building b : buildings) {
@@ -117,7 +117,7 @@ public class Display extends JComponent {
             }
             if (!check)
                 center_y-=moveamt;
-        }
+        } else 
         if (s) {
             boolean check = false;
             for (Building b : buildings) {
