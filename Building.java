@@ -28,14 +28,14 @@ public abstract class Building implements Clickable {
             if(i.getQuantity() <= getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType())){
                 return i.getQuantity();
             }
-            return getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType());
+            return getRequiredQuantityOf(i.getType());
         }
         if(i.getQuantity() <= getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType())){
             buildItemsHas.add(new TempItem(i.getType(),i.getQuantity()));
             return i.getQuantity();
         }
-        buildItemsHas.add(new TempItem(i.getType(),getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType())));
-        return getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType());
+        buildItemsHas.add(new TempItem(i.getType(),getRequiredQuantityOf(i.getType())));
+        return getRequiredQuantityOf(i.getType());
     }
     public boolean isBuildable(){
         for(TempItem e: buildItemsRequired){
