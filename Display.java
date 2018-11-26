@@ -250,10 +250,9 @@ public class Display extends JComponent {
                     g.drawString(btitle+b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
                     if(b.getType().contains("Frame")){
                         g.setColor(Color.WHITE);
-                        for(int i = 0; i < b.getBuildItemsRequired().size();i++){
-                            /*if(b.contains(b.getBuildItemsRequired().get(i),b.getBuildItemsHas())){
-                                
-                            }*/
+                        for(int a = 0; a < b.getBuildItemsRequired().size();a++){
+                            System.out.println("Writing resources");
+                            g.drawString(b.getBuildItemsRequired().get(a).getType() + " x" + b.getBuildItemsRequired().get(a).getQuantity(),(int)(b.getX()+5),(int)(b.getY()+(a*10)));
                         }
                     }
                 }
