@@ -32,9 +32,19 @@ public abstract class Building implements Clickable {
     public int addResource(Item i){
         if(contains(i,buildItemsHas)){
             if(i.getQuantity() <= getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType())){
+                for(int a = 0; a < buildItemsRequired.size();a++){
+                    if(buildItemsRequired.get(a).getType().equals(i.getType())){
+                        buildItemsHas.get(a).changeQuantity(i.getQuantity());
+                    }
+                }
                 return i.getQuantity();
             }
-            return getRequiredQuantityOf(i.getType());
+            for(int a = 0; a < buildItemsRequired.size();a++){
+                if(buildItemsRequired.get(a).getType().equals(i.getType())){
+                    buildItemsHas.get(a).changeQuantity(getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType()));
+                }
+            }
+            return getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType());
         }
         if(i.getQuantity() <= getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType())){
             buildItemsHas.add(new TempItem(i.getType(),i.getQuantity()));

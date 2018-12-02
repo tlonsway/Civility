@@ -251,8 +251,7 @@ public class Display extends JComponent {
                     if(b.getType().contains("Frame")){
                         g.setColor(Color.WHITE);
                         for(int a = 0; a < b.getBuildItemsRequired().size();a++){
-                            System.out.println("Writing resources");
-                            g.drawString(b.getBuildItemsRequired().get(a).getType() + " x" + b.getBuildItemsRequired().get(a).getQuantity(),(int)(b.getX()+5),(int)(b.getY()+(a*10)));
+                            g.drawString(b.getBuildItemsRequired().get(a).getType() + " "+ b.getHasQuantityOf(b.getBuildItemsRequired().get(a).getType()) + "/" + b.getBuildItemsRequired().get(a).getQuantity(),(int)(b.getX()+5-center_x),(int)(b.getY()+20+(a*10)-center_y));
                         }
                     }
                 }
@@ -518,7 +517,6 @@ public class Display extends JComponent {
         for (Building b : buildings) {
             if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
                 buildinghit = b;
-                //System.out.println("Punched building: " + b.getType());
                 if(b.getType().equals("House Frame") && b.requires(player.getHotbar()[player.getHotBarItemSelected()])){
                     Item item = new Item(player.getHotbar()[player.getHotBarItemSelected()].getType(),player.getHotbar()[player.getHotBarItemSelected()].getIsCraftable(),player.getHotbar()[player.getHotBarItemSelected()].getIsPlacable());
                     item.changeQuantity(b.addResource(player.getHotbar()[player.getHotBarItemSelected()])-1);
