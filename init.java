@@ -21,6 +21,8 @@ public class init {
         Hotbar hotbar = new Hotbar();
         Player p = new Player("Bob",100,new Color(252, 210, 126),pi,fists,hotbar);
         ArrayList<Item> craftableItems = new ArrayList<Item>();
+        craftableItems.add(new WoodenPlank());
+        craftableItems.add(new StoneBrick());
         craftableItems.add(new WoodenAxe());
         craftableItems.add(new HouseBlueprint());
         int X = 150;

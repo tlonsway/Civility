@@ -3,5 +3,6 @@ public class WoodenAxe extends Item{
         super("wooden_axe",true,false);
         super.addStringToItemsRequired("wood");
         super.addIntegerToNumOfItem(50);
+        super.setToolInfo("axe",10);
     }
 }

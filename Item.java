@@ -12,6 +12,9 @@ public class Item{
     private boolean isPlacable;
     private int cx;
     private int cy;
+    private boolean isTool;
+    private String toolName;
+    private int toolDamage;
     public Item(String T,boolean IC,boolean IP){
         type = T;
         quantity = 1;
@@ -21,6 +24,20 @@ public class Item{
         }
         isCraftable = IC;
         isPlacable = IP;
+    }
+    public void setToolInfo(String TN, int TD){
+        isTool = true;
+        toolName = TN;
+        toolDamage = TD;
+    }
+    public boolean isATool(){
+        return isTool;
+    }
+    public int getToolDamage(){
+        return toolDamage;
+    }
+    public String getToolName(){
+        return toolName;
     }
     public boolean getIsPlacable(){
         return isPlacable;

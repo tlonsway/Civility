@@ -9,7 +9,6 @@ public class Player{
     private Player_Inventory inventory;
     private Fists fists;
     private Hotbar hotbar;
-    private int playerWeaponDamage;
     public Player(String N, double H, Color C,Player_Inventory I,Fists F,Hotbar Hot){
         name = N;
         health = H;
@@ -17,14 +16,10 @@ public class Player{
         inventory = I;
         fists = F;
         hotbar = Hot;
-        playerWeaponDamage = 0;
     }
     public void setHotBarItem(Item i){
         hotbar.setHotbarItem(i);
     }   
-    public void setPlayerWeaponDammage(int PWD){
-        playerWeaponDamage = PWD;
-    }
     public Item[] getHotbar(){
         return hotbar.getHotbar();
     }
@@ -77,6 +72,14 @@ public class Player{
     }
     public void punch(Resource resource,int x,int y){
         fists.animate(x,y);
+        int playerWeaponDamage = 0;
+        if(getHotbar()[getHotBarItemSelected()] != null){
+            boolean isTool = getHotbar()[getHotBarItemSelected()].isATool();
+            System.out.println(isTool);
+        }
+        if(getHotbar()[getHotBarItemSelected()] != null && getHotbar()[getHotBarItemSelected()].isATool()){
+            playerWeaponDamage = getHotbar()[getHotBarItemSelected()].getToolDamage();
+        }
         if(resource != null){
             resource.dealDamage(5+playerWeaponDamage);
         }
