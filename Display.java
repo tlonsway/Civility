@@ -529,10 +529,11 @@ public class Display extends JComponent {
                 } 
             }
         }
+        player.punch(objectHit,(int)x,(int)y);        
         if(player.getHotbar()[player.getHotBarItemSelected()] != null && player.getHotbar()[player.getHotBarItemSelected()].getQuantity() <= 0){
+            System.out.println("Setting to zero");
             player.getHotbar()[player.getHotBarItemSelected()] = null;
         }
-        player.punch(objectHit,(int)x,(int)y);
     }
     public void craftingClick(int x,int y){
         System.out.print("craftingMouseClick()");
