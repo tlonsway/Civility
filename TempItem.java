@@ -1,17 +1,14 @@
 public class TempItem{
-    private String type;
+    private String name;
     private int quantity;
-    public TempItem(String name,int q){
-        type = name;
+    public TempItem(String n, int q){
+        name = n;
         quantity = q;
     }
-    public String getType(){
-        return type;
+    public String getName(){
+        return name;
     }
     public int getQuantity(){
         return quantity;
-    }
-    public void changeQuantity(int q){
-        quantity += q;
     }
 }
