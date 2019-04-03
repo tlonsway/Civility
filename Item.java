@@ -17,6 +17,10 @@ public class Item{
         required = r;
         toolDamage = td;
     }
+    public String ToString(){
+        String ret = "Name: "+name+" Quantity: "+quantity;
+        return ret;
+    }
     public boolean canbeCrafteg(){
         if(required == null){
             return false;
