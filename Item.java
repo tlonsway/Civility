@@ -17,7 +17,7 @@ public class Item{
         required = r;
         toolDamage = td;
     }
-    public String ToString(){
+    public String toString(){
         String ret = "Name: "+name+" Quantity: "+quantity;
         return ret;
     }

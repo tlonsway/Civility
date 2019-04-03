@@ -51,7 +51,7 @@ public class init {
         }
         //Biome b = new Biome("rocky",-1000,-1000);
         //d.addBiome(b);
-        long randseed = 441287210;
+        long randseed = 1111111111;
         Random generator = new Random(randseed);
         for(int x=-20000;x<=20000;x+=3000) {
             for(int y=-20000;y<=20000;y+=3000) {

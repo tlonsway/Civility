@@ -170,6 +170,9 @@ public class Display extends JComponent {
                 g.drawString("x"+i.getQuantity(),i.getBX()+15,i.getBY()+40);
             }
             */
+            for(Item i : player.getInventory()) {
+                System.out.println(i);
+            }
             Point mp = MouseInfo.getPointerInfo().getLocation();
             Point loc = frame.getLocationOnScreen();
             g.setColor(Color.WHITE);
