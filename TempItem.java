@@ -11,4 +11,7 @@ public class TempItem{
     public int getQuantity(){
         return quantity;
     }
+    public void changeQuantity(int q){
+        quantity += q;
+    }
 }

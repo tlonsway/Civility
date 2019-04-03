@@ -16,6 +16,15 @@ public class InventoryTwo{
             inven.add(a);
         }
     }
+    public ArrayList<Item> getInventory(){
+        return inven;
+    }
+    public void craft(Item i){
+        addItem(i);
+        for(TempItem a: i.getRequired()){
+            removeItem(a.getName(),a.getQuantity());
+        }
+    }
     public void removeItem(String name, int quantity){
         for(int a = 0; a < inven.size();a++){
             if(inven.get(a).getName().equals(name)){

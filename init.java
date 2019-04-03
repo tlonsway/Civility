@@ -13,33 +13,27 @@ public class init {
         BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank");
         frame.getContentPane().setCursor(blankCursor);
+        
         Inventory i = new Inventory();
-        Player_Inventory pi = new Player_Inventory();
+        InventoryTwo pi = new InventoryTwo();
         AIThread at = new AIThread();
         (new Thread(at)).start();
         Fists fists = new Fists(new Color(252, 210, 126),frame);
         Hotbar hotbar = new Hotbar();
         Player p = new Player("Bob",100,new Color(252, 210, 126),pi,fists,hotbar);
         ArrayList<Item> craftableItems = new ArrayList<Item>();
-        craftableItems.add(new WoodenPlank());
-        craftableItems.add(new StoneBrick());
-        craftableItems.add(new WoodenAxe());
-        craftableItems.add(new HouseBlueprint());
-        int X = 150;
-        int Y = 150;
-        for(Item e: craftableItems){
-            e.setCX(X);
-            e.setCY(Y);
-            X+=150;
-            if(X >= 1650){
-                X = 150;
-                Y += 100;
-            }
-        }
         Display d = new Display(1800,1000,i,p,at,frame,craftableItems);
         at.setDisplay(d);
         frame.add(d);
         d.setVisible(true);
+        
+        ArrayList<Item> Items = new ArrayList<Item>();
+        Items.add(new Item("wood",0,false,new Color(163,68,0),"square",null,0));
+        Items.add(new Item("stone",0,false,Color.GRAY,"square",null,0));
+        Items.add(new Item("wood planks",0,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood",5))),0));
+        Items.add(new Item("wooden axe",0,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",5))),10));
+        Items.add(new Item("house frame",0,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",20))),0));
+        
         KeyboardThread kt = new KeyboardThread(d);
         MouseThread mt = new MouseThread(d);
         frame.addMouseListener(mt);

@@ -1,16 +1,33 @@
 import java.util.*;
+import java.awt.*;
 public class Item{
     private String name;
     private int quantity;
     private boolean canBePlaced;
-    private int[] color;
+    private Color color;
     private String shape;
-    public Item(String n, int q, boolean cBP,int[] c, String s){
+    private ArrayList<TempItem> required;
+    private int toolDamage;
+    public Item(String n, int q, boolean cBP,Color c, String s, ArrayList<TempItem> r,int td){
         name = n;
         quantity = q;
         canBePlaced = cBP;
         color = c;
         shape = s;
+        required = r;
+        toolDamage = td;
+    }
+    public boolean isTool(){
+        if(toolDamage > 0){
+            return true;
+        }
+        return false;
+    }
+    public int getToolDamage(){
+        return toolDamage;
+    }
+    public ArrayList<TempItem> getRequired(){
+        return required;
     }
     public void changeQuantity(int x){
         quantity += x;

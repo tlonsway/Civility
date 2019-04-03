@@ -9,7 +9,6 @@ public abstract class Building implements Clickable {
     private String type;
     private Color color;
     private ArrayList<TempItem> buildItemsRequired;
-    private ArrayList<TempItem> buildItemsHas;
     Building(String t, double x_loc, double y_loc, double w, double h, Color c,ArrayList<TempItem> TI) {
         type=t;
         x=x_loc;
@@ -18,7 +17,6 @@ public abstract class Building implements Clickable {
         height=h;
         color=c;
         buildItemsRequired = TI;
-        buildItemsHas = new ArrayList<TempItem>();
     }
     public void setRequired(ArrayList<TempItem> TI) {
         buildItemsRequired=TI;
@@ -26,82 +24,26 @@ public abstract class Building implements Clickable {
     public ArrayList<TempItem> getBuildItemsRequired(){
         return buildItemsRequired;
     }
-    public ArrayList<TempItem> getBuildItemsHas(){
-        return buildItemsHas;
-    }
-    public int addResource(Item i){
-        if(contains(i,buildItemsHas)){
-            if(i.getQuantity() <= getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType())){
-                for(int a = 0; a < buildItemsRequired.size();a++){
-                    if(buildItemsRequired.get(a).getType().equals(i.getType())){
-                        buildItemsHas.get(a).changeQuantity(i.getQuantity());
-                    }
+    public int addResources(TempItem a){
+        //returns the amount of item used
+        int amountUsed = 0;
+        for(int i = 0; i < buildItemsRequired.size();i++){
+            if(a.getName().equals(buildItemsRequired.get(i).getName())){
+                if(a.getQuantity() >= buildItemsRequired.get(i).getQuantity()){
+                    amountUsed = buildItemsRequired.get(i).getQuantity();
+                    buildItemsRequired.remove(buildItemsRequired.get(i));
                 }
-                return i.getQuantity();
-            }
-            for(int a = 0; a < buildItemsRequired.size();a++){
-                if(buildItemsRequired.get(a).getType().equals(i.getType())){
-                    buildItemsHas.get(a).changeQuantity(getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType()));
+                else{
+                    buildItemsRequired.get(i).changeQuantity(-1*a.getQuantity());
+                    amountUsed = a.getQuantity();
                 }
             }
-            return getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType());
         }
-        if(i.getQuantity() <= getRequiredQuantityOf(i.getType())-getHasQuantityOf(i.getType())){
-            buildItemsHas.add(new TempItem(i.getType(),i.getQuantity()));
-            return i.getQuantity();
-        }
-        buildItemsHas.add(new TempItem(i.getType(),getRequiredQuantityOf(i.getType())));
-        return getRequiredQuantityOf(i.getType());
+        return amountUsed;
     }
     public boolean isBuildable(){
-        for(TempItem e: buildItemsRequired){
-            boolean check = false;
-            for(TempItem i: buildItemsHas){
-                if(i.getType().equals(e.getType()) && i.getQuantity() >= e.getQuantity()){
-                    check = true;
-                }
-            }
-            if(!check){
-                return false;
-            }
-        }
-        return true;
-    }
-    public int getRequiredQuantityOf(String n){
-        for(TempItem t: buildItemsRequired){
-            if(t.getType().equals(n)){
-                return t.getQuantity();
-            }
-        }
-        return 0;
-    }
-    public int getHasQuantityOf(String n){
-        for(TempItem t: buildItemsHas){
-            if(t.getType().equals(n)){
-                return t.getQuantity();
-            }
-        }
-        return 0;
-    }
-    public boolean contains(Item i,ArrayList<TempItem> items){
-        for(TempItem e: items){
-            if(e.getType().equals(i.getType())){
-                return true;
-            }
-        }
-        return false;
-    }
-    public boolean requires(Item i){
-        for(int a = 0;a < buildItemsRequired.size();a++){
-            if(buildItemsRequired.get(a).getType().equals(i.getType())){
-                int Q = buildItemsRequired.get(a).getQuantity();
-                for(int s = 0; s <  buildItemsHas.size(); s++){
-                    if(buildItemsHas.get(s).getType().equals(i.getType()) && buildItemsHas.get(s).getQuantity() >= Q){
-                        return false;
-                    }
-                }
-                return true;
-            }
+        if(buildItemsRequired == null){
+            return true;
         }
         return false;
     }
