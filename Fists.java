@@ -23,13 +23,23 @@ public class Fists{
                 inv=-1;
             }
             /*double fx1=inv*30*Math.cos(theta)+915;
-            double fy1=inv*30*Math.sin(theta)+515;
+            double fy1=inv*30*M4ath.sin(theta)+515;
             double fx2=inv*30*Math.cos(theta)+915;
             double fy2=inv*30*Math.sin(theta)+515;*/
             int dist=25;
             theta=-theta;
             double offset=.8;
             double horzdist=.2;
+            
+            double invdist = inv*dist;
+            double to = theta=+offset;
+            double to_p_h = to+horzdist;
+            double to_m_h = to-horzdist;
+            //double fx1=invdist*Math.sin(to_p_h)+915;
+            //double fy1=invdist*Math.cos(to_p_h)+515;    
+            //double fx2=invdist*Math.cos(to_m_h)+915;
+            //double fy2=invdist*-Math.sin(to_m_h)+515;
+            
             double fx1=inv*dist*Math.sin(theta+offset+horzdist)+915;
             double fy1=inv*dist*Math.cos(theta+offset+horzdist)+515;    
             double fx2=inv*dist*Math.cos(theta+offset-horzdist)+915;

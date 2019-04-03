@@ -5,6 +5,7 @@ import java.awt.image.*;
 public class init {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Game Window");
+
         frame.setVisible(true);
         frame.setSize(1800,1000);
         frame.setResizable(false);
@@ -26,6 +27,8 @@ public class init {
         at.setDisplay(d);
         frame.add(d);
         d.setVisible(true);
+        
+        d.setDoubleBuffered(true);
         
         ArrayList<Item> Items = new ArrayList<Item>();
         Items.add(new Item("wood",0,false,new Color(163,68,0),"square",null,0));
