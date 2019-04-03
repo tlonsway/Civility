@@ -17,6 +17,12 @@ public class Item{
         required = r;
         toolDamage = td;
     }
+    public boolean canbeCrafteg(){
+        if(required == null){
+            return false;
+        }
+        return true;
+    }
     public boolean isTool(){
         if(toolDamage > 0){
             return true;

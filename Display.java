@@ -160,6 +160,7 @@ public class Display extends JComponent {
             f = new Font("Courier New",Font.PLAIN,15);
             g.setFont(f);
             ArrayList<Item> Items = player.getInventory();
+            /*
             for(Item i: player.getInventory()){
                 g.setColor(Color.WHITE);
                 g.fillRect(i.getBX(),i.getBY(),i.getBWidth(),i.getBHeight());
@@ -168,6 +169,7 @@ public class Display extends JComponent {
                 g.drawString(i.getType(),i.getBX()+5,i.getBY()+20);
                 g.drawString("x"+i.getQuantity(),i.getBX()+15,i.getBY()+40);
             }
+            */
             Point mp = MouseInfo.getPointerInfo().getLocation();
             Point loc = frame.getLocationOnScreen();
             g.setColor(Color.WHITE);
@@ -197,7 +199,7 @@ public class Display extends JComponent {
                 }
                 if(hotbar[i] != null){
                     g.drawRect(605+i*60,830,50,50);
-                    g.drawString(hotbar[i].getType(),610+i*60,850);
+                    g.drawString(hotbar[i].getName(),610+i*60,850);
                     g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
                 }
             }
@@ -250,9 +252,11 @@ public class Display extends JComponent {
                     g.drawString(btitle+b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
                     if(b.getType().contains("Frame")){
                         g.setColor(Color.WHITE);
+                        /*
                         for(int a = 0; a < b.getBuildItemsRequired().size();a++){
-                            g.drawString(b.getBuildItemsRequired().get(a).getType() + " "+ b.getHasQuantityOf(b.getBuildItemsRequired().get(a).getType()) + "/" + b.getBuildItemsRequired().get(a).getQuantity(),(int)(b.getX()+5-center_x),(int)(b.getY()+20+(a*10)-center_y));
+                            g.drawString(b.getBuildItemsRequired().get(a).getName() + " "+ b.getHasQuantityOf(b.getBuildItemsRequired().get(a).getName()) + "/" + b.getBuildItemsRequired().get(a).getQuantity(),(int)(b.getX()+5-center_x),(int)(b.getY()+20+(a*10)-center_y));
                         }
+                        */
                     }
                 }
             }
@@ -317,7 +321,7 @@ public class Display extends JComponent {
                 }
                 if(hotbar[i] != null){
                     g.drawRect(605+i*60,830,50,50);
-                    g.drawString(hotbar[i].getType(),610+i*60,850);
+                    g.drawString(hotbar[i].getName(),610+i*60,850);
                     g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
                 }
             }
@@ -335,6 +339,7 @@ public class Display extends JComponent {
             g.drawRect(100,100,1600,800);
             f = new Font("Courier New",Font.PLAIN,15);
             g.setFont(f);
+            /*
             for(Item e: craftableItems){
                 g.setColor(Color.WHITE);
                 g.fillRect(e.getCX(),e.getCY(),100,50);
@@ -345,6 +350,7 @@ public class Display extends JComponent {
                     g.drawString(e.getItemsRequired().get(a)+": x"+e.getNumOfItem().get(a),e.getCX()+5,e.getCY()+a*5+10+25);
                 }
             }
+            */
             Point mp = MouseInfo.getPointerInfo().getLocation();
             Point loc = frame.getLocationOnScreen();
             g.setColor(Color.WHITE);
@@ -456,11 +462,13 @@ public class Display extends JComponent {
         }
     }
     public void inventoryClick(int x,int y){
+        /*
         for(Item e: player.getInventory()){
             if(new BoundingBox(e.getBX(),e.getBY(),e.getBWidth(),e.getBHeight()).intersects(new BoundingBox(x,y,1,1))){
                 player.setHotBarItem(e);
             }
         }
+        **/
     }
     public ArrayList<Building> getBuildings() {
         return buildings;
@@ -483,15 +491,14 @@ public class Display extends JComponent {
             fisty=fistcords[1];
         }
         Item temp = player.getHotbar()[player.getHotBarItemSelected()];
-        if(temp != null && temp.getIsPlacable()){
-            if(temp.getType().equals("HouseBlueprint")){
+        if(temp != null && temp.getCanBePlaced()){
+            if(temp.getName().equals("HouseBlueprint")){
                 System.out.println("test");
                 buildings.add(new HouseFrame((int)x+(int)center_x,(int)y+(int)center_y));
-                temp = new Item(temp.getType(),temp.getIsCraftable(),temp.getIsPlacable());
-                player.removeItemFromInven(temp);
+                player.removeItem(temp.getName(),temp.getQuantity());
                 boolean check = false;
                 for(Item a: player.getInventory()){
-                    if(a.getType().equals(temp.getType())){
+                    if(a.getName().equals(temp.getName())){
                         check = true;
                     }
                 }
@@ -517,11 +524,15 @@ public class Display extends JComponent {
         for (Building b : buildings) {
             if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
                 buildinghit = b;
-                if(b.getType().equals("House Frame") && b.requires(player.getHotbar()[player.getHotBarItemSelected()])){
+                TempItem inFist = new TempItem(player.getHotbar()[player.getHotBarItemSelected()].getName(),player.getHotbar()[player.getHotBarItemSelected()].getQuantity());
+                if(b.getType().equals("House Frame")){
+                    player.removeItem(inFist.getName(),b.addResources(inFist));
+                    /*
                     Item item = new Item(player.getHotbar()[player.getHotBarItemSelected()].getType(),player.getHotbar()[player.getHotBarItemSelected()].getIsCraftable(),player.getHotbar()[player.getHotBarItemSelected()].getIsPlacable());
-                    item.changeQuantity(b.addResource(player.getHotbar()[player.getHotBarItemSelected()])-1);
+                    item.changeQuantity(b.addResources(player.getHotbar()[player.getHotBarItemSelected()].getName(),player.getHotbar()[player.getHotBarItemSelected()].getQuantity())-1);
                     System.out.println(item.getQuantity());
                     player.removeItemFromInven(item);
+                    */
                     if(b.isBuildable()){
                         this.addBuilding(new House(b.getX(),b.getY()));
                         buildings.remove(b);
@@ -536,13 +547,16 @@ public class Display extends JComponent {
         }
     }
     public void craftingClick(int x,int y){
+        /*
         System.out.print("craftingMouseClick()");
         for(Item i: craftableItems){
             if(hasResources(i) && new BoundingBox(i.getCX(),i.getCY(),100,50).intersects(new BoundingBox(x,y,1,1))){
                 player.craft(i);
             }
         }
+        */
     }
+    /*
     public boolean hasResources(Item i){
         for(int a = 0; a < i.getItemsRequired().size();a++){
             boolean contin = false;
@@ -557,6 +571,7 @@ public class Display extends JComponent {
         }
         return true;
     }
+    */
     public void addBiome(Biome b) {
         biomes.add(b);
         ArrayList<Resource> biomeResources = b.getResources();
