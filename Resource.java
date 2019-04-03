@@ -19,8 +19,7 @@ public abstract class Resource implements Clickable {
         color = C;
         health = MH;
         Max_Health = MH;
-        yield = new Item(YN,0,false,null,null,null,0);
-        yield.changeQuantity(1+(int)(Math.random()*(maxquant-1)));
+        yield = new Item(YN,(int)(Math.random()*maxquant)+1,false,null,null,null,0);
     }
     public double getX(){
         return x;
