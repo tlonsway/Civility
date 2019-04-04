@@ -6,11 +6,11 @@ public class UpdateThread implements Runnable {
     public void run() {
         while(true) {
             try {
-                Thread.sleep(1000/70);
+                Thread.sleep(1000/100);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            d.update();
+            //d.update();
         }
     }
 }

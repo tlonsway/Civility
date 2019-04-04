@@ -92,7 +92,7 @@ public class init {
                 e.printStackTrace();
             }
         }
-        (new Thread(new FrameThread(d,60))).start();
+        (new Thread(new FrameThread(d,100))).start();
         (new Thread(new UpdateThread(d))).start();
     }
 }

@@ -19,6 +19,8 @@ public class Display extends JComponent {
     ArrayList<Item> craftableItems;
     String view;
     JFrame frame;
+    int updatetime;
+    int frametime;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
@@ -33,8 +35,11 @@ public class Display extends JComponent {
         view = "world";
         frame=f;
         craftableItems = CI;
+        updatetime=0;
+        frametime=0;
     }
     public void update() {
+        long stime = System.currentTimeMillis();
         BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
         if (player.getHealth()<=0) {
             view="dead";
@@ -57,7 +62,7 @@ public class Display extends JComponent {
                 }
             }
         }
-        int moveamt = 5;
+        int moveamt = 3;
         if (a) {
             boolean check = false;
             for (Building b : buildings) {
@@ -138,11 +143,14 @@ public class Display extends JComponent {
             if (!check)
                 center_y+=moveamt;
         }
+        //System.out.println((System.nanoTime()-stime)/1000);
+        updatetime=(int)((System.currentTimeMillis()-stime));
     }
     public void draw() {
         this.repaint();
     }
     public void paintComponent(Graphics g) {
+        long stime = System.currentTimeMillis();
         super.paintComponent(g);
         //this.setDoubleBuffered(true);
         if(view == "inventory"){
@@ -209,8 +217,8 @@ public class Display extends JComponent {
             }
         }
         else if(view == "world"){
-            long stime = System.nanoTime();
-            System.out.println("elapsed initial: " + (System.nanoTime()-stime));
+            //long stime = System.nanoTime();
+            //System.out.println("elapsed initial: " + (System.nanoTime()-stime));
             BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
             /*for(Biome b : biomes) {
                 if (b.getBoundingBox().intersects(screen)) {
@@ -225,20 +233,18 @@ public class Display extends JComponent {
                     int yloc = -(int)center_y+b.getY();
                     int width = b.getWidth();
                     int height = b.getHeight();
-                    if (xloc+width>1500) {
-                        width=1500;
+                    if (xloc+width>1800) {
+                        width=1800;
                     }
-                    if (yloc+height>700) {
-                        height=700;
+                    if (yloc+height>1000) {
+                        height=1000;
                     }
-                        
                     if (xloc<=0) {
                         xloc=0;
                     }
                     if (yloc<=0) {
                         yloc=0;
                     }
-
                     g.fillRect(xloc,yloc,width,height);
                     resources=b.getResources();
                     for (int ri=0;ri<resources.size();ri++) {
@@ -263,8 +269,8 @@ public class Display extends JComponent {
                     }
                 }
             }
-            System.out.println("elapsed biomes: " + (System.nanoTime()-stime));
-            stime = System.nanoTime();
+            //System.out.println("elapsed biomes: " + (System.nanoTime()-stime));
+            //stime = System.nanoTime();
             for (Building b : buildings) {
                 if (b.getBoundingBox().intersects(screen)) {
                     g.setColor(b.getColor());
@@ -288,8 +294,8 @@ public class Display extends JComponent {
                     }
                 }
             }
-            System.out.println("elapsed buildings: " + (System.nanoTime()-stime));
-            stime = System.nanoTime();
+            //System.out.println("elapsed buildings: " + (System.nanoTime()-stime));
+            //stime = System.nanoTime();
             for(AI a : aithread.getBots()) {
                 if (a.getBoundingBox().intersects(screen)) {
                     g.setColor(a.getColor());
@@ -301,24 +307,26 @@ public class Display extends JComponent {
                     g.drawString(a.getName(),(int)(a.getX()-center_x),(int)(a.getY()-center_y+a.getHeight()+20));
                 }                
             }
-            System.out.println("elapsed bots: " + (System.nanoTime()-stime));
-            stime = System.nanoTime();
+            //System.out.println("elapsed bots: " + (System.nanoTime()-stime));
+            //stime = System.nanoTime();
             g.setColor(Color.BLACK);
             Font f = new Font("Courier New", Font.BOLD, 30);
             g.setFont(f);
+            g.drawString("UPS: " + updatetime,40,140);
+            g.drawString("FPS: " + frametime,40,180);
             g.drawString("Gold: "+(int)(in.getGold()),40,40);
             g.drawString("center_x: " + center_x + "   center_y: " + center_y,300,40);
             g.setColor(player.getColor());
             g.fillOval(900,500,40,40);
             g.setColor(Color.BLACK);
             g.drawOval(900,500,40,40);
-            System.out.println("elapsed remainder_beforefist: " + (System.nanoTime()-stime));
-            stime = System.nanoTime();
+            //System.out.println("elapsed remainder_beforefist: " + (System.nanoTime()-stime));
+            //stime = System.nanoTime();
             Point mp = MouseInfo.getPointerInfo().getLocation();
             Point loc = frame.getLocationOnScreen();
             int[] fistCords = player.getFistCords((int)mp.getX()-(int)loc.getX(),(int)mp.getY()-(int)loc.getY());
-            System.out.println("elapsed remainder_afterfistcoords: " + (System.nanoTime()-stime));
-            stime = System.nanoTime();
+            //System.out.println("elapsed remainder_afterfistcoords: " + (System.nanoTime()-stime));
+            //stime = System.nanoTime();
             g.setColor(Color.WHITE);
             g.fillOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
             g.setColor(Color.BLACK);
@@ -329,8 +337,8 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             g.drawOval(fistCords[0],fistCords[1],10,10);
             g.drawOval(fistCords[2],fistCords[3],10,10);
-            System.out.println("elapsed remainder_afterfist: " + (System.nanoTime()-stime));
-            stime = System.nanoTime();
+            //System.out.println("elapsed remainder_afterfist: " + (System.nanoTime()-stime));
+            //stime = System.nanoTime();
             g.drawRect(899,479,41,11);
             g.setColor(Color.RED);
             g.fillRect(900,480,40,10);
@@ -343,8 +351,8 @@ public class Display extends JComponent {
             Item[] hotbar = player.getHotbar();
             f = new Font("Courier New",Font.PLAIN,15);
             g.setFont(f);
-            System.out.println("elapsed remainder: " + (System.nanoTime()-stime));
-            stime = System.nanoTime();
+            //System.out.println("elapsed remainder: " + (System.nanoTime()-stime));
+            //stime = System.nanoTime();
             for(int i = 0; i < 10; i++){
                 if(player.getHotBarItemSelected() == i){
                     g.setColor(Color.BLACK);
@@ -365,8 +373,8 @@ public class Display extends JComponent {
                     g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
                 }
             }
-            System.out.println("elapsed hotbar: " + (System.nanoTime()-stime));
-            stime = System.nanoTime();
+            //System.out.println("elapsed hotbar: " + (System.nanoTime()-stime));
+            //stime = System.nanoTime();
         }
         else if(view.equals("crafting")){
             Font f = new Font("Courier New",Font.PLAIN,60);
@@ -407,6 +415,7 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             g.drawString("YOU DIED",650,400);
         }   
+        frametime=(int)(((System.currentTimeMillis()-stime)));
     }
     public void addBuilding(Building b) {
         buildings.add(b);
