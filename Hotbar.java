@@ -22,7 +22,7 @@ public class Hotbar{
     }
     public void check(){
         for(int i = 0; i < items.length;i++){
-            if(items[i].getQuantity() <= 0){
+            if(items[i] != null && items[i].getQuantity() <= 0){
                 items[itemSelected] = null;
             }
         }
