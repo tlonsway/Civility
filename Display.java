@@ -225,11 +225,11 @@ public class Display extends JComponent {
                     int yloc = -(int)center_y+b.getY();
                     int width = b.getWidth();
                     int height = b.getHeight();
-                    if (xloc+width>1) {
-                        
+                    if (xloc+width>1500) {
+                        width=1500;
                     }
-                    if (yloc+height>1) {
-                        
+                    if (yloc+height>700) {
+                        height=700;
                     }
                         
                     if (xloc<=0) {
@@ -239,7 +239,7 @@ public class Display extends JComponent {
                         yloc=0;
                     }
 
-                    g.fillRect(xloc,yloc,b.getWidth(),b.getHeight());
+                    g.fillRect(xloc,yloc,width,height);
                     resources=b.getResources();
                     for (int ri=0;ri<resources.size();ri++) {
                         Resource r = resources.get(ri);
