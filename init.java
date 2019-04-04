@@ -57,10 +57,10 @@ public class init {
         }
         //Biome b = new Biome("rocky",-1000,-1000);
         //d.addBiome(b);
-        long randseed = 1111111111;
+        long randseed = (int)(Math.random()*100)*(int)(Math.random()*100)*(int)(Math.random()*100);
         Random generator = new Random(randseed);
-        for(int x=-10000;x<=10000;x+=3000) {
-            for(int y=-10000;y<=10000;y+=3000) {
+        for(int x=-40000;x<=40000;x+=3000) {
+            for(int y=-40000;y<=40000;y+=3000) {
                 int choice=(int)(generator.nextDouble()*6);
                 String type="";
                 if (choice==0) {
