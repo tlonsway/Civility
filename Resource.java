@@ -6,11 +6,12 @@ public abstract class Resource implements Clickable {
     private double height;
     private double width;
     private String type;
+    private int category; //0=woods, 1=rocks/metals, 2=fragiles, 3=specials
     private Color color;
     private double Max_Health;
     private double health;
     private Item yield;
-    public Resource(double X, double Y, double H, double W, String T, Color C, double MH,String YN, int maxquant){
+    public Resource(double X, double Y, double H, double W, String T, Color C, double MH,String YN, int maxquant, int cat){
         x = X;
         y = Y;
         height = H;
@@ -19,7 +20,8 @@ public abstract class Resource implements Clickable {
         color = C;
         health = MH;
         Max_Health = MH;
-        yield = new Item(YN,(int)(Math.random()*maxquant)+1,false,null,null,null,0);
+        yield = new Item(YN,(int)(Math.random()*maxquant)+1,false,null,null,null,new int[]{0,0,0,0,0});
+        category=cat;
     }
     public double getX(){
         return x;
@@ -40,7 +42,7 @@ public abstract class Resource implements Clickable {
         return type;
     }
     public Item getYield(){
-        Item tempnew = new Item(yield.getName(),yield.getQuantity(),yield.getCanBePlaced(),null,"",null,0);
+        Item tempnew = new Item(yield.getName(),yield.getQuantity(),yield.getCanBePlaced(),null,"",null,new int[]{0,0,0,0});
         return tempnew;
     }
     public Color getColor(){
@@ -54,5 +56,8 @@ public abstract class Resource implements Clickable {
     }
     public double getMax_Health(){
         return Max_Health;
+    }
+    public int getCategory() {
+        return category;
     }
 }

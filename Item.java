@@ -7,15 +7,20 @@ public class Item{
     private Color color;
     private String shape;
     private ArrayList<TempItem> required;
-    private int toolDamage;
-    public Item(String n, int q, boolean cBP,Color c, String s, ArrayList<TempItem> r,int td){
+    private int toolDamage; 
+    private int treeDamage;
+    private int rockDamage;
+    private int fragileDamage;
+    private int specialDamage;
+    private int[] damages; //0:tool,1:tree,2:rock,3:fragile,4:special
+    public Item(String n, int q, boolean cBP,Color c, String s, ArrayList<TempItem> r,int[] dam){
         name = n;
         quantity = q;
         canBePlaced = cBP;
         color = c;
         shape = s;
         required = r;
-        toolDamage = td;
+        damages = dam;
     }
     public String toString(){
         String ret = "Name: "+name+" Quantity: "+quantity;
@@ -33,8 +38,11 @@ public class Item{
         }
         return false;
     }
+    public int[] getDamages() {
+        return damages;
+    }
     public int getToolDamage(){
-        return toolDamage;
+        return damages[0];
     }
     public ArrayList<TempItem> getRequired(){
         return required;

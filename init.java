@@ -25,9 +25,11 @@ public class init {
         
         ArrayList<Item> craftableItems = new ArrayList<Item>();
         
-        craftableItems.add(new Item("wood planks",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood",5))),0));
-        craftableItems.add(new Item("wooden axe",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",5))),10));
-        craftableItems.add(new Item("house frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",20))),0));
+        craftableItems.add(new Item("stick",2,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood",5))),new int[]{1,1,1,1,0}));
+        craftableItems.add(new Item("wood planks",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood",5))),new int[]{0,0,0,0,0}));
+        craftableItems.add(new Item("wooden axe",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",5))),new int[]{1,10,3,2,0}));
+        craftableItems.add(new Item("stone axe",1,false,new Color(163,68,0),"square", new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",10),new TempItem("stick",5))),new int[]{1,15,5,1,0}));
+        craftableItems.add(new Item("house frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",20))),new int[]{0,0,0,0,0}));
         
         Display d = new Display(1800,1000,i,p,at,frame,craftableItems);
         at.setDisplay(d);
@@ -36,8 +38,8 @@ public class init {
         d.setDoubleBuffered(true);
         
         ArrayList<Item> Items = new ArrayList<Item>();
-        Items.add(new Item("wood",0,false,new Color(163,68,0),"square",null,0));
-        Items.add(new Item("stone",0,false,Color.GRAY,"square",null,0));
+        Items.add(new Item("wood",0,false,new Color(163,68,0),"square",null,new int[]{0,0,0,0,0}));
+        Items.add(new Item("stone",0,false,Color.GRAY,"square",null,new int[]{0,0,0,0,0}));
         
         
         KeyboardThread kt = new KeyboardThread(d);

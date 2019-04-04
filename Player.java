@@ -73,9 +73,33 @@ public class Player{
         int playerWeaponDamage = 0;
         if(getHotbar()[getHotBarItemSelected()] != null){
             playerWeaponDamage = getHotbar()[getHotBarItemSelected()].getToolDamage();
+            System.out.println("current weapon damage: " + playerWeaponDamage);
         }
         if(resource != null){
-            resource.dealDamage(5+playerWeaponDamage);
+            int treedam = 4;
+            int rockdam = 2;
+            int fragiledam = 5;
+            int specdam = 0;
+            if (playerWeaponDamage!=0) {
+                Item weapon = getHotbar()[getHotBarItemSelected()];
+                int[] dams = weapon.getDamages();
+                treedam=dams[1];
+                rockdam=dams[2];
+                fragiledam=dams[3];
+                specdam=dams[4];
+            }
+            if (resource.getCategory()==0) {
+                resource.dealDamage(treedam);
+            }
+            if (resource.getCategory()==1) {
+                resource.dealDamage(rockdam);
+            }
+            if (resource.getCategory()==2) {
+                resource.dealDamage(fragiledam);
+            }
+            if (resource.getCategory()==3) {
+                resource.dealDamage(specdam);
+            }
         }
     }
     public Fists getFists() {
