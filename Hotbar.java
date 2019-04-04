@@ -21,10 +21,8 @@ public class Hotbar{
         items[itemSelected] = i;
     }
     public void check(){
-        for(Item a: items){
-            if(a.getQuantity() <= 0){
-                a = null;
-            }
+        if(items[itemSelected] != null && items[itemSelected].getQuantity() <= 0){
+            items[itemSelected] = null;
         }
     }
 }

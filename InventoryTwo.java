@@ -10,6 +10,7 @@ public class InventoryTwo{
             if(a.getName().equals(b.getName())){
                 b.changeQuantity(a.getQuantity());
                 found = true;
+                break;
             }
         }
         if(!found){
