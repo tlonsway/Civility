@@ -21,6 +21,7 @@ public class Display extends JComponent {
     JFrame frame;
     int updatetime;
     int frametime;
+    MenuManager menu;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
@@ -37,6 +38,7 @@ public class Display extends JComponent {
         craftableItems = CI;
         updatetime=0;
         frametime=0;
+        menu = new MenuManager(CI,player.getInventory());
     }
     public void update() {
         long stime = System.nanoTime();
@@ -154,6 +156,7 @@ public class Display extends JComponent {
         super.paintComponent(g);
         //this.setDoubleBuffered(true);
         if(view == "inventory"){
+            menu.inventoryUpdate();
             Font f = new Font("Courier New",Font.PLAIN,60);
             g.setFont(f);
             g.setColor(Color.BLACK);
@@ -166,21 +169,15 @@ public class Display extends JComponent {
             g.drawRect(100,100,1600,800);
             int x = 150;
             int y = 150;
-            f = new Font("Courier New",Font.PLAIN,15);
+            f = new Font("Courier New",Font.PLAIN,20);
             g.setFont(f);
-            ArrayList<Item> Items = player.getInventory();
-            /*
-            for(Item i: player.getInventory()){
+            for(MenuItem e: menu.getInventoryMenu()){
                 g.setColor(Color.WHITE);
-                g.fillRect(i.getBX(),i.getBY(),i.getBWidth(),i.getBHeight());
+                g.fillRect(e.getX()+150,e.getY()+150,130,80);
                 g.setColor(Color.BLACK);
-                g.drawRect(i.getBX(),i.getBY(),i.getBWidth(),i.getBHeight());
-                g.drawString(i.getType(),i.getBX()+5,i.getBY()+20);
-                g.drawString("x"+i.getQuantity(),i.getBX()+15,i.getBY()+40);
-            }
-            */
-            for(Item i : player.getInventory()) {
-                System.out.println(i);
+                g.drawRect(e.getX()+150,e.getY()+150,130,80);
+                g.drawString(e.getItem().getName(),e.getX()+170,e.getY()+170);
+                g.drawString("x"+e.getItem().getQuantity(),e.getX()+170,e.getY()+200);
             }
             Point mp = MouseInfo.getPointerInfo().getLocation();
             Point loc = frame.getLocationOnScreen();
@@ -377,6 +374,7 @@ public class Display extends JComponent {
             //stime = System.nanoTime();
         }
         else if(view.equals("crafting")){
+            menu.craftingUpdate();
             Font f = new Font("Courier New",Font.PLAIN,60);
             g.setFont(f);
             g.setColor(Color.BLACK);
@@ -401,6 +399,16 @@ public class Display extends JComponent {
                 }
             }
             */
+            for(MenuItem e: menu.getCraftingMenu()){
+                g.setColor(Color.WHITE);
+                g.fillRect(e.getX()+150,e.getY()+150,270,110);
+                g.setColor(Color.BLACK);
+                g.drawRect(e.getX()+150,e.getY()+150,270,110);
+                g.drawString(e.getItem().getName(),e.getX()+170,e.getY()+170);
+                for(int i = 0; i < e.getItem().getRequired().size(); i++){
+                    g.drawString(e.getItem().getRequired().get(i).getQuantity()+" "+e.getItem().getRequired().get(i).getName(),e.getX()+170,e.getY()+190+(20*i));
+                }
+            }
             Point mp = MouseInfo.getPointerInfo().getLocation();
             Point loc = frame.getLocationOnScreen();
             g.setColor(Color.WHITE);
