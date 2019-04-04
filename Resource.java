@@ -40,7 +40,8 @@ public abstract class Resource implements Clickable {
         return type;
     }
     public Item getYield(){
-        return yield;
+        Item tempnew = new Item(yield.getName(),yield.getQuantity(),yield.getCanBePlaced(),null,"",null,0);
+        return tempnew;
     }
     public Color getColor(){
         return color;
