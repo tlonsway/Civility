@@ -8,7 +8,9 @@ public class InventoryTwo{
         boolean found = false;
         for(Item b: inven){
             if(a.getName().equals(b.getName())){
+                System.out.println("before: " + a.getQuantity());
                 b.changeQuantity(a.getQuantity());
+                System.out.println("after: " + a.getQuantity());
                 found = true;
                 break;
             }
@@ -21,7 +23,7 @@ public class InventoryTwo{
         return inven;
     }
     public void craft(Item i){
-        addItem(i);
+        addItem(new Item(i.getName(),i.getQuantity(),i.getCanBePlaced(),null,"",null,0));
         for(TempItem a: i.getRequired()){
             removeItem(a.getName(),a.getQuantity());
         }
