@@ -82,4 +82,7 @@ public class Player{
     public Fists getFists() {
         return fists;
     }
+    public void checkHotBar(){
+       hotbar.check();
+    }
 }

@@ -18,6 +18,7 @@ public class Fists{
             int[] ret = new int[4];
             //player middle at (920,520) always
             double theta = (Math.atan((520-(double)Y)/(920-(double)X)));
+            System.out.println("theta: " + theta);
             int inv=1;
             if (X<=920) {
                 inv=-1;
@@ -40,16 +41,23 @@ public class Fists{
             //double fx2=invdist*Math.cos(to_m_h)+915;
             //double fy2=invdist*-Math.sin(to_m_h)+515;
             
-            double fx1=inv*dist*Math.sin(theta+offset+horzdist)+915;
+            double fx1=(double)inv*(double)dist*Math.sin(theta+offset+horzdist)+915;
             double fy1=inv*dist*Math.cos(theta+offset+horzdist)+515;    
             double fx2=inv*dist*Math.cos(theta+offset-horzdist)+915;
             double fy2=inv*dist*-Math.sin(theta+offset-horzdist)+515;
+            
+            System.out.println("fx1: " + fx1);
+            //System.out.println(
+            
             //fx2=1;
             //fy2=1;
             ret[0]=(int)fx1;
             ret[1]=(int)fy1;
             ret[2]=(int)fx2;
             ret[3]=(int)fy2;
+            for (int i=0;i<4;i++) {
+                System.out.println(i + ": " + ret[i]);
+            }
             return ret;
         }
         int[] cords = animate.getFistCords();
