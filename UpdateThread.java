@@ -6,7 +6,7 @@ public class UpdateThread implements Runnable {
     public void run() {
         while(true) {
             try {
-                Thread.sleep(1000/120);
+                Thread.sleep(1000/70);
             } catch (Exception e) {
                 e.printStackTrace();
             }
