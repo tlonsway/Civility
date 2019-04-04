@@ -39,7 +39,7 @@ public class Display extends JComponent {
         frametime=0;
     }
     public void update() {
-        long stime = System.currentTimeMillis();
+        long stime = System.nanoTime();
         BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
         if (player.getHealth()<=0) {
             view="dead";
@@ -144,13 +144,13 @@ public class Display extends JComponent {
                 center_y+=moveamt;
         }
         //System.out.println((System.nanoTime()-stime)/1000);
-        updatetime=(int)((System.currentTimeMillis()-stime));
+        updatetime=(int)((System.nanoTime()-stime));
     }
     public void draw() {
         this.repaint();
     }
     public void paintComponent(Graphics g) {
-        long stime = System.currentTimeMillis();
+        long stime = System.nanoTime();
         super.paintComponent(g);
         //this.setDoubleBuffered(true);
         if(view == "inventory"){
@@ -312,8 +312,8 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             Font f = new Font("Courier New", Font.BOLD, 30);
             g.setFont(f);
-            g.drawString("UPS: " + updatetime,40,140);
-            g.drawString("FPS: " + frametime,40,180);
+            g.drawString("update time: " + updatetime,40,140);
+            g.drawString("frame time: " + frametime,40,180);
             g.drawString("Gold: "+(int)(in.getGold()),40,40);
             g.drawString("center_x: " + center_x + "   center_y: " + center_y,300,40);
             g.setColor(player.getColor());
@@ -415,7 +415,7 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             g.drawString("YOU DIED",650,400);
         }   
-        frametime=(int)(((System.currentTimeMillis()-stime)));
+        frametime=(int)(((System.nanoTime()-stime)));
     }
     public void addBuilding(Building b) {
         buildings.add(b);
