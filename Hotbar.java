@@ -20,4 +20,11 @@ public class Hotbar{
     public void addItemToHotBar(Item i){
         items[itemSelected] = i;
     }
+    public void check(){
+        for(Item a: items){
+            if(a.getQuantity() <= 0){
+                a = null;
+            }
+        }
+    }
 }
