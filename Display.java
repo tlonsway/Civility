@@ -521,13 +521,12 @@ public class Display extends JComponent {
         }
     }
     public void inventoryClick(int x,int y){
-        /*
-        for(Item e: player.getInventory()){
-            if(new BoundingBox(e.getBX(),e.getBY(),e.getBWidth(),e.getBHeight()).intersects(new BoundingBox(x,y,1,1))){
-                player.setHotBarItem(e);
+        System.out.print("inventory click");
+        for(MenuItem e: menu.getInventoryMenu()){
+            if(new BoundingBox(e.getX()+150,e.getY()+150,130,80).intersects(new BoundingBox(x,y,1,1))){
+                player.setHotBarItem(e.getItem());
             }
         }
-        **/
     }
     public ArrayList<Building> getBuildings() {
         return buildings;
@@ -605,31 +604,21 @@ public class Display extends JComponent {
         player.checkHotBar();
     }
     public void craftingClick(int x,int y){
-        /*
         System.out.print("craftingMouseClick()");
-        for(Item i: craftableItems){
-            if(hasResources(i) && new BoundingBox(i.getCX(),i.getCY(),100,50).intersects(new BoundingBox(x,y,1,1))){
-                player.craft(i);
+        for(MenuItem i: menu.getCraftingMenu()){
+            if(hasResources(i.getItem()) && new BoundingBox(i.getX()+150,i.getY()+150,270,110).intersects(new BoundingBox(x,y,1,1))){
+                player.craft(i.getItem());
             }
         }
-        */
     }
-    /*
     public boolean hasResources(Item i){
-        for(int a = 0; a < i.getItemsRequired().size();a++){
-            boolean contin = false;
-            for(Item e: player.getInventory()){
-                if(e.getType() == i.getItemsRequired().get(a) && e.getQuantity() >= i.getNumOfItem().get(a)){
-                    contin = true;
-                }
-            }
-            if(!contin){
+        for(TempItem a: i.getRequired()){
+            if(player.getInventoryQuantityOf(a.getName()) < a.getQuantity()){
                 return false;
             }
         }
         return true;
     }
-    */
     public void addBiome(Biome b) {
         biomes.add(b);
         ArrayList<Resource> biomeResources = b.getResources();

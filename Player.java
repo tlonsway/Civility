@@ -1,4 +1,4 @@
-import javafx.geometry.*;
+    import javafx.geometry.*;
 import java.awt.*;
 import java.util.*;
 public class Player{
@@ -51,6 +51,9 @@ public class Player{
             return true;
         }
         return false;
+    }
+    public int getInventoryQuantityOf(String s){
+        return inventory.getQuantityOf(s);
     }
     public ArrayList<Item> getInventory(){
         return inventory.getInventory();
