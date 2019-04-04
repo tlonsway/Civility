@@ -538,7 +538,9 @@ public class Display extends JComponent {
                         objectHit = r;
                         //System.out.println("Punched object: " + r.getType());
                         //System.out.println("Display: " + r.getYield().getQuantity());
-                        player.addItem(r.getYield());
+                        if (r.getHealth()<=5) {
+                            player.addItem(r.getYield());
+                        }
                         //System.out.println("adding quantity of type " + r.getType() + " amount: " + r.getYield().getQuantity());
                     }
                 }

@@ -13,7 +13,7 @@ public class FrameThread implements Runnable {
                 e.printStackTrace();
             }
             d.draw();
-            d.update();
+            //d.update();
         }
     }
 }

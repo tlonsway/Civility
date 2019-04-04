@@ -76,10 +76,15 @@ public class AnimateFist implements Runnable{
             } else {
                 horzdist1+=.015;
             }
-            double fx1=inv*dist1*Math.sin(theta+offset+horzdist1)+915;
-            double fy1=inv*dist1*Math.cos(theta+offset+horzdist1)+515;    
-            double fx2=inv*dist2*Math.cos(theta+offset-horzdist2)+915;
-            double fy2=inv*dist2*-Math.sin(theta+offset-horzdist2)+515;
+            double invdist1 = inv*dist1;
+            double invdist2 = inv*dist2;
+            double to = theta+offset;
+            double to_p_h1 = to+horzdist1;
+            double to_m_h2 = to-horzdist2;
+            double fx1=invdist1*Math.sin(to_p_h1)+915;
+            double fy1=invdist1*Math.cos(to_p_h1)+515;    
+            double fx2=invdist2*Math.cos(to_m_h2)+915;
+            double fy2=invdist2*-Math.sin(to_m_h2)+515;
             fistCords[0] = (int)fx1;
             fistCords[1] = (int)fy1;
             fistCords[2] = (int)fx2;
