@@ -69,10 +69,6 @@ public class Player{
         fists.animate(x,y);
         int playerWeaponDamage = 0;
         if(getHotbar()[getHotBarItemSelected()] != null){
-            boolean isTool = getHotbar()[getHotBarItemSelected()].isTool();
-            System.out.println(isTool);
-        }
-        if(getHotbar()[getHotBarItemSelected()] != null && getHotbar()[getHotBarItemSelected()].isTool()){
             playerWeaponDamage = getHotbar()[getHotBarItemSelected()].getToolDamage();
         }
         if(resource != null){
