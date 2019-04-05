@@ -35,7 +35,10 @@ public class init {
         craftableItems.add(new Item("house frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",1))),new int[]{0,0,0,0,0}));
         craftableItems.add(new Item("stone brick",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",5))),new int[]{0,0,0,0,0}));
         
-        Display d = new Display(1800,1000,i,p,at,frame,craftableItems);
+        ClientDataHost cdh = new ClientDataHost();
+        (new Thread(cdh)).start();
+        
+        Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh);
         at.setDisplay(d);
         frame.add(d);
         d.setVisible(true);
@@ -100,6 +103,6 @@ public class init {
         }
         (new Thread(new FrameThread(d,100))).start();
         (new Thread(new UpdateThread(d))).start();
-        (new Thread(new ClientDataHost())).start();
+        
     }
 }

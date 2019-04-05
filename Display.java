@@ -22,7 +22,8 @@ public class Display extends JComponent {
     int updatetime;
     int frametime;
     MenuManager menu;
-    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI) {
+    ClientDataHost chost;
+    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
         biomes = new ArrayList<Biome>();
@@ -39,6 +40,7 @@ public class Display extends JComponent {
         updatetime=0;
         frametime=0;
         menu = new MenuManager(CI,player.getInventory());
+        chost=cdh;
     }
     public void update() {
         long stime = System.nanoTime();
