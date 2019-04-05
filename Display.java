@@ -23,7 +23,8 @@ public class Display extends JComponent {
     int frametime;
     MenuManager menu;
     ClientDataHost chost;
-    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh) {
+    JTextField messageBox;
+    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
         biomes = new ArrayList<Biome>();
@@ -41,6 +42,7 @@ public class Display extends JComponent {
         frametime=0;
         menu = new MenuManager(CI,player.getInventory());
         chost=cdh;
+        messageBox = mb;
     }
     public void update() {
         long stime = System.nanoTime();
@@ -152,6 +154,11 @@ public class Display extends JComponent {
     }
     public void draw() {
         this.repaint();
+    }
+    public String sendMessage(){
+        String ret = messageBox.getText();
+        messageBox.setText("");
+        return ret;
     }
     public void paintComponent(Graphics g) {
         long stime = System.nanoTime();
@@ -370,10 +377,12 @@ public class Display extends JComponent {
                     g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
                 }
             }
+            g.setColor(new Color(200,200,200,125));
+            g.fillRect(1450,50,300,400);
             g.setColor(Color.BLACK);
             int count = 0;
-            for(String s : chost.getChat()){
-                g.drawString(player.getName()+": "+s,1400,100+(count*15));
+            for(String s : chost.getRecent()){
+                g.drawString(s,1400,100+(count*15));
                 count ++; 
             }
             //System.out.println("elapsed hotbar: " + (System.nanoTime()-stime));

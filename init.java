@@ -14,6 +14,10 @@ public class init {
         BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank");
         frame.getContentPane().setCursor(blankCursor);
+        JTextField chatBox = new JTextField("Type chat here to chat");
+        chatBox.setBounds(1450,430,300,20);
+        chatBox.setEditable(true);
+        frame.add(chatBox);
         
         Inventory i = new Inventory();
         InventoryTwo pi = new InventoryTwo();
@@ -38,7 +42,7 @@ public class init {
         ClientDataHost cdh = new ClientDataHost();
         (new Thread(cdh)).start();
         
-        Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh);
+        Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,chatBox);
         at.setDisplay(d);
         frame.add(d);
         d.setVisible(true);
