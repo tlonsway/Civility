@@ -1,11 +1,13 @@
 import java.net.*;
 import java.io.*;
+import java.util.*;
 public class ClientDataHost implements Runnable {
     ServerSocket ss;
     Socket s;
     BufferedReader din;
     DataOutputStream dout;
     InputStream is;
+    ArrayList<String> chat = new ArrayList<String>();
     PrintStream ps;
     public static void main(String[] args) throws Exception {
         new ClientDataHost();
@@ -37,5 +39,13 @@ public class ClientDataHost implements Runnable {
             }
             System.out.println("server input received: " + line);
         }
+    }
+    public ArrayList<String> getChat() {
+        return chat;
+    }
+    private void process(String input) {
+        
+        
+        
     }
 }
