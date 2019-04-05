@@ -402,10 +402,7 @@ public class Display extends JComponent {
                 g.drawString(s,1470,100+(count*15));
                 count ++; 
             }
-            for(String s: itemsUsedCrafting){
-               g.drawString(s.substring(0,s.indexOf(":")),Integer.parseInt(s.substring(s.indexOf(":"),s.indexOf(","))),Integer.parseInt(s.substring(s.indexOf(","),s.length())));
-               s = s.substring(0,s.indexOf(":"))+":"+(Integer.parseInt(s.substring(s.indexOf(":"),s.indexOf(",")))+1)+","+(Integer.parseInt(s.substring(s.indexOf(","),s.length()))+1);
-            }
+            
             //System.out.println("elapsed hotbar: " + (System.nanoTime()-stime));
             //stime = System.nanoTime();
         }
@@ -445,6 +442,12 @@ public class Display extends JComponent {
             g.fillOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10); 
             g.setColor(Color.BLACK);
             g.drawOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
+            for(String s: itemsUsedCrafting){
+               int x = Integer.parseInt(s.substring(s.indexOf(":")+1,s.indexOf(",")));
+               int y = Integer.parseInt(s.substring(s.indexOf(",")+1,s.length()));
+               g.drawString(s.substring(0,s.indexOf(":")),x,y);
+               s = s.substring(0,s.indexOf(":"))+":"+(x+1)+","+(y+1);
+            }
         } else if (view.equals("dead")) {
             messageBox.setVisible(false);
             g.setColor(Color.RED);
