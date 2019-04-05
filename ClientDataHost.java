@@ -36,7 +36,7 @@ public class ClientDataHost implements Runnable {
             try {
                 line = din.readLine();
                 process(line);
-                chat.add(line);
+                //chat.add(line);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -48,7 +48,13 @@ public class ClientDataHost implements Runnable {
     }
     public ArrayList<String> getRecent() {
         ArrayList<String> temp = new ArrayList<String>();
-        for(int i=chat.size()-15;i<chat.size();i++) {
+        int start=0;
+        if (chat.size()-15>=0) {
+            start=chat.size()-15;
+        } else {
+            start=chat.size();
+        }
+        for(int i=start;i<chat.size();i++) {
             temp.add(chat.get(i));
         }
         return temp;
@@ -76,12 +82,11 @@ public class ClientDataHost implements Runnable {
          * message=the text content
         */
         if (components[0]=="c") {
-            
+            System.out.println("chat message received!");
+            chat.add(components[2]+components[3]);
         }
-        
-        
     }
     public void sendMessage(String name,String message) {
-        
+        chat.add(name+message);
     }
 }
