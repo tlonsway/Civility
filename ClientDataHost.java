@@ -17,7 +17,7 @@ public class ClientDataHost implements Runnable {
     }
     public void run() {
         try {
-            ss = new ServerSocket(1555);
+            ss = new ServerSocket(1556);
             //din = new BufferedReader(new InputStreamReader(ss.getInputStream()));
             run();
         } catch (IOException e) {
