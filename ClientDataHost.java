@@ -17,7 +17,7 @@ public class ClientDataHost implements Runnable {
     }
     public void run() {
         try {
-            ss = new ServerSocket(1557);
+            ss = new ServerSocket(1558);
             //din = new BufferedReader(new InputStreamReader(ss.getInputStream()));
             run();
         } catch (IOException e) {
@@ -52,7 +52,7 @@ public class ClientDataHost implements Runnable {
         if (chat.size()-15>=0) {
             start=chat.size()-15;
         } else {
-            start=chat.size()-(15-chat.size());
+            start=0;
         }
         for(int i=start;i<chat.size();i++) {
             temp.add(chat.get(i));
