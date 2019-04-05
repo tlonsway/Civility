@@ -7,7 +7,7 @@ public class ClientDataHost implements Runnable {
     BufferedReader din;
     DataOutputStream dout;
     InputStream is;
-    ArrayList<String> chat = new ArrayList<String>();
+    ArrayList<String> chat;
     PrintStream ps;
     public static void main(String[] args) throws Exception {
         new ClientDataHost();
@@ -15,6 +15,7 @@ public class ClientDataHost implements Runnable {
     public ClientDataHost() {
         try {
             ss = new ServerSocket(1555);
+            chat = new ArrayList<String>();
             //din = new BufferedReader(new InputStreamReader(ss.getInputStream()));
             run();
         } catch (IOException e) {
@@ -34,6 +35,7 @@ public class ClientDataHost implements Runnable {
             String line = "";
             try {
                 line = din.readLine();
+                chat.add(line);
             } catch (IOException e) {
                 e.printStackTrace();
             }
