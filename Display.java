@@ -442,11 +442,15 @@ public class Display extends JComponent {
             g.fillOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10); 
             g.setColor(Color.BLACK);
             g.drawOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
-            for(String s: itemsUsedCrafting){
-               int x = Integer.parseInt(s.substring(s.indexOf(":")+1,s.indexOf(",")));
-               int y = Integer.parseInt(s.substring(s.indexOf(",")+1,s.length()));
-               g.drawString(s.substring(0,s.indexOf(":")),x,y);
-               s = s.substring(0,s.indexOf(":"))+":"+(x+1)+","+(y+1);
+            for(int a = 0; a < itemsUsedCrafting.size();a++){
+               int x = Integer.parseInt(itemsUsedCrafting.get(a).substring(itemsUsedCrafting.get(a).indexOf(":")+1,itemsUsedCrafting.get(a).indexOf(",")));
+               int y = Integer.parseInt(itemsUsedCrafting.get(a).substring(itemsUsedCrafting.get(a).indexOf(",")+1,itemsUsedCrafting.get(a).length()));
+               g.setColor(new Color(0,0,0,255-(y-50)));
+               g.drawString(itemsUsedCrafting.get(a).substring(0,itemsUsedCrafting.get(a).indexOf(":")),x,y);
+               itemsUsedCrafting.set(a,itemsUsedCrafting.get(a).substring(0,itemsUsedCrafting.get(a).indexOf(",")+1)+(y+1));
+               if(y > 304){
+                   itemsUsedCrafting.remove(itemsUsedCrafting.get(a));
+               }
             }
         } else if (view.equals("dead")) {
             messageBox.setVisible(false);
@@ -515,6 +519,13 @@ public class Display extends JComponent {
         else{
             view = "world";
         }
+    }
+    public void scroll(int x){
+        int temp = (player.getHotBarItemSelected()+x)%10;
+        if(temp < 0){
+            temp = 9;
+        }
+        player.setHotBarItemSelected(temp);
     }
     public void onePress(){
         player.setHotBarItemSelected(0);
@@ -636,24 +647,9 @@ public class Display extends JComponent {
             }
         }
         for (Building b : buildings) {
-            if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
+            if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10)) && player.getHotbar()[player.getHotBarItemSelected()] != null) {
                 buildinghit = b;
                 TempItem inFist = new TempItem(player.getHotbar()[player.getHotBarItemSelected()].getName(),player.getHotbar()[player.getHotBarItemSelected()].getQuantity());
-                /*if(b.getType().equals("House Frame")){
-                    player.removeItem(inFist.getName(),b.addResources(inFist));
-                    System.out.println("hit house");
-                    
-                    Item item = new Item(player.getHotbar()[player.getHotBarItemSelected()].getType(),player.getHotbar()[player.getHotBarItemSelected()].getIsCraftable(),player.getHotbar()[player.getHotBarItemSelected()].getIsPlacable());
-                    item.changeQuantity(b.addResources(player.getHotbar()[player.getHotBarItemSelected()].getName(),player.getHotbar()[player.getHotBarItemSelected()].getQuantity())-1);
-                    System.out.println(item.getQuantity());
-                    player.removeItemFromInven(item);
-                    
-                    if(b.isBuildable()){
-                        this.addBuilding(new House(b.getX(),b.getY()));
-                        buildings.remove(b);
-                    }
-                }
-                */
                 if(b.getType().contains("Frame")) {
                     player.removeItem(inFist.getName(),b.addResources(inFist));
                     System.out.println("hit " + b.getType());
@@ -673,11 +669,17 @@ public class Display extends JComponent {
         player.punch(objectHit,(int)x,(int)y);        
         player.checkHotBar();
     }
+    public void stopMotion(){
+        w = false;
+        a = false;
+        s = false;
+        d = false;
+    }
     public void craftingClick(int x,int y){
         for(MenuItem i: menu.getCraftingMenu()){
             if(hasResources(i.getItem()) && new BoundingBox(i.getX()+150,i.getY()+150,270,110).intersects(new BoundingBox(x,y,1,1))){
-                for(TempItem e: i.getItem().getRequired()){
-                    itemsUsedCrafting.add(e.getQuantity()+" "+e.getName()+" removed:1650,50");
+                for(int a = 0;a < i.getItem().getRequired().size();a++){
+                    itemsUsedCrafting.add(i.getItem().getRequired().get(a).getQuantity()+" "+i.getItem().getRequired().get(a).getName()+" removed:1650,"+(50+(a*15)));
                 }
                 player.craft(i.getItem());
             }

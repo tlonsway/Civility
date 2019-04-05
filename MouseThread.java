@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
-public class MouseThread extends  MouseAdapter{
+public class MouseThread extends MouseAdapter{
     private Display dis;
     public MouseThread(Display D){
         dis = D;

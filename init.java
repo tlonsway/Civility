@@ -22,17 +22,12 @@ public class init {
         BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank");
         frame.getContentPane().setCursor(blankCursor);
-        JTextField chatBox = new JTextField("Type chat here to chat");
+        JTextField chatBox = new JTextField("Type here to chat (press t)");
         
 
         InputMap im = chatBox.getInputMap();
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escape");
-                
-        
-        
-    
-        
         
         chatBox.setBounds(1450,430,300,20);
         chatBox.setEditable(true);
@@ -66,6 +61,9 @@ public class init {
         frame.add(d);
         d.setVisible(true);
         d.setDoubleBuffered(true);
+        
+        MouseScrollWheelThread mouseWheel = new MouseScrollWheelThread(d);
+        frame.addMouseWheelListener(mouseWheel);
         
         ArrayList<Item> Items = new ArrayList<Item>();
         Items.add(new Item("wood",0,false,new Color(163,68,0),"square",null,new int[]{0,0,0,0,0}));

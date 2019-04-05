@@ -58,9 +58,13 @@ public class KeyboardThread extends KeyAdapter {
             dis.zeroPress();
         }
         if(key == KeyEvent.VK_T && dis.view.equals("world")){
+            dis.stopMotion();
             System.out.println("Setting to editable");
             dis.messageBox.setText("");
             dis.messageBox.requestFocusInWindow();
+        }
+        if(key == KeyEvent.VK_ESCAPE){
+            dis.view = "world";
         }
     }
     public void keyReleased(KeyEvent e) {
