@@ -43,6 +43,20 @@ public class Display extends JComponent {
         menu = new MenuManager(CI,player.getInventory());
         chost=cdh;
         messageBox = mb;
+        ActionMap am = messageBox.getActionMap();
+        
+        am.put("enter", new AbstractAction() {
+                public void actionPerformed(ActionEvent ae) {
+                    chost.sendMessage(player.getName(),messageBox.getText());
+                    messageBox.setText("");
+                    frame.requestFocusInWindow();
+                }
+        });        
+        am.put("escape", new AbstractAction() {
+                public void actionPerformed(ActionEvent ae) {
+                    frame.requestFocusInWindow();
+                }
+        });
     }
     public void update() {
         long stime = System.nanoTime();
@@ -165,6 +179,7 @@ public class Display extends JComponent {
         super.paintComponent(g);
         //this.setDoubleBuffered(true);
         if(view == "inventory"){
+            messageBox.setVisible(false);
             menu.inventoryUpdate();
             Font f = new Font("Courier New",Font.PLAIN,60);
             g.setFont(f);
@@ -223,6 +238,7 @@ public class Display extends JComponent {
             }
         }
         else if(view == "world"){
+            messageBox.setVisible(true);
             //long stime = System.nanoTime();
             //System.out.println("elapsed initial: " + (System.nanoTime()-stime));
             BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
@@ -382,13 +398,14 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             int count = 0;
             for(String s : chost.getRecent()){
-                g.drawString(s,1400,100+(count*15));
+                g.drawString(s,1470,100+(count*15));
                 count ++; 
             }
             //System.out.println("elapsed hotbar: " + (System.nanoTime()-stime));
             //stime = System.nanoTime();
         }
         else if(view.equals("crafting")){
+            messageBox.setVisible(false);
             menu.craftingUpdate();
             Font f = new Font("Courier New",Font.PLAIN,60);
             g.setFont(f);
@@ -424,6 +441,7 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             g.drawOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
         } else if (view.equals("dead")) {
+            messageBox.setVisible(false);
             g.setColor(Color.RED);
             g.fillRect(0,0,1900,1000);
             Font f = new Font("Courier New",Font.BOLD,100);

@@ -2,6 +2,14 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.*;
 import java.awt.image.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
+import javax.swing.KeyStroke;
 public class init {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Game Window");
@@ -15,6 +23,17 @@ public class init {
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank");
         frame.getContentPane().setCursor(blankCursor);
         JTextField chatBox = new JTextField("Type chat here to chat");
+        
+
+        InputMap im = chatBox.getInputMap();
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
+        im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escape");
+                
+        
+        
+    
+        
+        
         chatBox.setBounds(1450,430,300,20);
         chatBox.setEditable(true);
         frame.add(chatBox);
