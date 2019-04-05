@@ -42,7 +42,7 @@ public abstract class Building implements Clickable {
         return amountUsed;
     }
     public boolean isBuildable(){
-        if(buildItemsRequired == null){
+        if(buildItemsRequired.size() < 1){
             return true;
         }
         return false;
