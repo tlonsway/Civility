@@ -11,6 +11,7 @@ public abstract class Resource implements Clickable {
     private double Max_Health;
     private double health;
     private Item yield;
+    private boolean destroyed;
     public Resource(double X, double Y, double H, double W, String T, Color C, double MH,String YN, int maxquant, int cat){
         x = X;
         y = Y;
@@ -22,6 +23,7 @@ public abstract class Resource implements Clickable {
         Max_Health = MH;
         yield = new Item(YN,(int)(Math.random()*maxquant)+1,false,null,null,null,new int[]{0,0,0,0,0});
         category=cat;
+        destroyed=false;
     }
     public double getX(){
         return x;
@@ -59,5 +61,11 @@ public abstract class Resource implements Clickable {
     }
     public int getCategory() {
         return category;
+    }
+    public void setDestroyed() {
+        destroyed=true;
+    }
+    public boolean isDestroyed() {
+        return destroyed;
     }
 }

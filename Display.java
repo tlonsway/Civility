@@ -54,7 +54,7 @@ public class Display extends JComponent {
         for(Biome b : biomes) {
             for (int ri=0;ri<b.getResources().size();ri++) {
                 Resource r = b.getResource(ri);
-                if (r.getHealth()<=0) {
+                if (r.isDestroyed()) {
                     b.removeResource(ri);
                     ri++;
                     continue;
@@ -284,7 +284,7 @@ public class Display extends JComponent {
                     if(b.getType().contains("Frame")){
                         g.setColor(Color.BLACK);
                         for(int a = 0; a < b.getBuildItemsRequired().size();a++){
-                            g.drawString(b.getBuildItemsRequired().get(a).getName() + " x" + b.getBuildItemsRequired().get(a).getQuantity(),(int)(b.getX()-center_x),(int)(b.getY()+b.getHeight()+20+(a*15)-center_y));
+                            g.drawString(b.getBuildItemsRequired().get(a).getName() + " x" + b.getBuildItemsRequired().get(a).getQuantity(),(int)(b.getX()-center_x),(int)(b.getY()+b.getHeight()+30+(a*15)-center_y));
                         }
                     }
                 }
@@ -563,8 +563,9 @@ public class Display extends JComponent {
                         objectHit = r;
                         //System.out.println("Punched object: " + r.getType());
                         //System.out.println("Display: " + r.getYield().getQuantity());
-                        if (r.getHealth()<=5) {
+                        if (r.getHealth()<=0) {
                             player.addItem(r.getYield());
+                            r.setDestroyed();
                         }
                         //System.out.println("adding quantity of type " + r.getType() + " amount: " + r.getYield().getQuantity());
                     }
