@@ -214,6 +214,12 @@ public class Display extends JComponent {
                     g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
                 }
             }
+            g.setColor(Color.BLACK);
+            int count = 0;
+            for(String s : chost.getChat()){
+                g.drawString(player.getName()+": "+s,1400,100+(count*15));
+                count ++; 
+            }
         }
         else if(view == "world"){
             //long stime = System.nanoTime();
