@@ -52,7 +52,7 @@ public class ClientDataHost implements Runnable {
         if (chat.size()-15>=0) {
             start=chat.size()-15;
         } else {
-            start=chat.size();
+            start=chat.size()-(15-chat.size());
         }
         for(int i=start;i<chat.size();i++) {
             temp.add(chat.get(i));
@@ -86,10 +86,10 @@ public class ClientDataHost implements Runnable {
         }
         if (components[0].equals("c")) {
             System.out.println("chat message received!");
-            chat.add(components[2]+components[3]);
+            chat.add(components[2]+": "+components[3]);
         }
     }
     public void sendMessage(String name,String message) {
-        chat.add(name+message);
+        chat.add(name+": "+message);
     }
 }
