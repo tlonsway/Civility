@@ -23,14 +23,14 @@ public class init {
         Hotbar hotbar = new Hotbar();
         Player p = new Player("Bob",100,new Color(252, 210, 126),pi,fists,hotbar);
         
-        //p.addItem(new Item("wood",50,false,new Color(163,68,0),"square",null,null));
+        p.addItem(new Item("wood",1000,false,new Color(163,68,0),"square",null,null));
         
         ArrayList<Item> craftableItems = new ArrayList<Item>();
         craftableItems.add(new Item("stick",2,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood",5))),new int[]{1,1,1,1,0}));
         craftableItems.add(new Item("wood planks",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood",5))),new int[]{0,0,0,0,0}));
         craftableItems.add(new Item("wooden axe",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",5))),new int[]{1,10,3,2,0}));
         craftableItems.add(new Item("stone axe",1,false,new Color(163,68,0),"square", new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",10),new TempItem("stick",5))),new int[]{1,15,5,1,0}));
-        craftableItems.add(new Item("house frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",20))),new int[]{0,0,0,0,0}));
+        craftableItems.add(new Item("house frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",1))),new int[]{0,0,0,0,0}));
         craftableItems.add(new Item("stone brick",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",5))),new int[]{0,0,0,0,0}));
         
         Display d = new Display(1800,1000,i,p,at,frame,craftableItems);
