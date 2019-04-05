@@ -284,7 +284,7 @@ public class Display extends JComponent {
                     if(b.getType().contains("Frame")){
                         g.setColor(Color.BLACK);
                         for(int a = 0; a < b.getBuildItemsRequired().size();a++){
-                            g.drawString(b.getBuildItemsRequired().get(a).getName() + " x" + b.getBuildItemsRequired().get(a).getQuantity(),(int)(b.getX()-center_x),(int)(b.getY()+b.getHeight()+10+(a*15)-center_y));
+                            g.drawString(b.getBuildItemsRequired().get(a).getName() + " x" + b.getBuildItemsRequired().get(a).getQuantity(),(int)(b.getX()-center_x),(int)(b.getY()+b.getHeight()+20+(a*15)-center_y));
                         }
                     }
                 }
