@@ -35,6 +35,7 @@ public class ClientDataHost implements Runnable {
             String line = "";
             try {
                 line = din.readLine();
+                process(line);
                 chat.add(line);
             } catch (IOException e) {
                 e.printStackTrace();
@@ -45,8 +46,20 @@ public class ClientDataHost implements Runnable {
     public ArrayList<String> getChat() {
         return chat;
     }
+    public ArrayList<String> getRecent() {
+        ArrayList<String> temp = new ArrayList<String>();
+        for(int i=chat.size()-15;i<chat.size();i++) {
+            temp.add(chat.get(i));
+        }
+        return temp;
+    }
     private void process(String input) {
-        
+        /*Structure of a server command:
+         * t:t2:s1:s2:s3:s4:s5
+         * t is type 1(chat,location,mapdata), t2 is type 2(more unique commands)
+         * s1,s2,s3,s4,s5, are strings that can be sent optionally
+        */
+        //t = input.
         
         
     }
