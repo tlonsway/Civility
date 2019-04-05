@@ -24,6 +24,7 @@ public class Display extends JComponent {
     MenuManager menu;
     ClientDataHost chost;
     JTextField messageBox;
+    ArrayList<String> itemsUsedCrafting;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
@@ -44,7 +45,7 @@ public class Display extends JComponent {
         chost=cdh;
         messageBox = mb;
         ActionMap am = messageBox.getActionMap();
-        
+        itemsUsedCrafting = new ArrayList<String>();
         am.put("enter", new AbstractAction() {
                 public void actionPerformed(ActionEvent ae) {
                     chost.sendMessage(player.getName(),messageBox.getText());
@@ -401,6 +402,10 @@ public class Display extends JComponent {
                 g.drawString(s,1470,100+(count*15));
                 count ++; 
             }
+            for(String s: itemsUsedCrafting){
+               g.drawString(s.substring(0,s.indexOf(":")),Integer.parseInt(s.substring(s.indexOf(":"),s.indexOf(","))),Integer.parseInt(s.substring(s.indexOf(","),s.length())));
+               s = s.substring(0,s.indexOf(":"))+":"+(Integer.parseInt(s.substring(s.indexOf(":"),s.indexOf(",")))+1)+","+(Integer.parseInt(s.substring(s.indexOf(","),s.length()))+1);
+            }
             //System.out.println("elapsed hotbar: " + (System.nanoTime()-stime));
             //stime = System.nanoTime();
         }
@@ -668,6 +673,9 @@ public class Display extends JComponent {
     public void craftingClick(int x,int y){
         for(MenuItem i: menu.getCraftingMenu()){
             if(hasResources(i.getItem()) && new BoundingBox(i.getX()+150,i.getY()+150,270,110).intersects(new BoundingBox(x,y,1,1))){
+                for(TempItem e: i.getItem().getRequired()){
+                    itemsUsedCrafting.add(e.getQuantity()+" "+e.getName()+" removed:1650,50");
+                }
                 player.craft(i.getItem());
             }
         }
