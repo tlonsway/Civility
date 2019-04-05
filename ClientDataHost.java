@@ -81,7 +81,7 @@ public class ClientDataHost implements Runnable {
          * name=name of sender
          * message=the text content
         */
-        if (components[0]=="c") {
+        if (components[0].equals("c")) {
             System.out.println("chat message received!");
             chat.add(components[2]+components[3]);
         }
