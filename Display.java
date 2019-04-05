@@ -389,7 +389,7 @@ public class Display extends JComponent {
                 g.setColor(Color.WHITE);
                 g.fillRect(e.getX()+150,e.getY()+150,270,110);
                 if(hasResources(e.getItem())){
-                    g.setColor(Color.GREEN);
+                    g.setColor(new Color(0, 183, 39));
                 }
                 else{
                     g.setColor(Color.RED);
@@ -553,6 +553,18 @@ public class Display extends JComponent {
                 if(!check){
                     player.getHotbar()[player.getHotBarItemSelected()] = null;
                 }
+            } else if(temp.getName().equals("wall frame")){
+                buildings.add(new WallFrame((int)x+(int)center_x,(int)y+(int)center_y));
+                player.removeItem(temp.getName(),1);
+                boolean check = false;
+                for(Item a: player.getInventory()){
+                    if(a.getName().equals(temp.getName())){
+                        check = true;
+                    }
+                }
+                if(!check){
+                    player.getHotbar()[player.getHotBarItemSelected()] = null;
+                }
             }
         }
         for(Biome b : biomes) {
@@ -576,20 +588,35 @@ public class Display extends JComponent {
             if (b.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10))) {
                 buildinghit = b;
                 TempItem inFist = new TempItem(player.getHotbar()[player.getHotBarItemSelected()].getName(),player.getHotbar()[player.getHotBarItemSelected()].getQuantity());
-                if(b.getType().equals("House Frame")){
+                /*if(b.getType().equals("House Frame")){
                     player.removeItem(inFist.getName(),b.addResources(inFist));
                     System.out.println("hit house");
-                    /*
+                    
                     Item item = new Item(player.getHotbar()[player.getHotBarItemSelected()].getType(),player.getHotbar()[player.getHotBarItemSelected()].getIsCraftable(),player.getHotbar()[player.getHotBarItemSelected()].getIsPlacable());
                     item.changeQuantity(b.addResources(player.getHotbar()[player.getHotBarItemSelected()].getName(),player.getHotbar()[player.getHotBarItemSelected()].getQuantity())-1);
                     System.out.println(item.getQuantity());
                     player.removeItemFromInven(item);
-                    */
+                    
                     if(b.isBuildable()){
                         this.addBuilding(new House(b.getX(),b.getY()));
                         buildings.remove(b);
                     }
-                } 
+                }
+                */
+                if(b.getType().contains("Frame")) {
+                    player.removeItem(inFist.getName(),b.addResources(inFist));
+                    System.out.println("hit " + b.getType());
+                    if(b.isBuildable()){
+                        if(b.getType().equals("House Frame")) {
+                            this.addBuilding(new House(b.getX(),b.getY()));
+                            buildings.remove(b);
+                        }
+                        if(b.getType().equals("Wall Frame")) {
+                            this.addBuilding(new Wall(b.getX(),b.getY()));
+                            buildings.remove(b);
+                        }
+                    }
+                }
             }
         }
         player.punch(objectHit,(int)x,(int)y);        
