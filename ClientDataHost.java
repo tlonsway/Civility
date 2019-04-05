@@ -53,14 +53,35 @@ public class ClientDataHost implements Runnable {
         }
         return temp;
     }
-    private void process(String input) {
+    public void process(String input) {
         /*Structure of a server command:
-         * t:t2:s1:s2:s3:s4:s5
-         * t is type 1(chat,location,mapdata), t2 is type 2(more unique commands)
+         * t1:t2:s1:s2:s3:s4:s5
+         * t1 is type 1(chat,location,mapdata), t2 is type 2(more unique commands)
          * s1,s2,s3,s4,s5, are strings that can be sent optionally
         */
-        //t = input.
+        String[] components = new String[7];
+        for(int i=0;i<7;i++) {
+            if (i<6) {
+                components[i]=input.substring(0,input.indexOf(":"));
+                input=input.substring(input.indexOf(":")+1);
+            } else {
+                components[i]=input;
+            }
+        }
+        /*Structure of a chat message:
+         * c:n:name:message:n:n:n
+         * c=chat
+         * n=null
+         * name=name of sender
+         * message=the text content
+        */
+        if (components[0]=="c") {
+            
+        }
         
+        
+    }
+    public void sendMessage(String name,String message) {
         
     }
 }
