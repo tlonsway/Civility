@@ -13,16 +13,16 @@ public class ClientDataHost implements Runnable {
         new ClientDataHost();
     }
     public ClientDataHost() {
+        chat = new ArrayList<String>();
+    }
+    public void run() {
         try {
             ss = new ServerSocket(1555);
-            chat = new ArrayList<String>();
             //din = new BufferedReader(new InputStreamReader(ss.getInputStream()));
             run();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    public void run() {
         try {
             s = ss.accept();
             din = new BufferedReader(new InputStreamReader(s.getInputStream()));
