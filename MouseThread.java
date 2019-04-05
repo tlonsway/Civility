@@ -7,10 +7,11 @@ public class MouseThread extends  MouseAdapter{
         dis = D;
     }
     public void mousePressed(MouseEvent e){
+        System.out.println(e.getButton());
         if(e.getButton() == 1){
             //should grab the resource that the player punched
             if(dis.view == "world"){
-                dis.mouseClick(e.getX(),e.getY());
+                dis.mouseLeftClick(e.getX(),e.getY());
             }
             else if(dis.view == "inventory"){
                 dis.inventoryClick(e.getX(),e.getY());
@@ -19,8 +20,13 @@ public class MouseThread extends  MouseAdapter{
                 dis.craftingClick(e.getX(),e.getY());
             }
         }
-        else if(e.getButton() == 2){
-            //display the information about the object clicked on
+        else if(e.getButton() == 3){
+            if(dis.view == "world"){
+                dis.mouseRightClick(e.getX(),e.getY());
+            }
         }
+    }
+    public void mouseWheelMoved(MouseWheelEvent e){
+        System.out.println("test\n"+e.getScrollAmount());
     }
 }

@@ -525,7 +525,15 @@ public class Display extends JComponent {
     public ArrayList<Resource> getResources() {
         return resources;
     }
-    public void mouseClick(double x, double y) {
+    public void mouseRightClick(double x, double y){
+        System.out.println("Right click");
+       for(Building b: buildings){
+           if(b.getBoundingBox().intersects(new BoundingBox(x,y,1,1))){
+               
+           }
+       }
+    }
+    public void mouseLeftClick(double x, double y) {
         BoundingBox screen = new BoundingBox(center_x,center_y,width,height);
         //System.out.println("Mouse clicked at x:" + x + " and y:" + y);
         Resource objectHit = null;
@@ -623,7 +631,6 @@ public class Display extends JComponent {
         player.checkHotBar();
     }
     public void craftingClick(int x,int y){
-        System.out.print("craftingMouseClick()");
         for(MenuItem i: menu.getCraftingMenu()){
             if(hasResources(i.getItem()) && new BoundingBox(i.getX()+150,i.getY()+150,270,110).intersects(new BoundingBox(x,y,1,1))){
                 player.craft(i.getItem());
