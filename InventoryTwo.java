@@ -23,7 +23,7 @@ public class InventoryTwo{
         return inven;
     }
     public void craft(Item i){
-        addItem(new Item(i.getName(),i.getQuantity(),i.getCanBePlaced(),null,"",null,i.getDamages()));
+        addItem(new Item(i.getName(),i.getQuantity(),i.getCanBePlaced(),null,"",null,i.getDamages(),i.getTechLevel()));
         for(TempItem a: i.getRequired()){
             removeItem(a.getName(),a.getQuantity());
         }

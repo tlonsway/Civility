@@ -43,20 +43,20 @@ public class init {
         Hotbar hotbar = new Hotbar();
         Player p = new Player("Bob",100,new Color(252, 210, 126),pi,fists,hotbar);
         
-        //p.addItem(new Item("wood",1000,false,new Color(163,68,0),"square",null,null));
-        //p.addItem(new Item("stone",1000,false,new Color(163,68,0), "square",null,null));
+        p.addItem(new Item("wood",1000,false,new Color(163,68,0),"square",null,null,0));
+        p.addItem(new Item("stone",1000,false,new Color(163,68,0), "square",null,null,0));
         
         //0:tool,1:tree,2:rock,3:fragile,4:special
         ArrayList<Item> craftableItems = new ArrayList<Item>();
-        craftableItems.add(new Item("stick",2,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood",5))),new int[]{1,1,1,1,0}));
-        craftableItems.add(new Item("wood planks",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood",5))),new int[]{0,0,0,0,0}));
-        craftableItems.add(new Item("wooden axe",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",5))),new int[]{1,10,3,2,0}));
-        craftableItems.add(new Item("wooden pickaxe",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",7))),new int[]{1,3,10,2,0}));
-        craftableItems.add(new Item("stone axe",1,false,new Color(163,68,0),"square", new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",10),new TempItem("stick",5))),new int[]{1,15,5,1,0}));
-        craftableItems.add(new Item("stone pickaxe",1,false,new Color(163,68,0),"square", new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",12),new TempItem("stick",7))),new int[]{1,5,15,1,0}));
-        craftableItems.add(new Item("wall frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",10))),new int[]{0,0,0,0,0}));
-        craftableItems.add(new Item("house frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",20))),new int[]{0,0,0,0,0}));
-        craftableItems.add(new Item("stone brick",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",5))),new int[]{0,0,0,0,0}));
+        craftableItems.add(new Item("stick",2,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood",5))),new int[]{1,1,1,1,0},0));
+        craftableItems.add(new Item("wood planks",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood",5))),new int[]{0,0,0,0,0},0));
+        craftableItems.add(new Item("wooden axe",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",5))),new int[]{1,10,3,2,0},0));
+        craftableItems.add(new Item("wooden pickaxe",1,false,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",7))),new int[]{1,3,10,2,0},0));
+        craftableItems.add(new Item("stone axe",1,false,new Color(163,68,0),"square", new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",10),new TempItem("stick",5))),new int[]{1,15,5,1,0},1));
+        craftableItems.add(new Item("stone pickaxe",1,false,new Color(163,68,0),"square", new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",12),new TempItem("stick",7))),new int[]{1,5,15,1,0},1));
+        craftableItems.add(new Item("wall frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",10))),new int[]{0,0,0,0,0},1));
+        craftableItems.add(new Item("house frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",20))),new int[]{0,0,0,0,0},1));
+        craftableItems.add(new Item("stone brick",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",5))),new int[]{0,0,0,0,0},1));
         
         ClientDataHost cdh = new ClientDataHost();
         (new Thread(cdh)).start();
@@ -71,8 +71,8 @@ public class init {
         frame.addMouseWheelListener(mouseWheel);
         
         ArrayList<Item> Items = new ArrayList<Item>();
-        Items.add(new Item("wood",0,false,new Color(163,68,0),"square",null,new int[]{0,0,0,0,0}));
-        Items.add(new Item("stone",0,false,Color.GRAY,"square",null,new int[]{0,0,0,0,0}));
+        Items.add(new Item("wood",0,false,new Color(163,68,0),"square",null,new int[]{0,0,0,0,0},0));
+        Items.add(new Item("stone",0,false,Color.GRAY,"square",null,new int[]{0,0,0,0,0},0));
         
         
         KeyboardThread kt = new KeyboardThread(d);

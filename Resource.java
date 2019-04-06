@@ -21,7 +21,7 @@ public abstract class Resource implements Clickable {
         color = C;
         health = MH;
         Max_Health = MH;
-        yield = new Item(YN,(int)(Math.random()*maxquant)+1,false,null,null,null,new int[]{0,0,0,0,0});
+        yield = new Item(YN,(int)(Math.random()*maxquant)+1,false,null,null,null,new int[]{0,0,0,0,0},0);
         category=cat;
         destroyed=false;
     }
@@ -44,7 +44,7 @@ public abstract class Resource implements Clickable {
         return type;
     }
     public Item getYield(){
-        Item tempnew = new Item(yield.getName(),yield.getQuantity(),yield.getCanBePlaced(),null,"",null,new int[]{0,0,0,0});
+        Item tempnew = new Item(yield.getName(),yield.getQuantity(),yield.getCanBePlaced(),null,"",null,new int[]{0,0,0,0},0);
         return tempnew;
     }
     public Color getColor(){

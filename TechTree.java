@@ -6,7 +6,7 @@ public class TechTree{
     public TechTree(){
         techLevel = -1;
         techLevelUpRequirments = new ArrayList<String[]>();
-        techLevelUpRequirments.add(new String[]{"wood gears:20","sticks:20"});
+        techLevelUpRequirments.add(new String[]{"wood planks:1","stick:1"});
         techLevelUpRequirments.add(new String[]{"stone gears:20"});
         itemsRequired = new ArrayList<TempItem>();
         levelUp();
@@ -39,6 +39,7 @@ public class TechTree{
         return itemsRequired;
     }
     private void levelUp(){
+        System.out.println("Level Up");
         techLevel ++;
         itemsRequired = new ArrayList<TempItem>();
         for(String e: techLevelUpRequirments.get(techLevel)){

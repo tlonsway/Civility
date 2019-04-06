@@ -4,16 +4,20 @@ public class MenuManager{
     private ArrayList<MenuItem> inventoryMenu;
     private ArrayList<Item> craftingList;
     private ArrayList<Item> inventoryItems;
-    public MenuManager(ArrayList<Item> cl, ArrayList<Item> inven){
+    private TechTree tree;
+    public MenuManager(ArrayList<Item> cl, ArrayList<Item> inven,TechTree t){
         craftingList = cl;
         inventoryItems = inven;
         craftingUpdate();
         inventoryUpdate();
+        tree = t;
     }
     public void craftingUpdate(){
         craftingMenu = new ArrayList<MenuItem>();
         for(int i = 0; i < craftingList.size(); i++){
-            craftingMenu.add(new MenuItem(craftingList.get(i),(i%5)*280, ((int)(i/5))*120));
+            if(craftingList.get(i).getTechLevel() <= tree.getTechLevel()){
+                craftingMenu.add(new MenuItem(craftingList.get(i),(i%5)*280, ((int)(i/5))*120));
+            }
         }
     }
     public void inventoryUpdate(){
