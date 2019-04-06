@@ -42,7 +42,7 @@ public class Display extends JComponent {
         craftableItems = CI;
         updatetime=0;
         frametime=0;
-        //menu = new MenuManager(CI,player.getInventory());
+        menu = new MenuManager(CI,player.getInventory(),rc.tree);
         chost=cdh;
         messageBox = mb;
         ActionMap am = messageBox.getActionMap();
@@ -300,8 +300,7 @@ public class Display extends JComponent {
             g.fillRect((int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y),(int)researchCenter.getWidth(),(int)researchCenter.getHeight());
             g.setColor(Color.BLACK);
             g.drawRect((int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y),(int)researchCenter.getWidth(),(int)researchCenter.getHeight());
-            g.drawString("Research Center",(int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y));    
-            g.drawString("Technology Level: "+researchCenter.tree.getTechLevel(),50,300);
+            g.drawString("Research Center",(int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y+researchCenter.getHeight()+15));   
             if(researchCenter.getBoundingBox().intersects(screen)){
                 for(int a  = 0; a < researchCenter.tree.getRequired().size();a++){
                     g.drawString(researchCenter.tree.getRequired().get(a).getName()+" x"+researchCenter.tree.getRequired().get(a).getQuantity(),(int)(researchCenter.getX()-center_x+10),(int)(researchCenter.getY()-center_y+(a*15))+20);
@@ -346,6 +345,7 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             Font f = new Font("Courier New", Font.BOLD, 30);
             g.setFont(f);
+            g.drawString("Technology Level: "+researchCenter.tree.getTechLevel(),40,220);
             g.drawString("update time: " + updatetime,40,140);
             g.drawString("frame time: " + frametime,40,180);
             g.drawString("Gold: "+(int)(in.getGold()),40,40);

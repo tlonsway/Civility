@@ -8,9 +8,9 @@ public class MenuManager{
     public MenuManager(ArrayList<Item> cl, ArrayList<Item> inven,TechTree t){
         craftingList = cl;
         inventoryItems = inven;
+        tree = t;
         craftingUpdate();
         inventoryUpdate();
-        tree = t;
     }
     public void craftingUpdate(){
         craftingMenu = new ArrayList<MenuItem>();
