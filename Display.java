@@ -42,7 +42,7 @@ public class Display extends JComponent {
         craftableItems = CI;
         updatetime=0;
         frametime=0;
-        menu = new MenuManager(CI,player.getInventory());
+        //menu = new MenuManager(CI,player.getInventory());
         chost=cdh;
         messageBox = mb;
         ActionMap am = messageBox.getActionMap();
@@ -421,16 +421,19 @@ public class Display extends JComponent {
             int side=(int)Math.sqrt(biomes.size());
             int tcnt=0;
             int mbsize=12;
+            g.setColor(Color.BLACK);
+            g.fillRect(1400-25,600-25,(mbsize*side)+50,(mbsize*side)+50);
             for(int r=0;r<side;r++) {
                 for(int c=0;c<side;c++) {
                     Biome tb = biomes.get(tcnt);
+                    Color btrans = new Color(tb.getColor().getRed(),tb.getColor().getGreen(),tb.getColor().getBlue(),120);
                     g.setColor(tb.getColor());
                     g.fillRect(1400+(mbsize*r), 600+(mbsize*c), mbsize, mbsize);
                     tcnt++;
                 }
             }
             g.setColor(Color.RED);
-            g.fillOval((int)(1520+(((center_x+900)/3000)*12)), (int)(720+(((center_y+500)/3000)*12)), 17, 17);
+            g.fillOval((int)(1556+(((center_x+900)/3000)*12)), (int)(756+(((center_y+500)/3000)*12)), 10, 10);
         }
         else if(view.equals("crafting")){
             messageBox.setVisible(false);
