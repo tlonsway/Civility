@@ -16,25 +16,29 @@ public class ClientDataHost implements Runnable {
         chat = new ArrayList<String>();
     }
     public void run() {
-        Socket sock = null;
+        Socket s = null;
         try {
-            sock = new Socket("192.168.1.4",1600);
-            //PrintStream sps = new PrintStream(sock.getOutputStream());
+            s = new Socket("192.168.1.4",1600);
+            ps = new PrintStream(s.getOutputStream());
             //InetAddress IP=InetAddress.getLocalHost();
             //String IPaddr = IP.getHostAddress();
             //sps.println("IPaddr");
         } catch (IOException e) {
             e.printStackTrace();
         }
-        try {
+        if (s==null) {
+            System.out.println("An error occured establishing a connection with the server");
+            System.exit(1);
+        }
+        /*try {
             ss = new ServerSocket(1601);
             //din = new BufferedReader(new InputStreamReader(ss.getInputStream()));
             run();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         try {
-            s = ss.accept();
+            //s = ss.accept();
             din = new BufferedReader(new InputStreamReader(s.getInputStream()));
             System.out.println("server connection achieved " + s.getInetAddress());
             //(new Thread(new serverRunabble(s))).start();
@@ -104,6 +108,7 @@ public class ClientDataHost implements Runnable {
     }
     public void sendMessage(String name,String message) {
         chat.add(name+": "+message);
-        //ps.println(encodeChat(name,message));
+        ps.println(encodeChat(name,message));
+        ps.flush();
     }
 }

@@ -6,18 +6,19 @@ public class ServerPoolThread implements Runnable {
     ServerHost sh;
     Socket connection;
     BufferedReader din;
-    public void ServerPoolThread(ServerHost host, Socket s) {
+    public ServerPoolThread(ServerHost host, Socket s) {
         connection=s;
         sh=host;
+        System.out.println("new server pool thread started for " + s.getInetAddress());
     }
     public void run() {
         try {
             din = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             while(true) {
                 try {
-                    din.readLine();
-                    
-                    
+                    String in = din.readLine();
+                    System.out.println("server has received packet: " + in);
+                    sh.inputPacket(in);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

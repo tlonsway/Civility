@@ -4,7 +4,7 @@ import java.util.*;
 public class ServerConnectionThread implements Runnable {
     ServerSocket ss;
     ServerHost sh;
-    public void ServerConnectionThread(ServerHost host) {
+    public ServerConnectionThread(ServerHost host) {
         sh=host;
     }
     public void run() {
@@ -17,6 +17,7 @@ public class ServerConnectionThread implements Runnable {
             try {
                 Socket s = ss.accept();
                 sh.addSocket(s);
+                System.out.println("Server has received a connection from " + s.getInetAddress());
                 //din = new BufferedReader(new InputStreamReader(ss.getInputStream()));
                 //run();
             } catch (IOException e) {
