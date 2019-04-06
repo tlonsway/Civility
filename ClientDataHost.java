@@ -104,6 +104,6 @@ public class ClientDataHost implements Runnable {
     }
     public void sendMessage(String name,String message) {
         chat.add(name+": "+message);
-        ps.println(encodeChat(name,message));
+        //ps.println(encodeChat(name,message));
     }
 }
