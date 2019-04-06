@@ -405,6 +405,19 @@ public class Display extends JComponent {
             
             //System.out.println("elapsed hotbar: " + (System.nanoTime()-stime));
             //stime = System.nanoTime();
+            int side=(int)Math.sqrt(biomes.size());
+            int tcnt=0;
+            int mbsize=12;
+            for(int r=0;r<side;r++) {
+                for(int c=0;c<side;c++) {
+                    Biome tb = biomes.get(tcnt);
+                    g.setColor(tb.getColor());
+                    g.fillRect(1400+(mbsize*c), 600+(mbsize*r), mbsize, mbsize);
+                    tcnt++;
+                }
+            }
+            g.setColor(Color.RED);
+            g.fillOval((int)(1520+((center_x/3000)/12)), (int)(720+((center_y/3000)/12)), 17, 17);
         }
         else if(view.equals("crafting")){
             messageBox.setVisible(false);
