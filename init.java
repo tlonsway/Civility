@@ -25,6 +25,7 @@ public class init {
         JTextField chatBox = new JTextField("Type here to chat (press t)");
         
         TechTree techLvl = new TechTree();
+        ResearchCenter research = new ResearchCenter(techLvl);
         
         InputMap im = chatBox.getInputMap();
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
@@ -60,7 +61,7 @@ public class init {
         ClientDataHost cdh = new ClientDataHost();
         (new Thread(cdh)).start();
         
-        Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,chatBox);
+        Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,chatBox,research);
         at.setDisplay(d);
         frame.add(d);
         d.setVisible(true);
@@ -83,7 +84,6 @@ public class init {
         d.addBuilding(new House(-400,400));
         d.addBuilding(new Factory(-600,-600));
         d.addBuilding(new GoldMine(500,500));
-        d.addBuilding(new ResearchCenter(techLvl));
         //d.addResource(new Tree(150,150));
         //d.addResource(new Rock(-300,-300));
         for(int x = 0; x < (int)(Math.random()*100);x++){

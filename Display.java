@@ -25,7 +25,8 @@ public class Display extends JComponent {
     ClientDataHost chost;
     JTextField messageBox;
     ArrayList<String> itemsUsedCrafting;
-    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb) {
+    ResearchCenter researchCenter;
+    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
         biomes = new ArrayList<Biome>();
@@ -46,6 +47,7 @@ public class Display extends JComponent {
         messageBox = mb;
         ActionMap am = messageBox.getActionMap();
         itemsUsedCrafting = new ArrayList<String>();
+        researchCenter = rc;
         am.put("enter", new AbstractAction() {
                 public void actionPerformed(ActionEvent ae) {
                     chost.sendMessage(player.getName(),messageBox.getText());
@@ -642,6 +644,9 @@ public class Display extends JComponent {
                 }
             }
         }
+        if(temp != null && researchCenter.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10)) && researchCenter.tree.isRequired(temp.getName())){
+            researchCenter.tree.addComponents(temp);
+        }
         for(Biome b : biomes) {
             if (b.getBoundingBox().intersects(screen)) {
                 resources=b.getResources();
@@ -676,12 +681,6 @@ public class Display extends JComponent {
                             buildings.remove(b);
                         }
                     }
-                }
-                else if(b.getType().equals("Research Center")){
-                    /*
-                    for(TempItem d: b.getRequired()){
-                        
-                    }*/
                 }
             }
         }
