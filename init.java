@@ -57,7 +57,7 @@ public class init {
         craftableItems.add(new Item("wall frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",10))),new int[]{0,0,0,0,0},1));
         craftableItems.add(new Item("house frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",20))),new int[]{0,0,0,0,0},1));
         craftableItems.add(new Item("stone brick",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",5))),new int[]{0,0,0,0,0},1));
-        craftableItems.add(new Item("Zuberrr Zpace Zip",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",1))),new int[]{1,100,100,100,0},2));
+        craftableItems.add(new Item("Zuberrr Zpace Zip",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",1))),new int[]{1,100,100,100,0},3));
         
         ClientDataHost cdh = new ClientDataHost();
         (new Thread(cdh)).start();
