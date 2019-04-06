@@ -63,8 +63,9 @@ public class ClientDataHost implements Runnable {
     public ArrayList<String> getRecent() {
         ArrayList<String> temp = new ArrayList<String>();
         int start=0;
-        if (chat.size()-15>=0) {
-            start=chat.size()-15;
+        int amount=22;
+        if (chat.size()-amount>=0) {
+            start=chat.size()-amount;
         } else {
             start=0;
         }
