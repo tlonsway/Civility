@@ -296,6 +296,17 @@ public class Display extends JComponent {
             }
             //System.out.println("elapsed biomes: " + (System.nanoTime()-stime));
             //stime = System.nanoTime();
+            g.setColor(researchCenter.getColor());
+            g.fillRect((int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y),(int)researchCenter.getWidth(),(int)researchCenter.getHeight());
+            g.setColor(Color.BLACK);
+            g.drawRect((int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y),(int)researchCenter.getWidth(),(int)researchCenter.getHeight());
+            g.drawString("Research Center",(int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y));
+            g.drawString("Technology Level: "+researchCenter.tree.getTechLevel(),50,300);
+            if(researchCenter.getBoundingBox().intersects(screen)){
+                for(int a  = 0; a < researchCenter.tree.getRequired().size();a++){
+                    g.drawString(researchCenter.tree.getRequired().get(a).getName()+" x"+researchCenter.tree.getRequired().get(a).getQuantity(),(int)(researchCenter.getX()-center_x+10),(int)(researchCenter.getY()-center_y+(a*15))+20);
+                }
+            }
             for (Building b : buildings) {
                 if (b.getBoundingBox().intersects(screen)) {
                     g.setColor(b.getColor());
