@@ -412,12 +412,12 @@ public class Display extends JComponent {
                 for(int c=0;c<side;c++) {
                     Biome tb = biomes.get(tcnt);
                     g.setColor(tb.getColor());
-                    g.fillRect(1400+(mbsize*c), 600+(mbsize*r), mbsize, mbsize);
+                    g.fillRect(1400+(mbsize*r), 600+(mbsize*c), mbsize, mbsize);
                     tcnt++;
                 }
             }
             g.setColor(Color.RED);
-            g.fillOval((int)(1520+((center_x/3000)/12)), (int)(720+((center_y/3000)/12)), 17, 17);
+            g.fillOval((int)(1520+(((center_x+900)/3000)*12)), (int)(720+(((center_y+500)/3000)*12)), 17, 17);
         }
         else if(view.equals("crafting")){
             messageBox.setVisible(false);

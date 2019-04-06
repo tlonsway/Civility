@@ -122,7 +122,7 @@ public class init {
         }
         for(int i2=0;i2<20;i2++) {
             try {
-                Thread.sleep(100);
+                //Thread.sleep(100);
             } catch (Exception e) {
                 e.printStackTrace();
             }
