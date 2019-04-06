@@ -5,6 +5,9 @@ public class TempItem{
         name = n;
         quantity = q;
     }
+    public String toString(){
+        return "Name: "+name+" Quantity: "+quantity;
+    }
     public String getName(){
         return name;
     }

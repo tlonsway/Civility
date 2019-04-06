@@ -24,7 +24,8 @@ public class init {
         frame.getContentPane().setCursor(blankCursor);
         JTextField chatBox = new JTextField("Type here to chat (press t)");
         
-
+        TechTree techLvl = new TechTree();
+        
         InputMap im = chatBox.getInputMap();
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escape");
