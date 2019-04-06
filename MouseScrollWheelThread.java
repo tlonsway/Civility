@@ -6,7 +6,6 @@ public class MouseScrollWheelThread implements MouseWheelListener{
         dis = d;
     }
     public void mouseWheelMoved(MouseWheelEvent e){
-        System.out.println(e.getWheelRotation());
         dis.scroll(e.getWheelRotation());
     }
 }

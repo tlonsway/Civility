@@ -26,7 +26,4 @@ public class MouseThread extends MouseAdapter{
             }
         }
     }
-    public void mouseWheelMoved(MouseWheelEvent e){
-        System.out.println("wheel moved");
-    }
 }
