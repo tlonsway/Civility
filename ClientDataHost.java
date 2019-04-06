@@ -107,7 +107,7 @@ public class ClientDataHost implements Runnable {
         return ("c:n:"+name+":"+message+":n:n:n");
     }
     public void sendMessage(String name,String message) {
-        chat.add(name+": "+message);
+        //chat.add(name+": "+message);
         ps.println(encodeChat(name,message));
         ps.flush();
     }
