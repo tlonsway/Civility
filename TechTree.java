@@ -6,9 +6,9 @@ public class TechTree{
     public TechTree(){
         techLevel = -1;
         techLevelUpRequirments = new ArrayList<String[]>();
-        techLevelUpRequirments.add(new String[]{"wood planks:1","stick:1"});
-        techLevelUpRequirments.add(new String[]{"stone brick:1"});
-        techLevelUpRequirments.add(new String[]{"stone brick:1","wood planks:1","stick:1"});
+        techLevelUpRequirments.add(new String[]{"wood planks:10","stick:10"});
+        techLevelUpRequirments.add(new String[]{"stone brick:10"});
+        techLevelUpRequirments.add(new String[]{"stone brick:10","wood planks:10","stick:10"});
         itemsRequired = new ArrayList<TempItem>();
         levelUp();
     }

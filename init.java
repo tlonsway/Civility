@@ -43,8 +43,8 @@ public class init {
         Hotbar hotbar = new Hotbar();
         Player p = new Player("Bob",100,new Color(252, 210, 126),pi,fists,hotbar);
         
-        p.addItem(new Item("wood",1000,false,new Color(163,68,0),"square",null,null,0));
-        p.addItem(new Item("stone",1000,false,new Color(163,68,0), "square",null,null,0));
+        //p.addItem(new Item("wood",1000,false,new Color(163,68,0),"square",null,null,0));
+        //p.addItem(new Item("stone",1000,false,new Color(163,68,0), "square",null,null,0));
         
         //0:tool,1:tree,2:rock,3:fragile,4:special
         ArrayList<Item> craftableItems = new ArrayList<Item>();
