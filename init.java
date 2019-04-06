@@ -41,7 +41,7 @@ public class init {
         (new Thread(at)).start();
         Fists fists = new Fists(new Color(252, 210, 126),frame);
         Hotbar hotbar = new Hotbar();
-        Player p = new Player("Bob",100,new Color(252, 210, 126),pi,fists,hotbar);
+        Player p = new Player(Human.getRandomName(),100,new Color(252, 210, 126),pi,fists,hotbar);
         
         p.addItem(new Item("wood",1000,false,new Color(163,68,0),"square",null,null,0));
         p.addItem(new Item("stone",1000,false,new Color(163,68,0), "square",null,null,0));

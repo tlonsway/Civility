@@ -18,7 +18,7 @@ public class ClientDataHost implements Runnable {
     public void run() {
         Socket s = null;
         try {
-            s = new Socket("192.168.1.4",1600);
+            s = new Socket("71.115.226.213",1600);
             ps = new PrintStream(s.getOutputStream());
             //InetAddress IP=InetAddress.getLocalHost();
             //String IPaddr = IP.getHostAddress();

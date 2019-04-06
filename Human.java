@@ -138,4 +138,10 @@ public class Human implements AI,Runnable {
     private double homeDistance(double x2, double y2) {
         return Math.sqrt((x2-home.getX())*(x2-home.getX())+(y2-home.getY())*(y2-home.getY()));
     }
+    public static String getRandomName() {
+        String[] names = new String[]{"Bob","Brian","Tristan","Ethan","Steve","Bill","Charles","Oliver","Harry","Jack","George","Noah","Charlie","Jacob","Alfie","Freddie","Oscar","Leo","Logan","Wes", "Roger","Nicholas","Rich","Korey","Renaldo","Donte","Rodolfo","Gerald","Rigoberto","Jamar","Doyle","Thad","Edgardo","Trey","Sylvester","Abel","Markus","Bryan","Odell","Oswaldo","Albert","Hai","Robby","Parker","Kermit","Darin","Willy","Juan","Jamie","Junior","Faustino","Harvey","Gayle","Eric","Otha","Sam","Roscoe","Stacey","Gerardo","Karl","Titus","Jerrod","Minh","Young","Danial","Emery","Felipe","Gustavo","Elisha","Malcolm"};
+        int namenum = (int)(Math.random()*names.length);
+        String tname=names[namenum];
+        return tname;
+    }
 }
