@@ -677,6 +677,12 @@ public class Display extends JComponent {
                         }
                     }
                 }
+                else if(b.getType().equals("Research Center")){
+                    /*
+                    for(TempItem d: b.getRequired()){
+                        
+                    }*/
+                }
             }
         }
         player.punch(objectHit,(int)x,(int)y);        

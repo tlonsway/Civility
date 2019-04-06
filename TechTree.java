@@ -35,6 +35,9 @@ public class TechTree{
     public int getTechLevel(){
         return techLevel;
     }
+    public ArrayList<TempItem> getRequired(){
+        return itemsRequired;
+    }
     private void levelUp(){
         techLevel ++;
         itemsRequired = new ArrayList<TempItem>();

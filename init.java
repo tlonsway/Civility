@@ -83,6 +83,7 @@ public class init {
         d.addBuilding(new House(-400,400));
         d.addBuilding(new Factory(-600,-600));
         d.addBuilding(new GoldMine(500,500));
+        d.addBuilding(new ResearchCenter(techLvl));
         //d.addResource(new Tree(150,150));
         //d.addResource(new Rock(-300,-300));
         for(int x = 0; x < (int)(Math.random()*100);x++){
