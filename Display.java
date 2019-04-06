@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.util.*;
 import java.awt.geom.*;
 import javafx.geometry.*;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 public class Display extends JComponent {
     ArrayList<Building> buildings;
     ArrayList<Resource> resources;
@@ -26,6 +30,7 @@ public class Display extends JComponent {
     JTextField messageBox;
     ArrayList<String> itemsUsedCrafting;
     ResearchCenter researchCenter;
+    private BufferedImage woodAxeImage;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
@@ -48,6 +53,12 @@ public class Display extends JComponent {
         ActionMap am = messageBox.getActionMap();
         itemsUsedCrafting = new ArrayList<String>();
         researchCenter = rc;
+        try{
+            woodAxeImage = ImageIO.read(new File("images/wood_axe.png"));
+        }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
         am.put("enter", new AbstractAction() {
                 public void actionPerformed(ActionEvent ae) {
                     chost.sendMessage(player.getName(),messageBox.getText());
@@ -239,6 +250,7 @@ public class Display extends JComponent {
                     g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
                 }
             }
+            g.drawImage(woodAxeImage,100,100,this);
         }
         else if(view == "world"){
             messageBox.setVisible(true);
@@ -389,23 +401,23 @@ public class Display extends JComponent {
             //stime = System.nanoTime();
             for(int i = 0; i < 10; i++){
                 if(player.getHotBarItemSelected() == i){
-                    g.setColor(Color.BLACK);
+                    g.setColor(new Color(120,120,120));
                 }
                 else{
                     g.setColor(Color.WHITE);
                 }
                 g.fillRect(605+i*60,830,50,50);
-                if(player.getHotBarItemSelected() == i){
-                    g.setColor(Color.WHITE);
-                }
-                else{
-                    g.setColor(Color.BLACK);
-                }
                 if(hotbar[i] != null){
-                    g.drawRect(605+i*60,830,50,50);
-                    g.drawString(hotbar[i].getName(),610+i*60,850);
+                    try{
+                        g.drawImage(ImageIO.read(new File("images/"+hotbar[i].getName()+".png")),605+i*60,830,50,50,this);
+                    }
+                    catch(IOException ex){
+                        System.out.println(ex);
+                    }
                     g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
                 }
+                g.setColor(Color.BLACK);
+                g.drawRect(605+i*60,830,50,50);
             }
             g.setColor(new Color(200,200,200,125));
             g.fillRect(1450,50,300,400);
