@@ -293,7 +293,7 @@ public class Display extends JComponent {
                     //b.getX()-(b.getX()-center_x)
                     if(b.getType().equals("forest")){
                         for(int c = (int)(b.getY()-center_y); c < 3000; c += 300){
-                            for(int d = (int)(b.getX()-(center_x-900)%300); d < 3000; d += 300){
+                            for(int d = (int)(b.getX()-center_x); d < 3000; d += 300){
                                 g.drawImage(forestTexture,d,c,300,300,this);
                             }
                         }
