@@ -135,6 +135,6 @@ public class init {
         frame.getContentPane().setBackground(new Color(0,140,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-       
+        frame.requestFocusInWindow();
     }
 }

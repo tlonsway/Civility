@@ -42,7 +42,7 @@ public class ServerHost {
     }
     public void sendPlayerLocation(String dat, String ip) {
         for(int i=0;i<connections.size();i++) {
-            //if (!(connections.get(i).getInetAddress().toString().equals(ip))) {
+            if (!(connections.get(i).getInetAddress().toString().equals(ip))) {
                 //System.out.println("sending message: " + dat + " to " + connections.get(i).getInetAddress());
                 try {
                    PrintStream sps = new PrintStream(connections.get(i).getOutputStream());
@@ -57,7 +57,7 @@ public class ServerHost {
                     i--;
                     System.out.println("dead socket has been cleared");
                 }
-           //}
+            }
         }
     }
     public void inputPacket(String data, String ip) {
@@ -67,7 +67,7 @@ public class ServerHost {
         if (data.toCharArray()[0]=='p') {
             if (data.toCharArray()[2]=='l') {
                 sendPlayerLocation(data,ip);
-                System.out.println("sending out player location");
+                //System.out.println("sending out player location");
             }
         }
     }

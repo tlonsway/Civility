@@ -78,6 +78,7 @@ public class Display extends JComponent {
                     frame.requestFocusInWindow();
                 }
         });
+        frame.requestFocusInWindow();
     }
     public void update() {
         long stime = System.nanoTime();
@@ -185,7 +186,7 @@ public class Display extends JComponent {
                 center_y+=moveamt;
         }
         //System.out.println((System.nanoTime()-stime)/1000);
-        if (spamlim==5) {
+        if (spamlim==3) {
             chost.sendPlayerLocation(player.getName(), (int)((center_x+width/2)), (int)((center_y+height/2)));
             spamlim=0;
         } else {
@@ -266,7 +267,7 @@ public class Display extends JComponent {
                 g.setColor(Color.BLACK);
                 g.drawRect(605+i*60,830,50,50);
             }
-            g.drawImage(woodAxeImage,100,100,this);
+            //g.drawImage(woodAxeImage,100,100,this);
         }
         else if(view == "world"){
             messageBox.setVisible(true);

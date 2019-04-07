@@ -60,7 +60,7 @@ public class ClientDataHost implements Runnable {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            System.out.println("server input received: " + line);
+            //System.out.println("server input received: " + line);
         }
     }
     public ArrayList<String> getChat() {
@@ -106,7 +106,7 @@ public class ClientDataHost implements Runnable {
          * message=the text content
         */
         for(String s : components) {
-            System.out.println(s);
+            //System.out.println(s);
         }
         if (components[0].equals("c")) {
             System.out.println("chat message received!");
