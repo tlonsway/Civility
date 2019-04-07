@@ -22,6 +22,7 @@ public class ServerPoolThread implements Runnable {
                 } catch (IOException e) {
                     System.out.println("Server Thread connection with " + connection.getInetAddress() + " has died");
                     System.out.println("Server Thread connection error: " + e);
+                    connection.close();
                     return;
                 }
             }

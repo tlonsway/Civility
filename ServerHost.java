@@ -30,8 +30,13 @@ public class ServerHost {
                 sps.println(msg);
             } catch (Exception e) {
                 System.out.println("unable to send message to " + connections.get(i).getInetAddress());
+                //connections.remove(i);
+                //i--;
+            }
+            if (connections.get(i).isClosed()) {
                 connections.remove(i);
                 i--;
+                System.out.println("dead socket has been cleared");
             }
         }
     }
