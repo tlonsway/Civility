@@ -31,6 +31,8 @@ public class Display extends JComponent {
     ArrayList<String> itemsUsedCrafting;
     ResearchCenter researchCenter;
     private BufferedImage woodAxeImage;
+    //private ArrayList
+    ResourceImage rims;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
@@ -53,6 +55,7 @@ public class Display extends JComponent {
         ActionMap am = messageBox.getActionMap();
         itemsUsedCrafting = new ArrayList<String>();
         researchCenter = rc;
+        rims = new ResourceImage();
         try{
             woodAxeImage = ImageIO.read(new File("images/wood_axe.png"));
         }
@@ -224,9 +227,9 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             g.drawOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
             g.setColor(Color.GRAY);
-            g.fillRect(595,820,610,70);
+            g.fillRect(595,820,610,85);
             g.setColor(Color.BLACK);
-            g.drawRect(595,820,610,70);
+            g.drawRect(595,820,610,85);
             Item[] hotbar = player.getHotbar();
             f = new Font("Courier New",Font.PLAIN,15);
             g.setFont(f);
@@ -247,7 +250,7 @@ public class Display extends JComponent {
                     catch(IOException ex){
                         System.out.println(ex);
                     }
-                    g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
+                    g.drawString("x" + hotbar[i].getQuantity(),610+i*60,895);
                 }
                 g.setColor(Color.BLACK);
                 g.drawRect(605+i*60,830,50,50);
@@ -294,9 +297,11 @@ public class Display extends JComponent {
                             //g.setColor(Color.BLACK);
                             //g.drawRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
                             try{
-                                g.drawImage(r.getIcon(),(int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()),this);
+                                g.drawImage(rims.getImage(r.getType()),(int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()),this);
+                                //g.drawImage(ImageIO.read(new File("images/"+r.getType()+".png")),(int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()),this);
                             }
                             catch(Exception ex){
+                                System.out.println("error drawing image");
                                 System.out.println(ex);
                             }
                             Font f = new Font("Courier New",Font.PLAIN,18);
@@ -399,9 +404,9 @@ public class Display extends JComponent {
             g.setColor(Color.GREEN);
             g.fillRect(900,480,(int)(player.getHealth()/100*40),10);
             g.setColor(Color.GRAY);
-            g.fillRect(595,820,610,70);
+            g.fillRect(595,820,610,85);
             g.setColor(Color.BLACK);
-            g.drawRect(595,820,610,70);
+            g.drawRect(595,820,610,85);
             Item[] hotbar = player.getHotbar();
             f = new Font("Courier New",Font.PLAIN,15);
             g.setFont(f);
@@ -422,7 +427,8 @@ public class Display extends JComponent {
                     catch(IOException ex){
                         System.out.println(ex);
                     }
-                    g.drawString("x" + hotbar[i].getQuantity(),610+i*60,865);
+                    g.setColor(Color.WHITE);
+                    g.drawString("x" + hotbar[i].getQuantity(),610+i*60,895);
                 }
                 g.setColor(Color.BLACK);
                 g.drawRect(605+i*60,830,50,50);

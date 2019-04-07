@@ -30,9 +30,9 @@ public abstract class Resource implements Clickable {
         category=cat;
         destroyed=false;
         try {
-            icon=ImageIO.read(new File("images/"+type+".png"));
+            //icon=ImageIO.read(new File("images/"+type+".png"));
         } catch (Exception e) {
-            System.out.println("failed to load image for " + type);
+            //System.out.println("failed to load image for " + type);
         }
     }
     public double getX(){

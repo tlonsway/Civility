@@ -118,6 +118,15 @@ public class ClientDataHost implements Runnable {
                 chat.add(full);
             }
         }
+        /*Structure of a player location:
+         *p:l:name:xcord:ycord:n:n:n
+         *p=player
+         *l=location
+         *name=name of other player
+         *xcord=x cord of the player
+         *ycord=y cord of the player
+         *n=null
+        */
     }
     public String encodeChat(String name, String message) {
         return ("c:n:"+name+":"+message+":n:n:n");
@@ -141,6 +150,14 @@ public class ClientDataHost implements Runnable {
             } else {
                 chat.add(full);
             }
+        }
+    }
+    private class PlayerLocation {
+        String n;
+        int x;
+        int y;
+        public PlayerLocation(String name, int xcord, int ycord) {
+            
         }
     }
 }
