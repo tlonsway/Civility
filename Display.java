@@ -34,6 +34,7 @@ public class Display extends JComponent {
     //private ArrayList
     ResourceImage rims;
     BiomeImage bims;
+    BuildingImage buims;
     BufferedImage forestTexture;
     int spamlim=0;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc) {
@@ -60,6 +61,7 @@ public class Display extends JComponent {
         researchCenter = rc;
         rims = new ResourceImage();
         bims = new BiomeImage();
+        buims = new BuildingImage();
         try{
             forestTexture = ImageIO.read(new File("images/forest texture.png"));
         }
@@ -360,10 +362,11 @@ public class Display extends JComponent {
             }
             for (Building b : buildings) {
                 if (b.getBoundingBox().intersects(screen)) {
-                    g.setColor(b.getColor());
-                    g.fillRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
-                    g.setColor(Color.BLACK);
-                    g.drawRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
+                    //g.setColor(b.getColor());
+                    //g.fillRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
+                    //g.setColor(Color.BLACK);
+                    //g.drawRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
+                    g.drawImage(buims.getImage(b.getType()),(int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()),this);
                     Font f = new Font("Courier New",Font.PLAIN,15);
                     g.setFont(f);
                     String btitle="";
