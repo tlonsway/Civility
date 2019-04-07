@@ -23,13 +23,15 @@ public class ServerHost {
         System.out.println("socket connection added to database");
     }
     public void sendMessage(String msg) {
-        for(Socket s : connections) {
-            System.out.println("sending message: " + msg + " to " + s.getInetAddress());
+        for(int i=0;i<connections.size();i++) {
+            System.out.println("sending message: " + msg + " to " + connections.get(i).getInetAddress());
             try {
-                PrintStream sps = new PrintStream(s.getOutputStream());
+                PrintStream sps = new PrintStream(connections.get(i).getOutputStream());
                 sps.println(msg);
             } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("unable to send message to " + connections.get(i).getInetAddress());
+                connections.remove(i);
+                i--;
             }
         }
     }
