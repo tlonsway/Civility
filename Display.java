@@ -33,6 +33,7 @@ public class Display extends JComponent {
     private BufferedImage woodAxeImage;
     //private ArrayList
     ResourceImage rims;
+    BiomeImage bims;
     BufferedImage forestTexture;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc) {
         buildings = new ArrayList<Building>();
@@ -57,6 +58,7 @@ public class Display extends JComponent {
         itemsUsedCrafting = new ArrayList<String>();
         researchCenter = rc;
         rims = new ResourceImage();
+        bims = new BiomeImage();
         try{
             forestTexture = ImageIO.read(new File("images/forest texture.png"));
         }
@@ -291,13 +293,14 @@ public class Display extends JComponent {
                     }
                     g.fillRect(xloc,yloc,width,height);
                     //b.getX()-(b.getX()-center_x)
-                    if(b.getType().equals("forest")){
-                        for(int c = (int)(b.getY()-center_y); c < 3000; c += 300){
-                            for(int d = (int)(b.getX()-center_x); d < 3000; d += 300){
-                                g.drawImage(forestTexture,d,c,300,300,this);
-                            }
+                    //if(b.getType().equals("forest")){
+                    for(int c = (int)(b.getY()-center_y); c < 3000; c += 300){
+                        for(int d = (int)(b.getX()-center_x); d < 3000; d += 300){
+                            g.drawImage(bims.getImage(b.getType()),d,c,300,300,this);
                         }
                     }
+                    //}
+                    
                     resources=b.getResources();
                     for (int ri=0;ri<resources.size();ri++) {
                         Resource r = resources.get(ri);
