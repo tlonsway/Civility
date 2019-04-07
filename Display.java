@@ -35,6 +35,7 @@ public class Display extends JComponent {
     ResourceImage rims;
     BiomeImage bims;
     BufferedImage forestTexture;
+    int spamlim=0;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
@@ -184,7 +185,12 @@ public class Display extends JComponent {
                 center_y+=moveamt;
         }
         //System.out.println((System.nanoTime()-stime)/1000);
-        chost.sendPlayerLocation(player.getName(), (int)((center_x+width)/2), (int)((center_y+height)/2));
+        if (spamlim==5) {
+            chost.sendPlayerLocation(player.getName(), (int)((center_x+width/2)), (int)((center_y+height/2)));
+            spamlim=0;
+        } else {
+            spamlim++;
+        }
         updatetime=(int)((System.nanoTime()-stime));
     }
     public void draw() {
@@ -398,7 +404,7 @@ public class Display extends JComponent {
             g.setColor(player.getColor());
             g.fillOval(900,500,40,40);
             for(PlayerLocation pl : chost.getPlayers()) {
-                System.out.println("other player location at " + pl.x + "," + pl.y);
+                //System.out.println("other player location at " + pl.x + "," + pl.y);
                 g.fillOval((int)(pl.x-center_x),(int)(pl.y-center_y),40,40);
             }
             
