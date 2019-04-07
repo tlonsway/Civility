@@ -409,6 +409,8 @@ public class Display extends JComponent {
                 g.fillOval((int)(pl.x-center_x),(int)(pl.y-center_y),40,40);
                 g.setColor(Color.BLACK);
                 g.drawOval((int)(pl.x-center_x),(int)(pl.y-center_y),40,40);
+                g.setFont(new Font("Courier New",Font.PLAIN,15));
+                g.drawString(pl.n, (int)(pl.x-center_x), (int)(pl.y-center_y)+50);
             }
             
             g.setColor(Color.BLACK);
@@ -502,6 +504,10 @@ public class Display extends JComponent {
             }
             g.setColor(Color.RED);
             g.fillOval((int)(1556+(((center_x+900)/3000)*12)), (int)(756+(((center_y+500)/3000)*12)), 10, 10);
+            g.setColor(Color.ORANGE);
+            for(PlayerLocation pl : chost.getPlayers()) {
+                g.fillOval((int)(1556+((((double)pl.x)/3000)*12)), (int)(756+((((double)pl.y)/3000)*12)), 10, 10);
+            }
         }
         else if(view.equals("crafting")){
             messageBox.setVisible(false);
