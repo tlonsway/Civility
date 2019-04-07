@@ -294,11 +294,17 @@ public class Display extends JComponent {
                     g.fillRect(xloc,yloc,width,height);*/
                     //b.getX()-(b.getX()-center_x)
                     //if(b.getType().equals("forest")){
+                    screen = new BoundingBox(0,0,width,height);
+                    //g.setColor(Color.RED);
+                    //g.drawRect((int)center_x,(int)center_y,width,height);
                     for(int c = (int)(b.getY()-center_y); c < (int)(b.getY()-center_y)+3000; c += 300){
                         for(int d = (int)(b.getX()-center_x); d < (int)(b.getX()-center_x)+3000; d += 300){
-                            g.drawImage(bims.getImage(b.getType()),d,c,300,300,this);
+                            if (new BoundingBox(d,c,300,300).intersects(screen)) {
+                                g.drawImage(bims.getImage(b.getType()),d,c,300,300,this);
+                            }
                         }
                     }
+                    screen = new BoundingBox(center_x,center_y,width,height);
                     //}
                     
                     resources=b.getResources();
