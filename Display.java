@@ -289,13 +289,19 @@ public class Display extends JComponent {
                     for (int ri=0;ri<resources.size();ri++) {
                         Resource r = resources.get(ri);
                         if (r.getBoundingBox().intersects(screen)) {
-                            g.setColor(r.getColor());
-                            g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
-                            g.setColor(Color.BLACK);
-                            g.drawRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
+                            //g.setColor(r.getColor());
+                            //g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
+                            //g.setColor(Color.BLACK);
+                            //g.drawRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
+                            try{
+                                g.drawImage(r.getIcon(),(int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()),this);
+                            }
+                            catch(Exception ex){
+                                System.out.println(ex);
+                            }
                             Font f = new Font("Courier New",Font.PLAIN,18);
                             g.setFont(f);
-                            g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
+                            //g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
                             if (r.getHealth()<r.getMax_Health()) {
                                 g.setColor(Color.BLACK);
                                 g.drawRect((int)(r.getX()-center_x)-1,(int)(r.getY()-center_y)-16,(int)r.getWidth()+1,11);
