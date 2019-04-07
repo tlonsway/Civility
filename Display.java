@@ -184,6 +184,7 @@ public class Display extends JComponent {
                 center_y+=moveamt;
         }
         //System.out.println((System.nanoTime()-stime)/1000);
+        chost.sendPlayerLocation(player.getName(), (int)((center_x+width)/2), (int)((center_y+height)/2));
         updatetime=(int)((System.nanoTime()-stime));
     }
     public void draw() {
@@ -396,6 +397,10 @@ public class Display extends JComponent {
             g.drawString("center_x: " + center_x + "   center_y: " + center_y,300,40);
             g.setColor(player.getColor());
             g.fillOval(900,500,40,40);
+            for(PlayerLocation pl : chost.getPlayers()) {
+                g.fillOval((int)(pl.x-center_x),(int)(pl.y-center_y),40,40);
+            }
+            
             g.setColor(Color.BLACK);
             g.drawOval(900,500,40,40);
             //System.out.println("elapsed remainder_beforefist: " + (System.nanoTime()-stime));

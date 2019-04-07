@@ -18,7 +18,7 @@ public class ServerPoolThread implements Runnable {
                 try {
                     String in = din.readLine();
                     System.out.println("server has received packet: " + in);
-                    sh.inputPacket(in);
+                    sh.inputPacket(in,connection.getInetAddress().toString());
                 } catch (IOException e) {
                     System.out.println("Server Thread connection with " + connection.getInetAddress() + " has died");
                     System.out.println("Server Thread connection error: " + e);

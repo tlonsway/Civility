@@ -10,12 +10,14 @@ public class ClientDataHost implements Runnable {
     ArrayList<String> chat;
     PrintStream ps;
     boolean connected;
+    ArrayList<PlayerLocation> playerlocs;
     public static void main(String[] args) throws Exception {
         new ClientDataHost();
     }
     public ClientDataHost() {
         chat = new ArrayList<String>();
         connected=false;
+        playerlocs = new ArrayList<PlayerLocation>();
     }
     public void run() {
         Socket s = null;
@@ -63,6 +65,9 @@ public class ClientDataHost implements Runnable {
     }
     public ArrayList<String> getChat() {
         return chat;
+    }
+    public ArrayList<PlayerLocation> getPlayers() {
+        return playerlocs;
     }
     public ArrayList<String> getRecent() {
         ArrayList<String> temp = new ArrayList<String>();
@@ -119,17 +124,28 @@ public class ClientDataHost implements Runnable {
             }
         }
         /*Structure of a player location:
-         *p:l:name:xcord:ycord:n:n:n
+         *p:l:name:xcord:ycord:n:n
          *p=player
          *l=location
          *name=name of other player
          *xcord=x cord of the player
          *ycord=y cord of the player
          *n=null
-        */
-    }
+         */
+        if(components[0].equals("p")) {
+            if(components[1].equals("l")) {
+                String nm=components[2];
+                int xc=Integer.parseInt(components[3]);
+                int yc=Integer.parseInt(components[4]);
+                playerlocs.add(new PlayerLocation(nm,xc,yc));
+            }
+        }
+    } 
     public String encodeChat(String name, String message) {
         return ("c:n:"+name+":"+message+":n:n:n");
+    }
+    public String encodePlayerLocation(String name, int x, int y) {
+        return ("p:l:"+name+":"+x+":"+y+":n:n");
     }
     public void sendMessage(String name,String message) {
         //chat.add(name+": "+message);
@@ -152,12 +168,11 @@ public class ClientDataHost implements Runnable {
             }
         }
     }
-    private class PlayerLocation {
-        String n;
-        int x;
-        int y;
-        public PlayerLocation(String name, int xcord, int ycord) {
-            
-        }
+    public void sendPlayerLocation(String name, int x, int y) {
+        if (connected) {
+            ps.println(encodePlayerLocation(name,x,y));
+            ps.flush();
+        } 
     }
+    
 }
