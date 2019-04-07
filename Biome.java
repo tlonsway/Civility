@@ -14,6 +14,7 @@ public class Biome{
         y=y_loc;
         width=3000;
         height=3000;
+        type = t;
         //randseed=123456789;
         randseed=rs;
         Random generator = new Random(randseed);
@@ -76,6 +77,9 @@ public class Biome{
             
         }
         
+    }
+    public String getType(){
+        return type;
     }
     public Color getColor() {
         return color;

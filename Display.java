@@ -33,6 +33,7 @@ public class Display extends JComponent {
     private BufferedImage woodAxeImage;
     //private ArrayList
     ResourceImage rims;
+    BufferedImage forestTexture;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
@@ -57,7 +58,7 @@ public class Display extends JComponent {
         researchCenter = rc;
         rims = new ResourceImage();
         try{
-            woodAxeImage = ImageIO.read(new File("images/wood_axe.png"));
+            forestTexture = ImageIO.read(new File("images/forest texture.png"));
         }
         catch(IOException ex){
             System.out.println(ex);
@@ -289,6 +290,14 @@ public class Display extends JComponent {
                         yloc=0;
                     }
                     g.fillRect(xloc,yloc,width,height);
+                    //b.getX()-(b.getX()-center_x)
+                    if(b.getType().equals("forest")){
+                        for(int c = (int)(b.getY()-center_y); c < 3000; c += 300){
+                            for(int d = (int)(b.getX()-(center_x-900)%300); d < 3000; d += 300){
+                                g.drawImage(forestTexture,d,c,300,300,this);
+                            }
+                        }
+                    }
                     resources=b.getResources();
                     for (int ri=0;ri<resources.size();ri++) {
                         Resource r = resources.get(ri);
@@ -411,6 +420,14 @@ public class Display extends JComponent {
             Item[] hotbar = player.getHotbar();
             f = new Font("Courier New",Font.PLAIN,15);
             g.setFont(f);
+            if(player.getHotbar()[player.getHotBarItemSelected()] != null){
+                try{
+                    g.drawImage(ImageIO.read(new File("images/"+player.getHotbar()[player.getHotBarItemSelected()].getName()+".png")),fistCords[0],fistCords[1],15,15,this);
+                }
+                catch(IOException ex){
+                    System.out.println(ex);
+                }
+            }
             //System.out.println("elapsed remainder: " + (System.nanoTime()-stime));
             //stime = System.nanoTime();
             for(int i = 0; i < 10; i++){
