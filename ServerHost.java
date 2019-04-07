@@ -35,9 +35,10 @@ public class ServerHost {
                 //i--;
             }
             if (connections.get(i).isClosed()) {
+                String ipt = connections.get(i).getInetAddress().toString();
                 connections.remove(i);
                 i--;
-                sendMessage(ClientDataHost.encodeChat("Server", connections.get(i).getInetAddress()+" has left the server"));
+                sendMessage(ClientDataHost.encodeChat("Server", ipt+" has left the server"));
                 System.out.println("dead socket has been cleared");
             }
         }
@@ -55,9 +56,10 @@ public class ServerHost {
                     //i--;
                 }
                 if (connections.get(i).isClosed()) {
+                    String ipt = connections.get(i).getInetAddress().toString();
                     connections.remove(i);
                     i--;
-                    sendMessage(ClientDataHost.encodeChat("Server", connections.get(i).getInetAddress()+" has left the server"));
+                    sendMessage(ClientDataHost.encodeChat("Server", ipt+" has left the server"));
                     System.out.println("dead socket has been cleared");
                 }
             }
