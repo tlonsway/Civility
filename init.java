@@ -14,11 +14,8 @@ public class init {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Game Window");
 
-        frame.setVisible(true);
-        frame.setSize(1800,1000);
-        frame.setResizable(false);
-        frame.getContentPane().setBackground(new Color(0,140,0));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        
         BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank");
         frame.getContentPane().setCursor(blankCursor);
@@ -131,8 +128,13 @@ public class init {
                 e.printStackTrace();
             }
         }
-        
         (new Thread(new FrameThread(d,100))).start();
         (new Thread(new UpdateThread(d))).start();
+        frame.setSize(1800,1000);
+        frame.setResizable(false);
+        frame.getContentPane().setBackground(new Color(0,140,0));
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+       
     }
 }
