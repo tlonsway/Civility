@@ -137,7 +137,19 @@ public class ClientDataHost implements Runnable {
                 String nm=components[2];
                 int xc=Integer.parseInt(components[3]);
                 int yc=Integer.parseInt(components[4]);
-                playerlocs.add(new PlayerLocation(nm,xc,yc));
+                boolean f = false;
+                for(int i=0;i<playerlocs.size();i++) {
+                    PlayerLocation pl = playerlocs.get(i);
+                    if ((pl.n).equals(nm)) {
+                        f=true;
+                        playerlocs.set(i,new PlayerLocation(pl.n,xc,yc));
+                    }
+                }
+                if (!f) {
+                    playerlocs.add(new PlayerLocation(nm,xc,yc));
+                }
+                
+                //playerlocs.add(new PlayerLocation(nm,xc,yc));
             }
         }
     } 
