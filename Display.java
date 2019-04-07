@@ -186,7 +186,7 @@ public class Display extends JComponent {
                 center_y+=moveamt;
         }
         //System.out.println((System.nanoTime()-stime)/1000);
-        if (spamlim==3) {
+        if (spamlim==1) {
             chost.sendPlayerLocation(player.getName(), (int)((center_x+width/2)), (int)((center_y+height/2)));
             spamlim=0;
         } else {
