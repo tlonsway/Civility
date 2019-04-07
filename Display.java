@@ -275,7 +275,7 @@ public class Display extends JComponent {
             for(Biome b : biomes) {
                 if (b.getBoundingBox().intersects(screen)) {
                     g.setColor(b.getColor());
-                    int xloc = -(int)center_x+b.getX();
+                    /*int xloc = -(int)center_x+b.getX();
                     int yloc = -(int)center_y+b.getY();
                     int width = b.getWidth();
                     int height = b.getHeight();
@@ -291,11 +291,11 @@ public class Display extends JComponent {
                     if (yloc<=0) {
                         yloc=0;
                     }
-                    g.fillRect(xloc,yloc,width,height);
+                    g.fillRect(xloc,yloc,width,height);*/
                     //b.getX()-(b.getX()-center_x)
                     //if(b.getType().equals("forest")){
-                    for(int c = (int)(b.getY()-center_y); c < 3000; c += 300){
-                        for(int d = (int)(b.getX()-center_x); d < 3000; d += 300){
+                    for(int c = (int)(b.getY()-center_y); c < (int)(b.getY()-center_y)+3000; c += 300){
+                        for(int d = (int)(b.getX()-center_x); d < (int)(b.getX()-center_x)+3000; d += 300){
                             g.drawImage(bims.getImage(b.getType()),d,c,300,300,this);
                         }
                     }
