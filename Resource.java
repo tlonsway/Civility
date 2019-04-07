@@ -42,6 +42,9 @@ public abstract class Resource implements Clickable {
         return y;
     }
     public BoundingBox getBoundingBox() {
+        if(type.contains("tree")){
+            return new BoundingBox(x+(width*0.1),y,width*0.8,height);
+        }
         return new BoundingBox(x,y,width,height);
     }
     public double getHeight(){
