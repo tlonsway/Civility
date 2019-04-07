@@ -17,6 +17,7 @@ public class ServerHost {
         (new Thread(new ServerConnectionThread(this))).start();
     }
     public void addSocket(Socket so) {
+        sendMessage(ClientDataHost.encodeChat("Server", so.getInetAddress()+" has joined the server"));
         connections.add(so);
         System.out.println("adding socket to server database");
         (new Thread(new ServerPoolThread(this,so))).start();
@@ -34,6 +35,7 @@ public class ServerHost {
                 //i--;
             }
             if (connections.get(i).isClosed()) {
+                sendMessage(ClientDataHost.encodeChat("Server", connections.get(i).getInetAddress()+" has left the server"));
                 connections.remove(i);
                 i--;
                 System.out.println("dead socket has been cleared");

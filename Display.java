@@ -407,6 +407,8 @@ public class Display extends JComponent {
             for(PlayerLocation pl : chost.getPlayers()) {
                 //System.out.println("other player location at " + pl.x + "," + pl.y);
                 g.fillOval((int)(pl.x-center_x),(int)(pl.y-center_y),40,40);
+                g.setColor(Color.BLACK);
+                g.drawOval((int)(pl.x-center_x),(int)(pl.y-center_y),40,40);
             }
             
             g.setColor(Color.BLACK);

@@ -153,10 +153,10 @@ public class ClientDataHost implements Runnable {
             }
         }
     } 
-    public String encodeChat(String name, String message) {
+    public static String encodeChat(String name, String message) {
         return ("c:n:"+name+":"+message+":n:n:n");
     }
-    public String encodePlayerLocation(String name, int x, int y) {
+    public static String encodePlayerLocation(String name, int x, int y) {
         return ("p:l:"+name+":"+x+":"+y+":n:n");
     }
     public void sendMessage(String name,String message) {
