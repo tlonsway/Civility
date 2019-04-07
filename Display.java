@@ -398,6 +398,7 @@ public class Display extends JComponent {
             g.setColor(player.getColor());
             g.fillOval(900,500,40,40);
             for(PlayerLocation pl : chost.getPlayers()) {
+                System.out.println("other player location at " + pl.x + "," + pl.y);
                 g.fillOval((int)(pl.x-center_x),(int)(pl.y-center_y),40,40);
             }
             
