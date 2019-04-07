@@ -42,6 +42,8 @@ public class init {
         Fists fists = new Fists(new Color(252, 210, 126),frame);
         Hotbar hotbar = new Hotbar();
         Player p = new Player(Human.getRandomName(),100,new Color(252, 210, 126),pi,fists,hotbar);
+        //-----------------------------------------------------------
+        
         
         p.addItem(new Item("wood",1000,false,new Color(163,68,0),"square",null,new int[]{0,0,0,0,0},0));
         p.addItem(new Item("stone",1000,false,new Color(163,68,0), "square",null,new int[]{0,0,0,0,0},0));
@@ -68,6 +70,7 @@ public class init {
         d.setVisible(true);
         d.setDoubleBuffered(true);
         
+        //--------------------------------------
         MouseScrollWheelThread mouseWheel = new MouseScrollWheelThread(d);
         frame.addMouseWheelListener(mouseWheel);
         
@@ -128,8 +131,8 @@ public class init {
                 e.printStackTrace();
             }
         }
+        
         (new Thread(new FrameThread(d,100))).start();
         (new Thread(new UpdateThread(d))).start();
-        
     }
 }
