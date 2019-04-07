@@ -250,6 +250,7 @@ public class Display extends JComponent {
                     catch(IOException ex){
                         System.out.println(ex);
                     }
+                    g.setColor(Color.WHITE);
                     g.drawString("x" + hotbar[i].getQuantity(),610+i*60,895);
                 }
                 g.setColor(Color.BLACK);
