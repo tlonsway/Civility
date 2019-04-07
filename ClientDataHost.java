@@ -105,7 +105,18 @@ public class ClientDataHost implements Runnable {
         }
         if (components[0].equals("c")) {
             System.out.println("chat message received!");
-            chat.add(components[2]+": "+components[3]);
+            String full = components[2]+": "+components[3];
+            if (full.length()>30) {
+                for(int i=0;i<full.length();i+=30) {
+                    if (full.length()<i+30) {
+                        chat.add(full.substring(i));
+                    } else { 
+                        chat.add(full.substring(i,i+30));
+                    }
+                }
+            } else {
+                chat.add(full);
+            }
         }
     }
     public String encodeChat(String name, String message) {
@@ -117,7 +128,19 @@ public class ClientDataHost implements Runnable {
             ps.println(encodeChat(name,message));
             ps.flush();
         } else {
-            chat.add(name+": "+message);
+            //chat.add(name+": "+message);
+            String full = name+": "+message;
+            if (full.length()>30) {
+                for(int i=0;i<full.length();i+=30) {
+                    if (full.length()<i+30) {
+                        chat.add(full.substring(i));
+                    } else { 
+                        chat.add(full.substring(i,i+30));
+                    }
+                }
+            } else {
+                chat.add(full);
+            }
         }
     }
 }
