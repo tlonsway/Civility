@@ -6,7 +6,7 @@ public class IconImage {
     private BufferedImage[] images;
     private String[] icons;
     public IconImage() {
-        icons=new String[]{"berry","ice","needle","rawrubber","stick","stone axe","stone pickaxe","stone","wood planks","wood","wooden axe","wooden pickaxe"};
+        icons=new String[]{"berry","ice","needle","rawrubber","stick","stone axe","stone pickaxe","stone","wood planks","wood","wooden axe","wooden pickaxe","stone brick"};
         images = new BufferedImage[icons.length];
         for(int i=0;i<icons.length;i++) {
             try {

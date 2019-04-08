@@ -11,6 +11,7 @@ public class ClientDataHost implements Runnable {
     PrintStream ps;
     boolean connected;
     ArrayList<PlayerLocation> playerlocs;
+    long mapseed;
     public static void main(String[] args) throws Exception {
         new ClientDataHost();
     }
@@ -18,6 +19,7 @@ public class ClientDataHost implements Runnable {
         chat = new ArrayList<String>();
         connected=false;
         playerlocs = new ArrayList<PlayerLocation>();
+        mapseed=0;
     }
     public void run() {
         Socket s = null;
@@ -152,6 +154,18 @@ public class ClientDataHost implements Runnable {
                 //playerlocs.add(new PlayerLocation(nm,xc,yc));
             }
         }
+        /*Structure of a map initiation:
+         * m:s:seed:n:n:n:n
+         * m=map
+         * s=seed
+         * seed=actual seed number
+         * n=null
+         */
+        if(components[0].equals("m")) {
+            if(components[1].equals("s")) {
+                mapseed=Long.parseLong(components[2]);
+            }
+        }
     } 
     public static String encodeChat(String name, String message) {
         return ("c:n:"+name+":"+message+":n:n:n");
@@ -186,5 +200,8 @@ public class ClientDataHost implements Runnable {
             ps.flush();
         } 
     }
-    
+    public long getMapSeed() {
+        while(mapseed==0) {}
+        return mapseed;
+    }
 }

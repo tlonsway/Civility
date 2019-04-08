@@ -113,9 +113,9 @@ public class init {
                     type="plains";
                 }
                    
-                d.addBiome(new Biome(type,x,y,randseed));
+                //d.addBiome(new Biome(type,x,y,randseed));
                 try {
-                    Thread.sleep(1);
+                    //Thread.sleep(1);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

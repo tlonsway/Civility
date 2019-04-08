@@ -6,7 +6,7 @@ public class BuildingImage {
     private BufferedImage[] images;
     private String[] buildings;
     public BuildingImage() {
-        buildings=new String[]{"factory","goldmine","center","house"};
+        buildings=new String[]{"factory","goldmine","center","house","House Frame"};
         images = new BufferedImage[buildings.length];
         for(int i=0;i<buildings.length;i++) {
             try {

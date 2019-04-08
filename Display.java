@@ -38,6 +38,7 @@ public class Display extends JComponent {
     IconImage iims;
     BufferedImage forestTexture;
     int spamlim=0;
+    Map map;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
@@ -56,6 +57,13 @@ public class Display extends JComponent {
         frametime=0;
         menu = new MenuManager(CI,player.getInventory(),rc.tree);
         chost=cdh;
+        /*try {
+            Thread.sleep(100);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        map = new Map(""+cdh.getMapSeed());
+        biomes=map.getBiomes();
         messageBox = mb;
         ActionMap am = messageBox.getActionMap();
         itemsUsedCrafting = new ArrayList<String>();

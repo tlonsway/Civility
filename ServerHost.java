@@ -9,15 +9,24 @@ public class ServerHost {
     InputStream is;
     ArrayList<Socket> connections;
     PrintStream ps;
+    long mapseed;
     public static void main(String[] args) {
         new ServerHost();
     }
     public ServerHost() {
         connections = new ArrayList<Socket>();
+        mapseed = (int)(Math.random()*100)*(int)(Math.random()*100)*(int)(Math.random()*100);
+        System.out.println("SERVER INIT | MAPSEED: " + mapseed);
         (new Thread(new ServerConnectionThread(this))).start();
     }
     public void addSocket(Socket so) {
         sendMessage(ClientDataHost.encodeChat("Server", so.getInetAddress()+" has joined the server"));
+        try {
+            PrintStream sps = new PrintStream(so.getOutputStream());
+            sps.println(encodeMapSeed(mapseed));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         connections.add(so);
         System.out.println("adding socket to server database");
         (new Thread(new ServerPoolThread(this,so))).start();
@@ -75,5 +84,8 @@ public class ServerHost {
                 //System.out.println("sending out player location");
             }
         }
+    }
+    public String encodeMapSeed(long seed) {
+        return ("m:s:"+seed+":n:n:n:n");
     }
 }
