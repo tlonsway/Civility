@@ -458,7 +458,7 @@ public class Display extends JComponent {
             g.setFont(f);
             if(player.getHotbar()[player.getHotBarItemSelected()] != null){
                 try{
-                    g.drawImage(iims.getImage(player.getHotbar()[player.getHotBarItemSelected()].getName()),fistCords[0],fistCords[1],15,15,this);
+                    g.drawImage(iims.getImage(player.getHotbar()[player.getHotBarItemSelected()].getName()),fistCords[0]-8,fistCords[1]-8,24,24,this);
                 }
                 catch(Exception ex){
                     System.out.println(ex);

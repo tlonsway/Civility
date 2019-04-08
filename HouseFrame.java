@@ -6,7 +6,7 @@ public class HouseFrame extends Building{
         //requirements = new ArrayList<TempItem>();
         //requirements.add(new TempItem("wood",50));
         //requirments.add(new TempItem("stone",50));
-        super("House Frame",x,y,75,75,Color.BLACK,null);
+        super("House Frame",x,y,125,125,Color.BLACK,null);
         requirements = new ArrayList<TempItem>();
         requirements.add(new TempItem("wood planks",20));
         requirements.add(new TempItem("stone brick",20));
