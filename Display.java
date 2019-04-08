@@ -62,8 +62,10 @@ public class Display extends JComponent {
         } catch (Exception e) {
             e.printStackTrace();
         }*/
-        map = new Map(""+cdh.getMapSeed());
-        biomes=map.getBiomes();
+        //-----------------------------------------------
+        //map = new Map(""+cdh.getMapSeed());
+        //biomes=map.getBiomes();
+        //-----------------------------------------------
         messageBox = mb;
         ActionMap am = messageBox.getActionMap();
         itemsUsedCrafting = new ArrayList<String>();

@@ -22,7 +22,6 @@ public class init {
         }*/
         
         //frame.setVisible(true);
-        
         BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank");
         frame.getContentPane().setCursor(blankCursor);
@@ -37,9 +36,8 @@ public class init {
         
         chatBox.setBounds(1450,430,300,20);
         chatBox.setEditable(true);
-        //chatBox.setVisible(true);
+        chatBox.setVisible(true);
         frame.add(chatBox);
-        
         Inventory i = new Inventory();
         InventoryTwo pi = new InventoryTwo();
         AIThread at = new AIThread();
@@ -65,10 +63,8 @@ public class init {
         craftableItems.add(new Item("house frame",1,true,new Color(163,68,0),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("wood planks",20))),new int[]{0,0,0,0,0},1));
         craftableItems.add(new Item("stone brick",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",5))),new int[]{0,0,0,0,0},1));
         craftableItems.add(new Item("Zuberrr Zpace Zip",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",1))),new int[]{1,100,100,100,0},3));
-        
         ClientDataHost cdh = new ClientDataHost();
         (new Thread(cdh)).start();
-        
         Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,chatBox,research);
         //Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,null,research);
         at.setDisplay(d);
@@ -83,8 +79,6 @@ public class init {
         ArrayList<Item> Items = new ArrayList<Item>();
         Items.add(new Item("wood",0,false,new Color(163,68,0),"square",null,new int[]{0,0,0,0,0},0));
         Items.add(new Item("stone",0,false,Color.GRAY,"square",null,new int[]{0,0,0,0,0},0));
-        
-        
         KeyboardThread kt = new KeyboardThread(d);
         MouseThread mt = new MouseThread(d);
         frame.addMouseListener(mt);
@@ -100,9 +94,9 @@ public class init {
             //d.addResource(new Tree((int)(2000*((Math.random()*2)-1)),(int)(2000*((Math.random()*2)-1))));
             //d.addResource(new Rock((int)(2000*((Math.random()*2)-1)),(int)(2000*((Math.random()*2)-1))));
         }
-        //Biome b = new Biome("rocky",-1000,-1000);
-        //d.addBiome(b);
         long randseed = (int)(Math.random()*100)*(int)(Math.random()*100)*(int)(Math.random()*100);
+        Biome b = new Biome("rocky",-1000,-1000,randseed);
+        d.addBiome(b);
         Random generator = new Random(randseed);
         for(int x=-40000;x<=40000;x+=3000) {
             for(int y=-40000;y<=40000;y+=3000) {
@@ -122,7 +116,7 @@ public class init {
                     type="plains";
                 }
                    
-                //d.addBiome(new Biome(type,x,y,randseed));
+                d.addBiome(new Biome(type,x,y,randseed));
                 try {
                     //Thread.sleep(1);
                 } catch (Exception e) {
@@ -138,21 +132,21 @@ public class init {
             }
         }
         
-        
-        
         (new Thread(new FrameThread(d,100))).start();
         (new Thread(new UpdateThread(d))).start();
         
         //frame.setVisible(true);
         //frame.revalidate();
-        frame.setSize(1800,1000);
         frame.setResizable(false);
         frame.getContentPane().setBackground(new Color(0,140,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setSize(1800,1000);
         frame.setVisible(true);
         //d.setVisible(true);
         //d.revalidate();
         //frame.validate();
         //frame.requestFocusInWindow();
+        
     }
 }
