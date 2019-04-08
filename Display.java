@@ -91,6 +91,9 @@ public class Display extends JComponent {
                 }
         });
         frame.requestFocusInWindow();
+        //frame.setVisible(true);
+        //this.setVisible(true);
+        //frame.revalidate();
     }
     public void update() {
         long stime = System.nanoTime();

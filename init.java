@@ -13,8 +13,15 @@ import javax.swing.KeyStroke;
 public class init {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Game Window");
-
         
+        //frame.setLayout(null);
+        /*try {
+            Thread.sleep(5000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
+        
+        //frame.setVisible(true);
         
         BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
         Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank");
@@ -30,6 +37,7 @@ public class init {
         
         chatBox.setBounds(1450,430,300,20);
         chatBox.setEditable(true);
+        //chatBox.setVisible(true);
         frame.add(chatBox);
         
         Inventory i = new Inventory();
@@ -62,6 +70,7 @@ public class init {
         (new Thread(cdh)).start();
         
         Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,chatBox,research);
+        //Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,null,research);
         at.setDisplay(d);
         frame.add(d);
         d.setVisible(true);
@@ -128,13 +137,22 @@ public class init {
                 e.printStackTrace();
             }
         }
+        
+        
+        
         (new Thread(new FrameThread(d,100))).start();
         (new Thread(new UpdateThread(d))).start();
+        
+        //frame.setVisible(true);
+        //frame.revalidate();
         frame.setSize(1800,1000);
         frame.setResizable(false);
         frame.getContentPane().setBackground(new Color(0,140,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.requestFocusInWindow();
+        //d.setVisible(true);
+        //d.revalidate();
+        //frame.validate();
+        //frame.requestFocusInWindow();
     }
 }
