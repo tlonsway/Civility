@@ -16,7 +16,7 @@ public class MenuManager{
         craftingMenu = new ArrayList<MenuItem>();
         for(int i = 0; i < craftingList.size(); i++){
             if(craftingList.get(i).getTechLevel() <= tree.getTechLevel()){
-                craftingMenu.add(new MenuItem(craftingList.get(i),(i%5)*280, ((int)(i/5))*120));
+                craftingMenu.add(new MenuItem(craftingList.get(i),(i%11)*150, ((int)(i/11))*120));
             }
         }
     }

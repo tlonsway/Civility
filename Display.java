@@ -540,21 +540,23 @@ public class Display extends JComponent {
             g.fillRect(100,100,1600,800);
             g.setColor(Color.BLACK);
             g.drawRect(100,100,1600,800);
-            f = new Font("Courier New",Font.PLAIN,15);
+            f = new Font("Courier New",Font.PLAIN,13);
             g.setFont(f);
             for(MenuItem e: menu.getCraftingMenu()){
                 g.setColor(Color.WHITE);
-                g.fillRect(e.getX()+150,e.getY()+150,270,110);
+                g.fillRect(e.getX()+150,e.getY()+150,130,110);
                 if(hasResources(e.getItem())){
                     g.setColor(new Color(0, 183, 39));
                 }
                 else{
                     g.setColor(Color.RED);
                 }
-                g.drawRect(e.getX()+150,e.getY()+150,270,110);
-                g.drawString(e.getItem().getName(),e.getX()+170,e.getY()+170);
+                g.drawRect(e.getX()+150,e.getY()+150,130,110);
+                g.setColor(Color.BLACK);
+                g.drawString(e.getItem().getName(),e.getX()+160,e.getY()+163);
+                g.drawImage(iims.getImage(e.getItem().getName()),e.getX()+163,e.getY()+160,65,65,this);
                 for(int i = 0; i < e.getItem().getRequired().size(); i++){
-                    g.drawString(e.getItem().getRequired().get(i).getQuantity()+" "+e.getItem().getRequired().get(i).getName(),e.getX()+170,e.getY()+190+(20*i));
+                    g.drawString(e.getItem().getRequired().get(i).getQuantity()+" "+e.getItem().getRequired().get(i).getName(),e.getX()+160,e.getY()+230+(13*i));
                 }
             }
             Point mp = MouseInfo.getPointerInfo().getLocation();
