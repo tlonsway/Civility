@@ -35,6 +35,7 @@ public class Display extends JComponent {
     ResourceImage rims;
     BiomeImage bims;
     BuildingImage buims;
+    IconImage iims;
     BufferedImage forestTexture;
     int spamlim=0;
     public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc) {
@@ -62,6 +63,7 @@ public class Display extends JComponent {
         rims = new ResourceImage();
         bims = new BiomeImage();
         buims = new BuildingImage();
+        iims = new IconImage();
         try{
             forestTexture = ImageIO.read(new File("images/forest texture.png"));
         }
@@ -223,15 +225,20 @@ public class Display extends JComponent {
             g.drawRect(100,100,1600,800);
             int x = 150;
             int y = 150;
-            f = new Font("Courier New",Font.PLAIN,20);
+            f = new Font("Courier New",Font.PLAIN,18);
             g.setFont(f);
             for(MenuItem e: menu.getInventoryMenu()){
                 g.setColor(Color.WHITE);
-                g.fillRect(e.getX()+150,e.getY()+150,130,80);
+                g.fillRect(e.getX()+150,e.getY()+150,80,80);
                 g.setColor(Color.BLACK);
-                g.drawRect(e.getX()+150,e.getY()+150,130,80);
-                g.drawString(e.getItem().getName(),e.getX()+170,e.getY()+170);
-                g.drawString("x"+e.getItem().getQuantity(),e.getX()+170,e.getY()+200);
+                g.drawRect(e.getX()+150,e.getY()+150,80,80);
+                try {
+                    g.drawImage(iims.getImage(e.getItem().getName()),e.getX()+155,e.getY()+150,70,70,this);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
+                //g.drawString(e.getItem().getName(),e.getX()+170,e.getY()+220);
+                g.drawString("x"+e.getItem().getQuantity(),e.getX()+170,e.getY()+228);
             }
             Point mp = MouseInfo.getPointerInfo().getLocation();
             Point loc = frame.getLocationOnScreen();
@@ -258,9 +265,9 @@ public class Display extends JComponent {
                 g.fillRect(605+i*60,830,50,50);
                 if(hotbar[i] != null){
                     try{
-                        g.drawImage(ImageIO.read(new File("images/"+hotbar[i].getName()+".png")),605+i*60,830,50,50,this);
+                        g.drawImage(iims.getImage(hotbar[i].getName()),605+i*60,830,50,50,this);
                     }
-                    catch(IOException ex){
+                    catch(Exception ex){
                         System.out.println(ex);
                     }
                     g.setColor(Color.WHITE);
@@ -451,9 +458,9 @@ public class Display extends JComponent {
             g.setFont(f);
             if(player.getHotbar()[player.getHotBarItemSelected()] != null){
                 try{
-                    g.drawImage(ImageIO.read(new File("images/"+player.getHotbar()[player.getHotBarItemSelected()].getName()+".png")),fistCords[0],fistCords[1],15,15,this);
+                    g.drawImage(iims.getImage(player.getHotbar()[player.getHotBarItemSelected()].getName()),fistCords[0],fistCords[1],15,15,this);
                 }
-                catch(IOException ex){
+                catch(Exception ex){
                     System.out.println(ex);
                 }
             }
@@ -469,9 +476,9 @@ public class Display extends JComponent {
                 g.fillRect(605+i*60,830,50,50);
                 if(hotbar[i] != null){
                     try{
-                        g.drawImage(ImageIO.read(new File("images/"+hotbar[i].getName()+".png")),605+i*60,830,50,50,this);
+                        g.drawImage(iims.getImage(hotbar[i].getName()),605+i*60,830,50,50,this);
                     }
-                    catch(IOException ex){
+                    catch(Exception ex){
                         System.out.println(ex);
                     }
                     g.setColor(Color.WHITE);
