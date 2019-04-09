@@ -29,12 +29,12 @@ public class init {
         
         TechTree techLvl = new TechTree();
         ResearchCenter research = new ResearchCenter(techLvl);
-        
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         InputMap im = chatBox.getInputMap();
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escape");
         
-        chatBox.setBounds(1450,430,300,20);
+        chatBox.setBounds((int)(1450*(screenSize.getWidth()/1800)),(int)(430*(screenSize.getHeight()/1000)),(int)(300*(screenSize.getWidth()/1800)),20);
         chatBox.setEditable(true);
         chatBox.setVisible(true);
         frame.add(chatBox);
@@ -65,7 +65,7 @@ public class init {
         craftableItems.add(new Item("Zuberrr Zpace Zip",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",1))),new int[]{1,100,100,100,0},3));
         ClientDataHost cdh = new ClientDataHost();
         (new Thread(cdh)).start();
-        Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,chatBox,research);
+        Display d = new Display((int)(screenSize.getWidth()),(int)(screenSize.getHeight()),i,p,at,frame,craftableItems,cdh,chatBox,research,screenSize.getWidth()/1800,screenSize.getHeight()/1000);
         //Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,null,research);
         at.setDisplay(d);
         frame.add(d);
@@ -141,7 +141,7 @@ public class init {
         frame.getContentPane().setBackground(new Color(0,140,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setSize(1800,1000);
+        frame.setSize((int)screenSize.getWidth(),(int)screenSize.getHeight());
         frame.setVisible(true);
         //d.setVisible(true);
         //d.revalidate();

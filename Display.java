@@ -39,7 +39,9 @@ public class Display extends JComponent {
     BufferedImage forestTexture;
     int spamlim=0;
     Map map;
-    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc) {
+    double xScale;
+    double yScale;
+    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc,double xS,double yS) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
         biomes = new ArrayList<Biome>();
@@ -74,6 +76,9 @@ public class Display extends JComponent {
         bims = new BiomeImage();
         buims = new BuildingImage();
         iims = new IconImage();
+        xScale = xS;
+        yScale = yS;
+        System.out.println("X: "+xScale+" Y: "+yScale);
         try{
             forestTexture = ImageIO.read(new File("images/forest texture.png"));
         }
@@ -229,40 +234,40 @@ public class Display extends JComponent {
             Font f = new Font("Courier New",Font.PLAIN,60);
             g.setFont(f);
             g.setColor(Color.BLACK);
-            g.drawString("Inventory",52,52);
+            g.drawString("Inventory",(int)(52*xScale),(int)(52*yScale));
             g.setColor(Color.WHITE);
-            g.drawString("Inventory",50,50);
+            g.drawString("Inventory",(int)(50*xScale),(int)(50*yScale));
             g.setColor(Color.GRAY);
-            g.fillRect(100,100,1600,800);
+            g.fillRect((int)(100*xScale),(int)(100*yScale),(int)(1600*xScale),(int)(800*yScale));
             g.setColor(Color.BLACK);
-            g.drawRect(100,100,1600,800);
-            int x = 150;
-            int y = 150;
+            g.drawRect((int)(100*xScale),(int)(100*yScale),(int)(1600*xScale),(int)(800*yScale));
+            int x = (int)(150*xScale);
+            int y = (int)(150*yScale);
             f = new Font("Courier New",Font.PLAIN,18);
             g.setFont(f);
             for(MenuItem e: menu.getInventoryMenu()){
                 g.setColor(Color.WHITE);
-                g.fillRect(e.getX()+150,e.getY()+150,80,80);
+                g.fillRect((int)(e.getX()*xScale)+(int)(150*xScale),(int)(e.getY()*yScale)+(int)(150*yScale),(int)(80*xScale),(int)(80*yScale));
                 g.setColor(Color.BLACK);
-                g.drawRect(e.getX()+150,e.getY()+150,80,80);
+                g.drawRect((int)(e.getX()*xScale)+(int)(150*xScale),(int)(e.getY()*yScale)+(int)(150*yScale),(int)(80*xScale),(int)(80*yScale));
                 try {
-                    g.drawImage(iims.getImage(e.getItem().getName()),e.getX()+155,e.getY()+150,70,70,this);
+                    g.drawImage(iims.getImage(e.getItem().getName()),(int)(e.getX()*xScale)+(int)(155*xScale),(int)(e.getY()*yScale)+(int)(150*yScale),(int)(70*xScale),(int)(70*yScale),this);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
                 //g.drawString(e.getItem().getName(),e.getX()+170,e.getY()+220);
-                g.drawString("x"+e.getItem().getQuantity(),e.getX()+170,e.getY()+228);
+                g.drawString("x"+e.getItem().getQuantity(),(int)(e.getX()*xScale)+(int)(170*xScale),(int)(e.getY()*yScale)+(int)(228*yScale));
             }
             Point mp = MouseInfo.getPointerInfo().getLocation();
             Point loc = frame.getLocationOnScreen();
             g.setColor(Color.WHITE);
-            g.fillOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10); 
+            g.fillOval((int)mp.getX()-(int)loc.getX()-(int)(5*xScale),(int)mp.getY()-(int)loc.getY()-(int)(5*yScale),(int)(10*xScale),(int)(10*yScale)); 
             g.setColor(Color.BLACK);
-            g.drawOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
+            g.drawOval((int)mp.getX()-(int)loc.getX()-(int)(5*xScale),(int)mp.getY()-(int)loc.getY()-(int)(5*yScale),(int)(10*xScale),(int)(10*yScale));
             g.setColor(Color.GRAY);
-            g.fillRect(595,820,610,85);
+            g.fillRect((int)(595*xScale),(int)(820*yScale),(int)(610*xScale),(int)(85*yScale));
             g.setColor(Color.BLACK);
-            g.drawRect(595,820,610,85);
+            g.drawRect((int)(595*xScale),(int)(820*yScale),(int)(610*xScale),(int)(85*yScale));
             Item[] hotbar = player.getHotbar();
             f = new Font("Courier New",Font.PLAIN,15);
             g.setFont(f);
@@ -275,19 +280,19 @@ public class Display extends JComponent {
                 else{
                     g.setColor(Color.WHITE);
                 }
-                g.fillRect(605+i*60,830,50,50);
+                g.fillRect((int)(605*xScale)+(i*(int)(60*xScale)),(int)(830*yScale),(int)(50*xScale),(int)(50*yScale));
                 if(hotbar[i] != null){
                     try{
-                        g.drawImage(iims.getImage(hotbar[i].getName()),605+i*60,830,50,50,this);
+                        g.drawImage(iims.getImage(hotbar[i].getName()),(int)(605*xScale)+(i*(int)(60*xScale)),(int)(830*yScale),(int)(50*xScale),(int)(50*yScale),this);
                     }
                     catch(Exception ex){
                         System.out.println(ex);
                     }
                     g.setColor(Color.WHITE);
-                    g.drawString("x" + hotbar[i].getQuantity(),610+i*60,895);
+                    g.drawString("x" + hotbar[i].getQuantity(),(int)(610*xScale)+(i*(int)(60*xScale)),(int)(895*yScale));
                 }
                 g.setColor(Color.BLACK);
-                g.drawRect(605+i*60,830,50,50);
+                g.drawRect((int)(605*xScale)+(i*(int)(60*xScale)),(int)(830*yScale),(int)(50*xScale),(int)(50*yScale));
             }
             //g.drawImage(woodAxeImage,100,100,this);
         }
@@ -329,7 +334,7 @@ public class Display extends JComponent {
                     //g.drawRect((int)center_x,(int)center_y,width,height);
                     for(int c = (int)(b.getY()-center_y); c < (int)(b.getY()-center_y)+3000; c += 300){
                         for(int d = (int)(b.getX()-center_x); d < (int)(b.getX()-center_x)+3000; d += 300){
-                            if (new BoundingBox(d,c,300,300).intersects(screen)) {
+                            if (new BoundingBox(d,c,300,300).intersects(screen)){
                                 g.drawImage(bims.getImage(b.getType()),d,c,300,300,this);
                             }
                         }
@@ -346,7 +351,7 @@ public class Display extends JComponent {
                             //g.setColor(Color.BLACK);
                             //g.drawRect((int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()));
                             try{
-                                g.drawImage(rims.getImage(r.getType()),(int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()),this);
+                                g.drawImage(rims.getImage(r.getType()),(int)((r.getX()-center_x)*xScale),(int)((r.getY()-center_y)*yScale),(int)((r.getWidth())*xScale),(int)((r.getHeight())*yScale),this);
                                 //g.drawImage(ImageIO.read(new File("images/"+r.getType()+".png")),(int)(r.getX()-center_x),(int)(r.getY()-center_y),(int)(r.getWidth()),(int)(r.getHeight()),this);
                             }
                             catch(Exception ex){
@@ -358,11 +363,11 @@ public class Display extends JComponent {
                             //g.drawString(r.getType(), (int)(r.getX()-center_x), (int)(r.getY()-center_y+r.getHeight()+20));
                             if (r.getHealth()<r.getMax_Health()) {
                                 g.setColor(Color.BLACK);
-                                g.drawRect((int)(r.getX()-center_x)-1,(int)(r.getY()-center_y)-16,(int)r.getWidth()+1,11);
+                                g.drawRect((int)((r.getX()-center_x)*xScale)-1,(int)((r.getY()-center_y)*yScale)-(int)(16*yScale),(int)(r.getWidth()*yScale)+1,(int)(11*yScale));
                                 g.setColor(Color.RED);
-                                g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)-15,(int)r.getWidth(),10);
+                                g.fillRect((int)((r.getX()-center_x)*xScale),(int)((r.getY()-center_y)*yScale)-(int)(15*yScale),(int)(r.getWidth()*xScale),(int)(10*yScale));
                                 g.setColor(Color.GREEN);
-                                g.fillRect((int)(r.getX()-center_x),(int)(r.getY()-center_y)-15,(int)(r.getHealth()/r.getMax_Health()*r.getWidth()),10);
+                                g.fillRect((int)((r.getX()-center_x)*xScale),(int)((r.getY()-center_y)*yScale)-(int)(15*yScale),(int)((r.getHealth()/r.getMax_Health()*r.getWidth())*yScale),(int)(10*yScale));
                             }
                         }
                     }
@@ -374,10 +379,10 @@ public class Display extends JComponent {
             g.fillRect((int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y),(int)researchCenter.getWidth(),(int)researchCenter.getHeight());
             g.setColor(Color.BLACK);
             g.drawRect((int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y),(int)researchCenter.getWidth(),(int)researchCenter.getHeight());
-            g.drawString("Research Center",(int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y+researchCenter.getHeight()+15));   
+            g.drawString("Research Center",(int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y+researchCenter.getHeight()+(int)(15*yScale)));   
             if(researchCenter.getBoundingBox().intersects(screen)){
                 for(int a  = 0; a < researchCenter.tree.getRequired().size();a++){
-                    g.drawString(researchCenter.tree.getRequired().get(a).getName()+" x"+researchCenter.tree.getRequired().get(a).getQuantity(),(int)(researchCenter.getX()-center_x+10),(int)(researchCenter.getY()-center_y+(a*15))+20);
+                    g.drawString(researchCenter.tree.getRequired().get(a).getName()+" x"+researchCenter.tree.getRequired().get(a).getQuantity(),(int)(researchCenter.getX()-center_x+(int)(10*xScale)),(int)(researchCenter.getY()-center_y+(a*15))+(int)(20*yScale));
                 }
             }
             for (Building b : buildings) {
@@ -386,18 +391,18 @@ public class Display extends JComponent {
                     //g.fillRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
                     //g.setColor(Color.BLACK);
                     //g.drawRect((int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()));
-                    g.drawImage(buims.getImage(b.getType()),(int)(b.getX()-center_x),(int)(b.getY()-center_y),(int)(b.getWidth()),(int)(b.getHeight()),this);
+                    g.drawImage(buims.getImage(b.getType()),(int)((b.getX()-center_x)*xScale),(int)((b.getY()-center_y)*yScale),(int)(b.getWidth()*xScale),(int)(b.getHeight()*yScale),this);
                     Font f = new Font("Courier New",Font.PLAIN,15);
                     g.setFont(f);
                     String btitle="";
                     if (b.getType().equals("house")) {
                         btitle+=((House)(b)).getOwner()+"'s ";
                     }
-                    g.drawString(btitle+b.getType(), (int)(b.getX()-center_x), (int)(b.getY()-center_y+b.getHeight()+20));
+                    g.drawString(btitle+b.getType(), (int)((b.getX()-center_x)*xScale), (int)((int)((b.getY()-center_y+b.getHeight())*yScale)+(int)(20*yScale)));
                     if(b.getType().contains("Frame")){
                         g.setColor(Color.BLACK);
                         for(int a = 0; a < b.getBuildItemsRequired().size();a++){
-                            g.drawString(b.getBuildItemsRequired().get(a).getName() + " x" + b.getBuildItemsRequired().get(a).getQuantity(),(int)(b.getX()-center_x),(int)(b.getY()+b.getHeight()+30+(a*15)-center_y));
+                            g.drawString(b.getBuildItemsRequired().get(a).getName() + " x" + b.getBuildItemsRequired().get(a).getQuantity(),(int)((b.getX()-center_x)*xScale),(int)((int)((b.getY()+b.getHeight()+30)*yScale)+(a*(int)(15*yScale))-(int)(center_y*yScale)));
                         }
                     }
                 }
@@ -412,7 +417,7 @@ public class Display extends JComponent {
                     g.drawRect((int)(a.getX()-center_x),(int)(a.getY()-center_y),(int)(a.getWidth()),(int)(a.getHeight()));
                     Font f = new Font("Courier New",Font.PLAIN,18);
                     g.setFont(f);
-                    g.drawString(a.getName(),(int)(a.getX()-center_x),(int)(a.getY()-center_y+a.getHeight()+20));
+                    g.drawString(a.getName(),(int)(a.getX()-center_x),(int)(a.getY()-center_y+a.getHeight()+(int)(20*yScale)));
                 }                
             }
             //System.out.println("elapsed bots: " + (System.nanoTime()-stime));
@@ -420,24 +425,24 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             Font f = new Font("Courier New", Font.BOLD, 30);
             g.setFont(f);
-            g.drawString("Technology Level: "+researchCenter.tree.getTechLevel(),40,220);
-            g.drawString("update time: " + updatetime,40,140);
-            g.drawString("frame time: " + frametime,40,180);
-            g.drawString("Gold: "+(int)(in.getGold()),40,40);
-            g.drawString("center_x: " + center_x + "   center_y: " + center_y,300,40);
+            g.drawString("Technology Level: "+researchCenter.tree.getTechLevel(),(int)(40*xScale),(int)(220*yScale));
+            g.drawString("update time: " + updatetime,(int)(40*xScale),(int)(140*yScale));
+            g.drawString("frame time: " + frametime,(int)(40*xScale),(int)(180*yScale));
+            g.drawString("Gold: "+(int)(in.getGold()),(int)(40*xScale),(int)(40*yScale));
+            g.drawString("center_x: " + center_x + "   center_y: " + center_y,(int)(300*xScale),(int)(40*yScale));
             g.setColor(player.getColor());
-            g.fillOval(900,500,40,40);
+            g.fillOval((int)(900*xScale),(int)(500*yScale),(int)(40*xScale),(int)(40*yScale));
             for(PlayerLocation pl : chost.getPlayers()) {
                 //System.out.println("other player location at " + pl.x + "," + pl.y);
-                g.fillOval((int)(pl.x-center_x),(int)(pl.y-center_y),40,40);
+                g.fillOval((int)(pl.x-center_x),(int)(pl.y-center_y),(int)(40*xScale),(int)(40*yScale));
                 g.setColor(Color.BLACK);
-                g.drawOval((int)(pl.x-center_x),(int)(pl.y-center_y),40,40);
+                g.drawOval((int)(pl.x-center_x),(int)(pl.y-center_y),(int)(40*xScale),(int)(40*yScale));
                 g.setFont(new Font("Courier New",Font.PLAIN,15));
-                g.drawString(pl.n, (int)(pl.x-center_x), (int)(pl.y-center_y)+50);
+                g.drawString(pl.n, (int)(pl.x-center_x), (int)(pl.y-center_y)+(int)(50*yScale));
             }
             
             g.setColor(Color.BLACK);
-            g.drawOval(900,500,40,40);
+            g.drawOval((int)(900*xScale),(int)(500*yScale),(int)(40*xScale),(int)(40*yScale));
             //System.out.println("elapsed remainder_beforefist: " + (System.nanoTime()-stime));
             //stime = System.nanoTime();
             Point mp = MouseInfo.getPointerInfo().getLocation();
@@ -446,32 +451,32 @@ public class Display extends JComponent {
             //System.out.println("elapsed remainder_afterfistcoords: " + (System.nanoTime()-stime));
             //stime = System.nanoTime();
             g.setColor(Color.WHITE);
-            g.fillOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
+            g.fillOval((int)mp.getX()-(int)loc.getX()-(int)(5*xScale),(int)mp.getY()-(int)loc.getY()-(int)(5*yScale),(int)(10*xScale),(int)(10*yScale));
             g.setColor(Color.BLACK);
-            g.drawOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
+            g.drawOval((int)mp.getX()-(int)loc.getX()-(int)(5*xScale),(int)mp.getY()-(int)loc.getY()-(int)(5*xScale),(int)(10*xScale),(int)(10*xScale));
             g.setColor(player.getFistColor());
-            g.fillOval(fistCords[0],fistCords[1],10,10);
-            g.fillOval(fistCords[2],fistCords[3],10,10);
+            g.fillOval((int)(fistCords[0]*xScale),(int)(fistCords[1]*yScale),(int)(10*xScale),(int)(10*yScale));
+            g.fillOval((int)(fistCords[2]*xScale),(int)(fistCords[3]*yScale),(int)(10*xScale),(int)(10*yScale));
             g.setColor(Color.BLACK);
-            g.drawOval(fistCords[0],fistCords[1],10,10);
-            g.drawOval(fistCords[2],fistCords[3],10,10);
+            g.drawOval((int)(fistCords[0]*xScale),(int)(fistCords[1]*yScale),(int)(10*xScale),(int)(10*yScale));
+            g.drawOval((int)(fistCords[2]*xScale),(int)(fistCords[3]*yScale),(int)(10*xScale),(int)(10*yScale));
             //System.out.println("elapsed remainder_afterfist: " + (System.nanoTime()-stime));
             //stime = System.nanoTime();
-            g.drawRect(899,479,41,11);
+            g.drawRect((int)(899*xScale),(int)(479*yScale),(int)(41*xScale),(int)(11*yScale));
             g.setColor(Color.RED);
-            g.fillRect(900,480,40,10);
+            g.fillRect((int)(900*xScale),(int)(480*yScale),(int)(40*xScale),(int)(10*yScale));
             g.setColor(Color.GREEN);
-            g.fillRect(900,480,(int)(player.getHealth()/100*40),10);
+            g.fillRect((int)(900*xScale),(int)(480*yScale),(int)(player.getHealth()/(int)(100*xScale)*(int)(40*yScale)),(int)(10*yScale));
             g.setColor(Color.GRAY);
-            g.fillRect(595,820,610,85);
+            g.fillRect((int)(595*xScale),(int)(820*yScale),(int)(610*xScale),(int)(85*yScale));
             g.setColor(Color.BLACK);
-            g.drawRect(595,820,610,85);
+            g.drawRect((int)(595*xScale),(int)(820*yScale),(int)(610*xScale),(int)(85*yScale));
             Item[] hotbar = player.getHotbar();
             f = new Font("Courier New",Font.PLAIN,15);
             g.setFont(f);
             if(player.getHotbar()[player.getHotBarItemSelected()] != null){
                 try{
-                    g.drawImage(iims.getImage(player.getHotbar()[player.getHotBarItemSelected()].getName()),fistCords[0]-8,fistCords[1]-8,24,24,this);
+                    g.drawImage(iims.getImage(player.getHotbar()[player.getHotBarItemSelected()].getName()),fistCords[0]-(int)(8*xScale),fistCords[1]-(int)(8*yScale),(int)(24*xScale),(int)(24*yScale),this);
                 }
                 catch(Exception ex){
                     System.out.println(ex);
@@ -486,26 +491,26 @@ public class Display extends JComponent {
                 else{
                     g.setColor(Color.WHITE);
                 }
-                g.fillRect(605+i*60,830,50,50);
+                g.fillRect((int)(605*xScale)+(i*(int)(60*xScale)),(int)(830*yScale),(int)(50*xScale),(int)(50*xScale));
                 if(hotbar[i] != null){
                     try{
-                        g.drawImage(iims.getImage(hotbar[i].getName()),605+i*60,830,50,50,this);
+                        g.drawImage(iims.getImage(hotbar[i].getName()),(int)(605*xScale)+(i*(int)(60*xScale)),(int)(830*yScale),(int)(50*xScale),(int)(50*yScale),this);
                     }
                     catch(Exception ex){
                         System.out.println(ex);
                     }
                     g.setColor(Color.WHITE);
-                    g.drawString("x" + hotbar[i].getQuantity(),610+i*60,895);
+                    g.drawString("x" + hotbar[i].getQuantity(),(int)(610*xScale)+(i*(int)(60*xScale)),(int)(895*yScale));
                 }
                 g.setColor(Color.BLACK);
-                g.drawRect(605+i*60,830,50,50);
+                g.drawRect((int)(605*xScale)+(i*(int)(60*xScale)),(int)(830*yScale),(int)(50*xScale),(int)(50*yScale));
             }
             g.setColor(new Color(200,200,200,125));
-            g.fillRect(1450,50,300,400);
+            g.fillRect((int)(1450*xScale),(int)(50*yScale),(int)(300*xScale),(int)(400*yScale));
             g.setColor(Color.BLACK);
             int count = 0;
             for(String s : chost.getRecent()){
-                g.drawString(s,1470,100+(count*15));
+                g.drawString(s,(int)(1470*xScale),(int)(100*yScale)+(count*15));
                 count ++; 
             }
             
@@ -515,21 +520,21 @@ public class Display extends JComponent {
             int tcnt=0;
             int mbsize=12;
             g.setColor(Color.BLACK);
-            g.fillRect(1400-25,600-25,(mbsize*side)+50,(mbsize*side)+50);
+            g.fillRect((int)((1400-25)*xScale),(int)((600-25)*yScale),((int)(mbsize*xScale)*side)+(int)(50*xScale),((int)(mbsize*yScale)*side)+(int)(50*yScale));
             for(int r=0;r<side;r++) {
                 for(int c=0;c<side;c++) {
                     Biome tb = biomes.get(tcnt);
                     Color btrans = new Color(tb.getColor().getRed(),tb.getColor().getGreen(),tb.getColor().getBlue(),120);
                     g.setColor(tb.getColor());
-                    g.fillRect(1400+(mbsize*r), 600+(mbsize*c), mbsize, mbsize);
+                    g.fillRect((int)(1400*xScale)+((int)(mbsize*xScale)*r), (int)(600*yScale)+((int)(mbsize*yScale)*c), (int)(mbsize*xScale), (int)(mbsize*yScale));
                     tcnt++;
                 }
             }
             g.setColor(Color.RED);
-            g.fillOval((int)(1556+(((center_x+900)/3000)*12)), (int)(756+(((center_y+500)/3000)*12)), 10, 10);
+            g.fillOval((int)((int)(1556*xScale)+(((center_x+(int)(900*xScale))/3000)*(int)(12*xScale))), (int)((int)(756*yScale)+(((center_y+(int)(500*yScale))/3000)*(int)(12*yScale))), (int)(10*xScale), (int)(10*yScale));
             g.setColor(Color.ORANGE);
             for(PlayerLocation pl : chost.getPlayers()) {
-                g.fillOval((int)(1556+((((double)pl.x)/3000)*12)), (int)(756+((((double)pl.y)/3000)*12)), 10, 10);
+                g.fillOval((int)((int)(1556*xScale)+((((double)pl.x)/3000)*(int)(12*xScale))), (int)((int)(756*yScale)+((((double)pl.y)/3000)*(int)(12*yScale))), (int)(10*xScale), (int)(10*yScale));
             }
         }
         else if(view.equals("crafting")){
@@ -538,43 +543,43 @@ public class Display extends JComponent {
             Font f = new Font("Courier New",Font.PLAIN,60);
             g.setFont(f);
             g.setColor(Color.BLACK);
-            g.drawString("Crafting",52,52);
+            g.drawString("Crafting",(int)(52*xScale),(int)(52*yScale));
             g.setColor(Color.WHITE);
-            g.drawString("Crafting",50,50);
+            g.drawString("Crafting",(int)(50*yScale),(int)(50*yScale));
             g.setColor(Color.GRAY);
-            g.fillRect(100,100,1600,800);
+            g.fillRect((int)(100*xScale),(int)(100*yScale),(int)(1600*xScale),(int)(800*yScale));
             g.setColor(Color.BLACK);
-            g.drawRect(100,100,1600,800);
+            g.drawRect((int)(100*xScale),(int)(100*yScale),(int)(1600*xScale),(int)(800*yScale));
             f = new Font("Courier New",Font.PLAIN,13);
             g.setFont(f);
             for(MenuItem e: menu.getCraftingMenu()){
                 g.setColor(Color.WHITE);
-                g.fillRect(e.getX()+150,e.getY()+150,130,110);
+                g.fillRect((int)(e.getX()*xScale)+(int)(150*xScale),(int)(e.getY()*yScale)+(int)(150*yScale),(int)(130*xScale),(int)(110*yScale));
                 if(hasResources(e.getItem())){
                     g.setColor(new Color(0, 183, 39));
                 }
                 else{
                     g.setColor(Color.RED);
                 }
-                g.drawRect(e.getX()+150,e.getY()+150,130,110);
+                g.drawRect((int)(e.getX()*xScale)+(int)(150*xScale),(int)(e.getY()*yScale)+(int)(150*yScale),(int)(130*xScale),(int)(110*yScale));
                 g.setColor(Color.BLACK);
-                g.drawString(e.getItem().getName(),e.getX()+160,e.getY()+163);
-                g.drawImage(iims.getImage(e.getItem().getName()),e.getX()+163,e.getY()+160,65,65,this);
+                g.drawString(e.getItem().getName(),(int)((e.getX()+160)*xScale),(int)((e.getY()+163)*yScale));
+                g.drawImage(iims.getImage(e.getItem().getName()),(int)((e.getX()+163)*xScale),(int)((e.getY()+160)*yScale),(int)(65*xScale),(int)(65*yScale),this);
                 for(int i = 0; i < e.getItem().getRequired().size(); i++){
-                    g.drawString(e.getItem().getRequired().get(i).getQuantity()+" "+e.getItem().getRequired().get(i).getName(),e.getX()+160,e.getY()+230+(13*i));
+                    g.drawString(e.getItem().getRequired().get(i).getQuantity()+" "+e.getItem().getRequired().get(i).getName(),(int)((e.getX()+160)*xScale),(int)((e.getY()+230)*yScale)+((int)(13*yScale)*i));
                 }
             }
             Point mp = MouseInfo.getPointerInfo().getLocation();
             Point loc = frame.getLocationOnScreen();
             g.setColor(Color.WHITE);
-            g.fillOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10); 
+            g.fillOval((int)mp.getX()-(int)loc.getX()-(int)(5*xScale),(int)mp.getY()-(int)loc.getY()-(int)(5*yScale),(int)(10*xScale),(int)(10*yScale)); 
             g.setColor(Color.BLACK);
-            g.drawOval((int)mp.getX()-(int)loc.getX()-5,(int)mp.getY()-(int)loc.getY()-5,10,10);
+            g.drawOval((int)mp.getX()-(int)loc.getX()-(int)(5*xScale),(int)mp.getY()-(int)loc.getY()-(int)(5*yScale),(int)(10*xScale),(int)(10*yScale));
             for(int a = 0; a < itemsUsedCrafting.size();a++){
                int x = Integer.parseInt(itemsUsedCrafting.get(a).substring(itemsUsedCrafting.get(a).indexOf(":")+1,itemsUsedCrafting.get(a).indexOf(",")));
                int y = Integer.parseInt(itemsUsedCrafting.get(a).substring(itemsUsedCrafting.get(a).indexOf(",")+1,itemsUsedCrafting.get(a).length()));
                g.setColor(new Color(0,0,0,255-(y-50)));
-               g.drawString(itemsUsedCrafting.get(a).substring(0,itemsUsedCrafting.get(a).indexOf(":")),x,y);
+               g.drawString(itemsUsedCrafting.get(a).substring(0,itemsUsedCrafting.get(a).indexOf(":")),(int)(x*xScale),(int)(y*yScale));
                itemsUsedCrafting.set(a,itemsUsedCrafting.get(a).substring(0,itemsUsedCrafting.get(a).indexOf(",")+1)+(y+1));
                if(y > 304){
                    itemsUsedCrafting.remove(itemsUsedCrafting.get(a));
@@ -583,11 +588,11 @@ public class Display extends JComponent {
         } else if (view.equals("dead")) {
             messageBox.setVisible(false);
             g.setColor(Color.RED);
-            g.fillRect(0,0,1900,1000);
+            g.fillRect(0,0,(int)(1900*xScale),(int)(1000*yScale));
             Font f = new Font("Courier New",Font.BOLD,100);
             g.setFont(f);
             g.setColor(Color.BLACK);
-            g.drawString("YOU DIED",650,400);
+            g.drawString("YOU DIED",(int)(650*xScale),(int)(400*yScale));
         }   
         frametime=(int)(((System.nanoTime()-stime)));
     }
