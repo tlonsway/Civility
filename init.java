@@ -10,6 +10,10 @@ import javax.swing.InputMap;
 import javax.swing.JFrame;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 public class init {
     public static void main(String[] args) {
         JFrame frame = new JFrame("Game Window");
@@ -137,6 +141,12 @@ public class init {
         
         //frame.setVisible(true);
         //frame.revalidate();
+        try{
+            frame.setIconImage(ImageIO.read(new File("images/icon.png")));
+        }
+        catch(IOException ex){
+            System.out.println(ex);
+        }
         frame.setResizable(false);
         frame.getContentPane().setBackground(new Color(0,140,0));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

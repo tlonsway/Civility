@@ -335,7 +335,7 @@ public class Display extends JComponent {
                     for(int c = (int)(b.getY()-center_y); c < (int)(b.getY()-center_y)+3000; c += 300){
                         for(int d = (int)(b.getX()-center_x); d < (int)(b.getX()-center_x)+3000; d += 300){
                             if (new BoundingBox(d,c,300,300).intersects(screen)){
-                                g.drawImage(bims.getImage(b.getType()),d,c,300,300,this);
+                                g.drawImage(bims.getImage(b.getType()),(int)(d*xScale),(int)(c*yScale),(int)(300*xScale),(int)(300*yScale),this);
                             }
                         }
                     }
@@ -476,7 +476,7 @@ public class Display extends JComponent {
             g.setFont(f);
             if(player.getHotbar()[player.getHotBarItemSelected()] != null){
                 try{
-                    g.drawImage(iims.getImage(player.getHotbar()[player.getHotBarItemSelected()].getName()),fistCords[0]-(int)(8*xScale),fistCords[1]-(int)(8*yScale),(int)(24*xScale),(int)(24*yScale),this);
+                    g.drawImage(iims.getImage(player.getHotbar()[player.getHotBarItemSelected()].getName()),(int)(fistCords[0]*xScale)-(int)(8*xScale),(int)(fistCords[1]*yScale)-(int)(8*yScale),(int)(24*xScale),(int)(24*yScale),this);
                 }
                 catch(Exception ex){
                     System.out.println(ex);
@@ -802,7 +802,7 @@ public class Display extends JComponent {
                 }
             }
         }
-        player.punch(objectHit,(int)x,(int)y);        
+        player.punch(objectHit,(int)x,(int)(int)y);        
         player.checkHotBar();
     }
     public void stopMotion(){
