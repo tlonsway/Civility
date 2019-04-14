@@ -209,7 +209,7 @@ public class Display extends JComponent {
         }
         //System.out.println((System.nanoTime()-stime)/1000);
         if (spamlim==1) {
-            chost.sendPlayerLocation(player.getName(), (int)((center_x+width/2)-20), (int)((center_y+height/2)-20));
+            chost.sendPlayerLocation(player.getName(), (int)((center_x+width/2)-20*xScale), (int)((center_y+height/2)-20*yScale));
             spamlim=0;
         } else {
             spamlim++;
