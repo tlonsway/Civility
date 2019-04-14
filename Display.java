@@ -388,6 +388,7 @@ public class Display extends JComponent {
                     if (b.getType().equals("house")) {
                         btitle+=((House)(b)).getOwner()+"'s ";
                     }
+                    g.setColor(Color.BLACK);
                     g.drawString(btitle+b.getType(), (int)((b.getX()-center_x)*xScale), (int)((int)((b.getY()-center_y+b.getHeight())*yScale)+(int)(20*yScale)));
                     if(b.getType().contains("Frame")){
                         g.setColor(Color.BLACK);
