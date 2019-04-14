@@ -209,7 +209,7 @@ public class Display extends JComponent {
         }
         //System.out.println((System.nanoTime()-stime)/1000);
         if (spamlim==1) {
-            chost.sendPlayerLocation(player.getName(), (int)(((center_x+width/2)-20)*xScale), (int)(((center_y+height/2)-20)*yScale));
+            chost.sendPlayerLocation(player.getName(), (int)((center_x+(width/2))-(20*xScale)), (int)((center_y+(height/2))-(20*yScale)));
             spamlim=0;
         } else {
             spamlim++;
@@ -335,7 +335,7 @@ public class Display extends JComponent {
                     for(int c = (int)(b.getY()-center_y); c < (int)(b.getY()-center_y)+3000; c += 300){
                         for(int d = (int)(b.getX()-center_x); d < (int)(b.getX()-center_x)+3000; d += 300){
                             if (new BoundingBox(d,c,300,300).intersects(screen)){
-                                g.drawImage(bims.getImage(b.getType()),(int)(d*xScale),(int)(c*yScale),(int)(300*xScale),(int)(300*yScale),this);
+                                g.drawImage(bims.getImage(b.getType()),(int)(d*xScale),(int)(c*yScale),(int)(300),(int)(300),this);
                             }
                         }
                     }
@@ -408,12 +408,12 @@ public class Display extends JComponent {
             for(AI a : aithread.getBots()) {
                 if (a.getBoundingBox().intersects(screen)) {
                     g.setColor(a.getColor());
-                    g.fillRect((int)(a.getX()-center_x),(int)(a.getY()-center_y),(int)(a.getWidth()),(int)(a.getHeight()));
+                    g.fillRect((int)((a.getX()-center_x)*xScale),(int)((a.getY()-center_y)*yScale),(int)(a.getWidth()*xScale),(int)(a.getHeight()*yScale));
                     g.setColor(Color.BLACK);
-                    g.drawRect((int)(a.getX()-center_x),(int)(a.getY()-center_y),(int)(a.getWidth()),(int)(a.getHeight()));
+                    g.drawRect((int)((a.getX()-center_x)*xScale),(int)((a.getY()-center_y)*yScale),(int)(a.getWidth()*xScale),(int)(a.getHeight()*yScale));
                     Font f = new Font("Courier New",Font.PLAIN,18);
                     g.setFont(f);
-                    g.drawString(a.getName(),(int)(a.getX()-center_x),(int)(a.getY()-center_y+a.getHeight()+(int)(20*yScale)));
+                    g.drawString(a.getName(),(int)((a.getX()-center_x)*xScale),(int)((a.getY()-center_y+a.getHeight()+20)*yScale));
                 }                
             }
             //System.out.println("elapsed bots: " + (System.nanoTime()-stime));
@@ -430,7 +430,7 @@ public class Display extends JComponent {
             g.fillOval((int)(900*xScale),(int)(500*yScale),(int)(40*xScale),(int)(40*yScale));
             for(PlayerLocation pl : chost.getPlayers()) {
                 //System.out.println("other player location at " + pl.x + "," + pl.y);
-                g.fillOval((int)((pl.x-center_x)*xScale),(int)((pl.y-center_y)*yScale),(int)(40*xScale),(int)(40*yScale));
+                g.fillOval((int)(pl.x-center_x),(int)(pl.y-center_y),(int)(40*xScale),(int)(40*yScale));
                 g.setColor(Color.BLACK);
                 g.drawOval((int)((pl.x-center_x)*xScale),(int)((pl.y-center_y*yScale)*yScale),(int)(40*xScale),(int)(40*yScale));
                 g.setFont(new Font("Courier New",Font.PLAIN,15));
