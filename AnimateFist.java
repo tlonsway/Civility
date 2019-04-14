@@ -10,12 +10,16 @@ public class AnimateFist implements Runnable{
     private boolean animating;
     private boolean isRightArm;
     private JFrame frame;
-    public AnimateFist(boolean R,JFrame f){
+    private double xscale;
+    private double yscale;
+    public AnimateFist(boolean R,JFrame f,double xs,double ys){
         fistCords = new int[4];
         mouseCords = new int[2];
         animating = false;
         isRightArm = R;
         frame=f;
+        xscale=xs;
+        yscale=ys;
     }
     public void setMouseCords(int[] cords){
         mouseCords = cords;
@@ -48,7 +52,7 @@ public class AnimateFist implements Runnable{
         Point loc = frame.getLocationOnScreen();
         mouseCords[0]=(int)mp.getX()-(int)loc.getX();
         mouseCords[1]=(int)mp.getY()-(int)loc.getY();
-        double theta = (Math.atan((520-(double)mouseCords[1])/(920-(double)mouseCords[0])));
+        double theta = (Math.atan((520*yscale-(double)mouseCords[1])/(920*xscale-(double)mouseCords[0])));
         int inv=1;
         double offset=.8;
         //double slope = (fistCords[2]-fistCords[0])/(fistCords[3]-fistCords[1])*-1;
@@ -57,13 +61,13 @@ public class AnimateFist implements Runnable{
         double dist1=25;
         double dist2=25;
         for(int i = 0; i < 15; i+=1){
-            if (mouseCords[0]<=920) {
+            if (mouseCords[0]<=920*xscale) {
                 inv=-1;
             }
             else{
                 inv=1;
             }
-            theta = (Math.atan((520-(double)mouseCords[1])/(920-(double)mouseCords[0])));
+            theta = (Math.atan((520*yscale-(double)mouseCords[1])/(920*xscale-(double)mouseCords[0])));
             theta=-theta;
             if(isRightArm){
                 dist2+=1;
@@ -97,13 +101,13 @@ public class AnimateFist implements Runnable{
             }
         }
         for(int i = 14; i >= 0; i-=1){
-            if (mouseCords[0]<=920) {
+            if (mouseCords[0]<=920*xscale) {
                 inv=-1;
             }
             else{
                 inv=1;
             }
-            theta = (Math.atan((520-(double)mouseCords[1])/(920-(double)mouseCords[0])));
+            theta = (Math.atan((520*yscale-(double)mouseCords[1])/(920*xscale-(double)mouseCords[0])));
             theta=-theta;
             if(isRightArm){
                 dist2-=1;

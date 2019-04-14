@@ -60,14 +60,14 @@ public class Display extends JComponent {
         menu = new MenuManager(CI,player.getInventory(),tt);
         chost=cdh;
         tree = tt;
-        /*try {
+        try {
             Thread.sleep(100);
         } catch (Exception e) {
             e.printStackTrace();
-        }*/
+        }
         //-----------------------------------------------
-        //map = new Map(""+cdh.getMapSeed());
-        //biomes=map.getBiomes();
+        map = new Map(""+cdh.getMapSeed());
+        biomes=map.getBiomes();
         //-----------------------------------------------
         messageBox = mb;
         ActionMap am = messageBox.getActionMap();

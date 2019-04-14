@@ -34,6 +34,10 @@ public class init {
         TechTree techLvl = new TechTree();
         ResearchCenter research = new ResearchCenter();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        
+        double xscale = screenSize.getWidth()/1800;
+        double yscale = screenSize.getHeight()/1000;
+        
         InputMap im = chatBox.getInputMap();
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escape");
@@ -46,7 +50,7 @@ public class init {
         InventoryTwo pi = new InventoryTwo();
         AIThread at = new AIThread();
         (new Thread(at)).start();
-        Fists fists = new Fists(new Color(252, 210, 126),frame);
+        Fists fists = new Fists(new Color(252, 210, 126),frame,xscale,yscale);
         Hotbar hotbar = new Hotbar();
         Player p = new Player(Human.getRandomName(),100,new Color(252, 210, 126),pi,fists,hotbar);
         //-----------------------------------------------------------
@@ -69,7 +73,8 @@ public class init {
         craftableItems.add(new Item("Zuberrr Zpace Zip",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",1))),new int[]{1,100,100,100,0},3));
         ClientDataHost cdh = new ClientDataHost();
         (new Thread(cdh)).start();
-        Display d = new Display((int)(screenSize.getWidth()),(int)(screenSize.getHeight()),i,p,at,frame,craftableItems,cdh,chatBox,techLvl,screenSize.getWidth()/1800,screenSize.getHeight()/1000);
+        
+        Display d = new Display((int)(screenSize.getWidth()),(int)(screenSize.getHeight()),i,p,at,frame,craftableItems,cdh,chatBox,techLvl,xscale,yscale);
         //Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,null,research);
         at.setDisplay(d);
         frame.add(d);
@@ -100,7 +105,7 @@ public class init {
             //d.addResource(new Tree((int)(2000*((Math.random()*2)-1)),(int)(2000*((Math.random()*2)-1))));
             //d.addResource(new Rock((int)(2000*((Math.random()*2)-1)),(int)(2000*((Math.random()*2)-1))));
         }
-        long randseed = (int)(Math.random()*100)*(int)(Math.random()*100)*(int)(Math.random()*100);
+        /*long randseed = (int)(Math.random()*100)*(int)(Math.random()*100)*(int)(Math.random()*100);
         Biome b = new Biome("rocky",-1000,-1000,randseed);
         d.addBiome(b);
         Random generator = new Random(randseed);
@@ -136,7 +141,7 @@ public class init {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
+        }*/
         
         (new Thread(new FrameThread(d,100))).start();
         (new Thread(new UpdateThread(d))).start();

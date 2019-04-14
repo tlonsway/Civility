@@ -6,21 +6,25 @@ public class Fists{
     private AnimateFist animate;
     private boolean isRightArm;
     JFrame frame;
-    public Fists(Color C, JFrame f){
+    double xscale;
+    double yscale;
+    public Fists(Color C, JFrame f, double xs, double ys){
         color = C;
         isRightArm = true;
-        animate = new AnimateFist(isRightArm,frame);
+        animate = new AnimateFist(isRightArm,frame,xs,ys);
         frame=f;
+        xscale=xs;
+        yscale=ys;
     }
     public int[] getFistsCords(int X, int Y){
         animate.setMouseCords(X,Y);
         if(!animate.isAnimating()){
             int[] ret = new int[4];
             //player middle at (920,520) always
-            double theta = (Math.atan((520-(double)Y)/(920-(double)X)));
+            double theta = (Math.atan((520*yscale-(double)Y)/(920*xscale-(double)X)));
             
             int inv=1;
-            if (X<=920) {
+            if (X<=920*xscale) {
                 inv=-1;
             }
             /*double fx1=inv*30*Math.cos(theta)+915;
@@ -69,9 +73,9 @@ public class Fists{
         if (!isRightArm) {
             int[] ret = new int[4];
             //player middle at (920,520) always
-            double theta = (Math.atan((520-(double)Y)/(920-(double)X)));
+            double theta = (Math.atan((520*yscale-(double)Y)/(920*xscale-(double)X)));
             int inv=1;
-            if (X<=920) {
+            if (X<=920*xscale) {
                 inv=-1;
             }
             /*double fx1=inv*30*Math.cos(theta)+915;
@@ -97,7 +101,7 @@ public class Fists{
     }
     public void animate(int X,int Y){
         //System.out.println("Fist.animate()");
-        animate = new AnimateFist(isRightArm,frame);
+        animate = new AnimateFist(isRightArm,frame,xscale,yscale);
         (new Thread(animate)).start();
         if(isRightArm){
             isRightArm = false;
