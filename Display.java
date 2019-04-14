@@ -340,7 +340,7 @@ public class Display extends JComponent {
                     for(int c = (int)(b.getY()-center_y); c < (int)(b.getY()-center_y)+3000; c += 300){
                         for(int d = (int)(b.getX()-center_x); d < (int)(b.getX()-center_x)+3000; d += 300){
                             if (new BoundingBox(d,c,300,300).intersects(screen)){
-                                g.drawImage(bims.getImage(b.getType()),(int)(d*xScale),(int)(c*yScale),(int)(300),(int)(300),this);
+                                g.drawImage(bims.getImage(b.getType()),(int)(d*xScale),(int)(c*yScale),(int)(300*xScale),(int)(300*yScale),this);
                             }
                         }
                     }
