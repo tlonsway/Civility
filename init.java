@@ -32,7 +32,7 @@ public class init {
         JTextField chatBox = new JTextField("Type here to chat (press t)");
         
         TechTree techLvl = new TechTree();
-        ResearchCenter research = new ResearchCenter(techLvl);
+        ResearchCenter research = new ResearchCenter();
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         InputMap im = chatBox.getInputMap();
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
@@ -69,7 +69,7 @@ public class init {
         craftableItems.add(new Item("Zuberrr Zpace Zip",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",1))),new int[]{1,100,100,100,0},3));
         ClientDataHost cdh = new ClientDataHost();
         (new Thread(cdh)).start();
-        Display d = new Display((int)(screenSize.getWidth()),(int)(screenSize.getHeight()),i,p,at,frame,craftableItems,cdh,chatBox,research,screenSize.getWidth()/1800,screenSize.getHeight()/1000);
+        Display d = new Display((int)(screenSize.getWidth()),(int)(screenSize.getHeight()),i,p,at,frame,craftableItems,cdh,chatBox,techLvl,screenSize.getWidth()/1800,screenSize.getHeight()/1000);
         //Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,null,research);
         at.setDisplay(d);
         frame.add(d);
@@ -87,11 +87,13 @@ public class init {
         MouseThread mt = new MouseThread(d);
         frame.addMouseListener(mt);
         frame.addKeyListener(kt);
+        d.addBuilding(new ResearchCenter());
         d.addBuilding(new Center(200,300));
         d.addBuilding(new House(0,0));
         d.addBuilding(new House(-400,400));
         d.addBuilding(new Factory(-600,-600));
         d.addBuilding(new GoldMine(500,500));
+        
         //d.addResource(new Tree(150,150));
         //d.addResource(new Rock(-300,-300));
         for(int x = 0; x < (int)(Math.random()*100);x++){

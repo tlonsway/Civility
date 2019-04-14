@@ -29,7 +29,7 @@ public class Display extends JComponent {
     ClientDataHost chost;
     JTextField messageBox;
     ArrayList<String> itemsUsedCrafting;
-    ResearchCenter researchCenter;
+    TechTree tree;
     private BufferedImage woodAxeImage;
     //private ArrayList
     ResourceImage rims;
@@ -41,7 +41,7 @@ public class Display extends JComponent {
     Map map;
     double xScale;
     double yScale;
-    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,ResearchCenter rc,double xS,double yS) {
+    public Display(int w, int h, Inventory inventory,Player p, AIThread at, JFrame f,ArrayList<Item> CI, ClientDataHost cdh, JTextField mb,TechTree tt,double xS,double yS) {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
         biomes = new ArrayList<Biome>();
@@ -57,8 +57,9 @@ public class Display extends JComponent {
         craftableItems = CI;
         updatetime=0;
         frametime=0;
-        menu = new MenuManager(CI,player.getInventory(),rc.tree);
+        menu = new MenuManager(CI,player.getInventory(),tt);
         chost=cdh;
+        tree = tt;
         /*try {
             Thread.sleep(100);
         } catch (Exception e) {
@@ -71,7 +72,6 @@ public class Display extends JComponent {
         messageBox = mb;
         ActionMap am = messageBox.getActionMap();
         itemsUsedCrafting = new ArrayList<String>();
-        researchCenter = rc;
         rims = new ResourceImage();
         bims = new BiomeImage();
         buims = new BuildingImage();
@@ -375,16 +375,6 @@ public class Display extends JComponent {
             }
             //System.out.println("elapsed biomes: " + (System.nanoTime()-stime));
             //stime = System.nanoTime();
-            g.setColor(researchCenter.getColor());
-            g.fillRect((int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y),(int)researchCenter.getWidth(),(int)researchCenter.getHeight());
-            g.setColor(Color.BLACK);
-            g.drawRect((int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y),(int)researchCenter.getWidth(),(int)researchCenter.getHeight());
-            g.drawString("Research Center",(int)(researchCenter.getX()-center_x),(int)(researchCenter.getY()-center_y+researchCenter.getHeight()+(int)(15*yScale)));   
-            if(researchCenter.getBoundingBox().intersects(screen)){
-                for(int a  = 0; a < researchCenter.tree.getRequired().size();a++){
-                    g.drawString(researchCenter.tree.getRequired().get(a).getName()+" x"+researchCenter.tree.getRequired().get(a).getQuantity(),(int)(researchCenter.getX()-center_x+(int)(10*xScale)),(int)(researchCenter.getY()-center_y+(a*15))+(int)(20*yScale));
-                }
-            }
             for (Building b : buildings) {
                 if (b.getBoundingBox().intersects(screen)) {
                     //g.setColor(b.getColor());
@@ -403,6 +393,11 @@ public class Display extends JComponent {
                         g.setColor(Color.BLACK);
                         for(int a = 0; a < b.getBuildItemsRequired().size();a++){
                             g.drawString(b.getBuildItemsRequired().get(a).getName() + " x" + b.getBuildItemsRequired().get(a).getQuantity(),(int)((b.getX()-center_x)*xScale),(int)((int)((b.getY()+b.getHeight()+30)*yScale)+(a*(int)(15*yScale))-(int)(center_y*yScale)));
+                        }
+                    }
+                    if(b.getType().equals("Research Center")){
+                        for(int a = 0; a < tree.getRequired().size(); a++){
+                            g.drawString(tree.getRequired().get(a).getName()+" x"+tree.getRequired().get(a).getQuantity(),(int)((b.getX()-center_x)*xScale),(int)((b.getY()+b.getHeight()+30-center_y)*yScale)+(int)(15*a*yScale));
                         }
                     }
                 }
@@ -425,7 +420,7 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             Font f = new Font("Courier New", Font.BOLD, 30);
             g.setFont(f);
-            g.drawString("Technology Level: "+researchCenter.tree.getTechLevel(),(int)(40*xScale),(int)(220*yScale));
+            g.drawString("Technology Level: "+tree.getTechLevel(),(int)(40*xScale),(int)(220*yScale));
             g.drawString("update time: " + updatetime,(int)(40*xScale),(int)(140*yScale));
             g.drawString("frame time: " + frametime,(int)(40*xScale),(int)(180*yScale));
             g.drawString("Gold: "+(int)(in.getGold()),(int)(40*xScale),(int)(40*yScale));
@@ -762,8 +757,8 @@ public class Display extends JComponent {
                 }
             }
         }
-        if(temp != null && researchCenter.getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10)) && researchCenter.tree.isRequired(temp.getName())){
-            researchCenter.tree.addComponents(temp);
+        if(temp != null && buildings.get(0).getBoundingBox().intersects(new BoundingBox(fistx+center_x,fisty+center_y,10,10)) && tree.isRequired(temp.getName())){
+            player.removeItem(temp.getName(),tree.addComponents(temp));
         }
         for(Biome b : biomes) {
             if (b.getBoundingBox().intersects(screen)) {
@@ -821,6 +816,7 @@ public class Display extends JComponent {
             }
         }
     }
+    
     public boolean hasResources(Item i){
         for(TempItem a: i.getRequired()){
             if(player.getInventoryQuantityOf(a.getName()) < a.getQuantity()){
