@@ -101,7 +101,8 @@ public class Display extends JComponent {
         frame.requestFocusInWindow();
         center_x=920-(width/2);
         center_y=520-(height/2);
-        
+        System.out.println("width: " + width);
+        System.out.println("height: " + height);
         //frame.setVisible(true);
         //this.setVisible(true);
         //frame.revalidate();
@@ -426,16 +427,24 @@ public class Display extends JComponent {
             g.setColor(Color.BLACK);
             Font f = new Font("Courier New", Font.BOLD, 30);
             g.setFont(f);
-            g.drawString("Technology Level: "+tree.getTechLevel(),(int)(40*xScale),(int)(220*yScale));
+            g.drawString("Technology Level: "+(tree.getTechLevel()+1),(int)(40*xScale),(int)(220*yScale));
             g.drawString("update time: " + updatetime,(int)(40*xScale),(int)(140*yScale));
             g.drawString("frame time: " + frametime,(int)(40*xScale),(int)(180*yScale));
             g.drawString("Gold: "+(int)(in.getGold()),(int)(40*xScale),(int)(40*yScale));
             g.drawString("center_x: " + center_x + "   center_y: " + center_y,(int)(300*xScale),(int)(40*yScale));
             g.setColor(player.getColor());
-            g.fillOval((int)(900*xScale),(int)(500*yScale),(int)(40*xScale),(int)(40*yScale));
+            
+            int pwid=(int)(40*xScale);
+            int phei=(int)(40*yScale);
+            int px=(int)(((width/2)-pwid/2));
+            System.out.println("drawing player x at " + px);
+            int py=(int)(((height/2)-phei/2));
+            //g.fillOval((int)(900*xScale),(int)(500*yScale),(int)(40*xScale),(int)(40*yScale));
+            g.fillOval(px,py,pwid,phei);
             for(PlayerLocation pl : chost.getPlayers()) {
                 //System.out.println("other player location at " + pl.x + "," + pl.y);
-                g.fillOval((int)(pl.x-center_x),(int)(pl.y-center_y),(int)(40*xScale),(int)(40*yScale));
+                g.setColor(player.getColor());
+                g.fillOval((int)((pl.x*xScale-center_x)),(int)((pl.y*yScale-center_y)),(int)(40*xScale),(int)(40*yScale));
                 g.setColor(Color.BLACK);
                 g.drawOval((int)((pl.x-center_x)*xScale),(int)((pl.y-center_y*yScale)*yScale),(int)(40*xScale),(int)(40*yScale));
                 g.setFont(new Font("Courier New",Font.PLAIN,15));
