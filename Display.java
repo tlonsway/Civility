@@ -429,11 +429,11 @@ public class Display extends JComponent {
             g.fillOval((int)(900*xScale),(int)(500*yScale),(int)(40*xScale),(int)(40*yScale));
             for(PlayerLocation pl : chost.getPlayers()) {
                 //System.out.println("other player location at " + pl.x + "," + pl.y);
-                g.fillOval((int)(pl.x-center_x),(int)(pl.y-center_y),(int)(40*xScale),(int)(40*yScale));
+                g.fillOval((int)((pl.x-center_x)*xScale),(int)((pl.y-center_y)*yScale),(int)(40*xScale),(int)(40*yScale));
                 g.setColor(Color.BLACK);
-                g.drawOval((int)(pl.x-center_x),(int)(pl.y-center_y),(int)(40*xScale),(int)(40*yScale));
+                g.drawOval((int)((pl.x-center_x)*xScale),(int)((pl.y-center_y)*yScale),(int)(40*xScale),(int)(40*yScale));
                 g.setFont(new Font("Courier New",Font.PLAIN,15));
-                g.drawString(pl.n, (int)(pl.x-center_x), (int)(pl.y-center_y)+(int)(50*yScale));
+                g.drawString(pl.n, (int)((pl.x-center_x)*xScale), (int)((pl.y-center_y)*yScale)+(int)(50*yScale));
             }
             
             g.setColor(Color.BLACK);

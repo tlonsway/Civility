@@ -16,7 +16,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 public class init {
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Game Window");
+        JFrame frame = new JFrame("Civility");
         
         //frame.setLayout(null);
         /*try {
