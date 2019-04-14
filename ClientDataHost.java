@@ -202,7 +202,10 @@ public class ClientDataHost implements Runnable {
         } 
     }
     public long getMapSeed() {
-        while(mapseed==0) {}
-        return mapseed;
+        if (connected) {
+            while(mapseed==0) {}
+            return mapseed;
+        }
+        return (int)(Math.random()*100)*(int)(Math.random()*100)*(int)(Math.random()*100);
     }
 }
