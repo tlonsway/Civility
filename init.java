@@ -38,6 +38,9 @@ public class init {
         double xscale = screenSize.getWidth()/1800;
         double yscale = screenSize.getHeight()/1000;
         
+        //double xscale = 1;
+        //double yscale = 1;
+        
         InputMap im = chatBox.getInputMap();
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "enter");
         im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "escape");
@@ -72,9 +75,23 @@ public class init {
         craftableItems.add(new Item("stone brick",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",5))),new int[]{0,0,0,0,0},1));
         craftableItems.add(new Item("Zuberrr Zpace Zip",1,false,new Color(127,127,127),"square",new ArrayList<TempItem>(Arrays.asList(new TempItem("stone",1))),new int[]{1,100,100,100,0},3));
         ClientDataHost cdh = new ClientDataHost();
+        
         (new Thread(cdh)).start();
         
+        try {
+            Thread.sleep(200);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        
+        System.out.println("preparing to create display");
+        
         Display d = new Display((int)(screenSize.getWidth()),(int)(screenSize.getHeight()),i,p,at,frame,craftableItems,cdh,chatBox,techLvl,xscale,yscale);
+        
+        //
+        
+        System.out.println("display created");
+        
         //Display d = new Display(1800,1000,i,p,at,frame,craftableItems,cdh,null,research);
         at.setDisplay(d);
         frame.add(d);

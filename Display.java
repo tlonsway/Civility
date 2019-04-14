@@ -45,8 +45,8 @@ public class Display extends JComponent {
         buildings = new ArrayList<Building>();
         resources = new ArrayList<Resource>();
         biomes = new ArrayList<Biome>();
-        center_x=0;
-        center_y=0;
+        //center_x=0;
+        //center_y=0;
         width=w;
         height=h;
         in=inventory;
@@ -60,6 +60,7 @@ public class Display extends JComponent {
         menu = new MenuManager(CI,player.getInventory(),tt);
         chost=cdh;
         tree = tt;
+        //(new Thread(chost)).start();
         try {
             Thread.sleep(100);
         } catch (Exception e) {
@@ -98,6 +99,9 @@ public class Display extends JComponent {
                 }
         });
         frame.requestFocusInWindow();
+        center_x=920-(width/2);
+        center_y=520-(height/2);
+        
         //frame.setVisible(true);
         //this.setVisible(true);
         //frame.revalidate();
@@ -209,7 +213,7 @@ public class Display extends JComponent {
         }
         //System.out.println((System.nanoTime()-stime)/1000);
         if (spamlim==1) {
-            chost.sendPlayerLocation(player.getName(), (int)((center_x+(width/2))-(20*xScale)), (int)((center_y+(height/2))-(20*yScale)));
+            chost.sendPlayerLocation(player.getName(), (int)(((center_x+(width/2))-20*xScale)/xScale), (int)(((center_y+(height/2))-(20*yScale))/yScale));
             spamlim=0;
         } else {
             spamlim++;

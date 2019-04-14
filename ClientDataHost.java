@@ -20,6 +20,7 @@ public class ClientDataHost implements Runnable {
         connected=false;
         playerlocs = new ArrayList<PlayerLocation>();
         mapseed=0;
+        System.out.println("ClientDataHost construction complete");
     }
     public void run() {
         Socket s = null;
@@ -55,6 +56,7 @@ public class ClientDataHost implements Runnable {
             e.printStackTrace();
         }
         while(true) {
+            System.out.println("running cdh loop");
             String line = "";
             try {
                 line = din.readLine();
