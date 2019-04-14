@@ -209,7 +209,7 @@ public class Display extends JComponent {
         }
         //System.out.println((System.nanoTime()-stime)/1000);
         if (spamlim==1) {
-            chost.sendPlayerLocation(player.getName(), (int)((center_x+width/2)), (int)((center_y+height/2)));
+            chost.sendPlayerLocation(player.getName(), (int)((center_x+width/2)-20), (int)((center_y+height/2)-20));
             spamlim=0;
         } else {
             spamlim++;
@@ -432,9 +432,9 @@ public class Display extends JComponent {
                 //System.out.println("other player location at " + pl.x + "," + pl.y);
                 g.fillOval((int)((pl.x-center_x)*xScale),(int)((pl.y-center_y)*yScale),(int)(40*xScale),(int)(40*yScale));
                 g.setColor(Color.BLACK);
-                g.drawOval((int)((pl.x-center_x)*xScale),(int)((pl.y-center_y)*yScale),(int)(40*xScale),(int)(40*yScale));
+                g.drawOval((int)((pl.x-center_x)*xScale),(int)((pl.y-center_y*yScale)*yScale),(int)(40*xScale),(int)(40*yScale));
                 g.setFont(new Font("Courier New",Font.PLAIN,15));
-                g.drawString(pl.n, (int)((pl.x-center_x)*xScale), (int)((pl.y-center_y)*yScale)+(int)(50*yScale));
+                g.drawString(pl.n, (int)((pl.x-center_x)), (int)((pl.y-center_y))+(int)(50*yScale));
             }
             
             g.setColor(Color.BLACK);
