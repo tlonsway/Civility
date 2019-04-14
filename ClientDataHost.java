@@ -56,7 +56,7 @@ public class ClientDataHost implements Runnable {
             e.printStackTrace();
         }
         while(true) {
-            System.out.println("running cdh loop");
+            //System.out.println("running cdh loop");
             String line = "";
             try {
                 line = din.readLine();
@@ -94,6 +94,11 @@ public class ClientDataHost implements Runnable {
          * t1 is type 1(chat,location,mapdata), t2 is type 2(more unique commands)
          * s1,s2,s3,s4,s5, are strings that can be sent optionally
         */
+        if (input.indexOf(":")<0) {
+            //System.out.println("broken input: " + input);
+            return;
+        }
+       
         String[] components = new String[7];
         for(int i=0;i<7;i++) {
             if (i<6) {
